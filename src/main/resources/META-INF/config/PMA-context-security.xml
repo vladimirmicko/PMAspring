@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd       
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-4.2.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+	
+ 	<!-- Authentication manager -->
+	<security:authentication-manager id="authenticationManager">
+		<security:authentication-provider user-service-ref="userDao"/>
+	</security:authentication-manager>
+		
+	<!-- Disable security -->	
+	<security:http security="none" pattern="/app/**"/>
+    <security:http security="none" pattern="/node_modules/**"/>
+    
+	<!-- HTTP settings -->
+	<security:http 	realm="Protected API" 
+					use-expressions="true"
+					auto-config="false"
+					disable-url-rewriting="true" 
+					create-session="stateless" 
+					entry-point-ref="unauthorizedEntryPoint"
+					authentication-manager-ref="authenticationManager">
+					
+		<!-- Access Rights -->
+		<security:intercept-url pattern="/rest/users/authenticate" access="permitAll()" />
+		<security:intercept-url pattern="/rest/users/captchacode" access="permitAll()" />
+		<security:intercept-url pattern="/rest/users/signup" access="permitAll()" />
+		<security:intercept-url pattern="/rest/users/availableLanguages" access="permitAll()" />
+		<security:intercept-url method="GET" pattern="/rest/users/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER', 'ROLE_MNG', 'ROLE_DEV', 'ROLE_SALES', 'ROLE_AGENT')" />
+		<security:csrf disabled="true"/>
+	</security:http>
+	
+	 <!-- Security Beans -->
+	<bean id="userDao" class="com.vladimir.pma.data.dao.UserDao"/>
+	<bean id="unauthorizedEntryPoint" class="com.vladimir.pma.security.UnauthorizedEntryPoint" />
+	<bean id="accessDeniedHandler"  class="com.vladimir.pma.security.AccessDeniedExceptionHandler"/>
+	
+</beans>	

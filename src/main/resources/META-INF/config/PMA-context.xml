@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+    
+    <!-- Enable annotations -->    
+    <context:annotation-config/>
+    
+    <!-- Enable detecting beans which don't implement intefaces -->
+    <aop:config proxy-target-class="true"/>
+
+   	<!-- Property file  -->
+	<context:property-placeholder location="classpath:application.properties" />
+	
+	<bean id="properties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations" value="classpath:application.properties"></property>
+	</bean>
+	
+	<!-- Resource bundle messages -->
+	<bean name="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"> 
+    	<property name="basename"> 
+        	<value>messages</value> 
+    	</property> 
+	</bean>
+</beans>
+    

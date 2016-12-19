@@ -30,7 +30,7 @@ public class DemoController {
 	}
 
 
-	@RequestMapping(value = "/value/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/value/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getTestObject(@PathVariable(value = "id") int id) {
 
 		log.info("----------------------");

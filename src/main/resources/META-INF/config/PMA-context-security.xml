@@ -8,10 +8,6 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-4.2.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
-
-
-
-
  	<!-- Authentication manager -->
 	<security:authentication-manager id="authenticationManager">
 		<security:authentication-provider>
@@ -35,22 +31,13 @@
 					entry-point-ref="unauthorizedEntryPoint"
 					authentication-manager-ref="authenticationManager">
 					
-		<!-- <security:custom-filter ref="authenticationFilter" position="FORM_LOGIN_FILTER" /> -->
-					
 		<!-- Access Rights -->
 		<security:intercept-url pattern="/rest/demo/lalala/**" access="permitAll()" />
 		<security:intercept-url method="POST" pattern="/rest/demo/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER', 'ROLE_MNG', 'ROLE_DEV', 'ROLE_SALES', 'ROLE_AGENT')" />
 		<security:csrf disabled="true"/>
-		<security:form-login authentication-success-handler-ref="mySuccessHandler"
-         				     authentication-failure-handler-ref="myFailureHandler" />
-        <security:logout />
 	</security:http>
 	
 	 <!-- Security Beans -->
-	<bean id="userDao" class="com.vladimir.pma.data.dao.UserDao"/>
 	<bean id="unauthorizedEntryPoint" class="com.vladimir.pma.security.UnauthorizedEntryPoint" />
 	<bean id="accessDeniedHandler"  class="com.vladimir.pma.security.AccessDeniedExceptionHandler"/>
-	<bean id="mySuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"/>
-    <bean id="myFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
-    <bean id="authenticationFilter" class="com.vladimir.pma.security.AuthenticationFilter" />
 </beans>	

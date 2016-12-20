@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
@@ -73,13 +74,14 @@ public class UserDao implements UserDetailsService {
 
 	@Transactional(readOnly=true)
 	public UserAccounts findById(Integer id) {
-			UserAccounts instance = (UserAccounts) sessionFactory.getCurrentSession().get(UserAccounts.class, id);
+			UserAccounts instance = sessionFactory.getCurrentSession().get(UserAccounts.class, id);
 			return instance;
 	}
 
 
 	@Transactional
 	public List<UserAccounts> findAllUsers() {
+		Session sss = sessionFactory.getCurrentSession();
 		return sessionFactory.getCurrentSession().createCriteria(UserAccounts.class).list();
 	}
 	
@@ -88,7 +90,7 @@ public class UserDao implements UserDetailsService {
 		sessionFactory.getCurrentSession().update(user);
 	}
 
-	@Transactional
+	@Transactional(readOnly=true)
 	public List<String> findAllUsersByName() {
 		String query = "select username from USER_ACCOUNTS";
 		List<String> listUsernames = (List<String>) this.sessionFactory.getCurrentSession().createSQLQuery(query).list();

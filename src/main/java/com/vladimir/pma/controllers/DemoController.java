@@ -4,9 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
+import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
@@ -18,24 +19,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.vladimir.pma.data.dao.UserDao;
+import com.vladimir.pma.data.entity.UserAccounts;
 
 @RestController
 @RequestMapping("/rest/demo")
 public class DemoController {
 	private static final Log log = LogFactory.getLog(DemoController.class);
-
-	public DemoController() {
-	}
-
+	
+	@Autowired
+	private UserDao userDao;
 
 	@RequestMapping(value = "/value/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getTestObject(@PathVariable(value = "id") int id) {
-
 		log.info("----------------------");
 		return new ResponseEntity<String>("Value:"+id, HttpStatus.OK);
-
+	}
+	
+	
+	@RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<UserAccounts>> getAllUsers() {
+		List<UserAccounts> userList = userDao.findAllUsers();
+		return new ResponseEntity<List<UserAccounts>>(userList, HttpStatus.OK);
 	}
 
 

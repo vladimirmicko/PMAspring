@@ -11,4 +11,5 @@
 	<mvc:default-servlet-handler />
 
 	<context:component-scan base-package="com.vladimir.pma.controllers" />
+	<context:component-scan base-package="com.vladimir.pma.data.dao" />
 </beans>

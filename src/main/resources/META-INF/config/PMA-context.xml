@@ -10,9 +10,7 @@
     <!-- Enable annotations -->    
     <context:annotation-config/>
     
-    <!-- Enable detecting beans which don't implement intefaces -->
-    <aop:config proxy-target-class="true"/>
-
+    
    	<!-- Property file  -->
 	<context:property-placeholder location="classpath:application.properties" />
 	

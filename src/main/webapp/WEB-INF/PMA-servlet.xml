@@ -10,6 +10,9 @@
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler />
 
-	<context:component-scan base-package="com.vladimir.pma.controllers" />
-	<context:component-scan base-package="com.vladimir.pma.data.dao" />
+	<!-- Enable detecting beans which don't implement intefaces -->
+    <aop:config proxy-target-class="true"/>
+
+	<!-- Scanning packages -->
+	<context:component-scan base-package="com.vladimir.pma" />
 </beans>

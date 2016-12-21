@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vladimir.pma.data.entity.UserAccounts;
 
-@Repository(value = "userDao")
+@Repository
 public class UserDao implements UserDetailsService {
 	
 	private static final Log log = LogFactory.getLog(UserDao.class);
@@ -79,10 +79,10 @@ public class UserDao implements UserDetailsService {
 	}
 
 
-	@Transactional
+	@Transactional(readOnly=true)
 	public List<UserAccounts> findAllUsers() {
-		Session sss = sessionFactory.getCurrentSession();
-		return sessionFactory.getCurrentSession().createCriteria(UserAccounts.class).list();
+		List<UserAccounts> lll = sessionFactory.getCurrentSession().createCriteria(UserAccounts.class).list();
+		return lll;
 	}
 	
 	@Transactional

@@ -12,7 +12,7 @@
 	<security:authentication-manager id="authenticationManager">
 		<security:authentication-provider>
 		     <security:user-service>
-        		<security:user name="vlada" password="vlada" authorities="ROLE_USER, ROLE_ADMIN" />
+        		<security:user name="vlada" password="vlada" authorities="ROLE_ADMIN" />
         		<security:user name="micko" password="micko" authorities="ROLE_USER" />
       		</security:user-service>
       	</security:authentication-provider>
@@ -32,8 +32,8 @@
 					authentication-manager-ref="authenticationManager">
 					
 		<!-- Access Rights -->
-		<security:intercept-url pattern="/rest/demo/lalala/**" access="permitAll()" />
-		<security:intercept-url method="POST" pattern="/rest/demo/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER', 'ROLE_MNG', 'ROLE_DEV', 'ROLE_SALES', 'ROLE_AGENT')" />
+		<security:intercept-url pattern="/rest/demo/proba/**" access="permitAll()" />
+		<security:intercept-url method="GET" pattern="/rest/demo/**" access="hasAnyRole('ROLE_ADMIN')" />
 		<security:csrf disabled="true"/>
 	</security:http>
 	

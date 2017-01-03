@@ -39,11 +39,12 @@ public class DemoController {
 	
 	@RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<UserAccounts>> getAllUsers() {
+		log.info("----------------------GET----- /rest/demo/users ");
 		List<UserAccounts> userList = userDao.findAllUsers();
 		return new ResponseEntity<List<UserAccounts>>(userList, HttpStatus.OK);
 	}
 
-
+	
 	@RequestMapping(value = "/header", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> testHeader(@RequestHeader(value = "test") String test,
 			@RequestHeader(value = "Accept-Language") String acceptLanguage,

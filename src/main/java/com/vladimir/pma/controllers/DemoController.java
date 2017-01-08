@@ -86,13 +86,12 @@ public class DemoController {
 	@RequestMapping(value = "/fileFromDb", method = RequestMethod.GET, produces = "application/pdf")
 	public ResponseEntity<InputStreamResource> getFileFromDb()	throws IOException {
 		
-		Proba proba = probaDao.findById(1);
+		Proba proba = probaDao.findById(2);
 		InputStream inputStream = new ByteArrayInputStream(proba.getFileBlob());
 		
 		log.info("DEMO CONTROLLER - File display --------------------------------------------------------");
 
 		return ResponseEntity.ok().contentLength((int) proba.getFileBlob().length)
-				//.header("Content-Disposition", String.format("inline; filename=\"" + fileName + "\""))
 				.header("Content-Type", "application/octet-stream")
 				.contentType(MediaType.parseMediaType("application/pdf"))
 				.body(new InputStreamResource(inputStream));

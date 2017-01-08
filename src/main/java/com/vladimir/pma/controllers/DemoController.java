@@ -57,11 +57,15 @@ public class DemoController {
 
 
 	@RequestMapping(value = "/displayFile", method = RequestMethod.GET, produces = "application/pdf")
-	public ResponseEntity<InputStreamResource> displayPdfFile(@RequestParam(required = true) String fileName)
+	public ResponseEntity<InputStreamResource> displayPdfFile()
 			throws IOException {
+		
+		String fileName = "psycho.jpg";
 
 		InputStream inputStream = new FileInputStream("G:/" + fileName);
 		File file = new File("G:/" + fileName);
+		
+		log.info("DEMO CONTROLLER - File display --------------------------------------------------------");
 
 		return ResponseEntity.ok().contentLength((int) file.length())
 				.header("Content-Disposition", String.format("inline; filename=\"" + fileName + "\""))
@@ -75,7 +79,9 @@ public class DemoController {
 	public ResponseEntity<InputStreamResource> displayFileInternal(@RequestParam(required = true) String fileName)
 			throws IOException {
 
+		fileName = "psycho.jpg";
 		ClassPathResource file = new ClassPathResource(fileName);
+		log.info("DEMO CONTROLLER - File download --------------------------------------------------------");
 
 		return ResponseEntity.ok().contentLength((int) file.contentLength())
 				.header("Content-Disposition", String.format("attachment; filename=\"" + fileName + "\""))

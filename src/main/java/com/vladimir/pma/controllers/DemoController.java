@@ -1,9 +1,11 @@
 package com.vladimir.pma.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Base64;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.vladimir.pma.data.dao.ProbaDao;
 import com.vladimir.pma.data.dao.UserDao;
+import com.vladimir.pma.data.entity.Proba;
 import com.vladimir.pma.data.entity.UserAccounts;
 
 @RestController
@@ -29,6 +34,9 @@ public class DemoController {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private ProbaDao probaDao;
 
 	@RequestMapping(value = "/value/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getTestObject(@PathVariable(value = "id") int id) {
@@ -74,6 +82,21 @@ public class DemoController {
 				.body(new InputStreamResource(inputStream));
 	}
 
+	
+	@RequestMapping(value = "/fileFromDb", method = RequestMethod.GET, produces = "application/pdf")
+	public ResponseEntity<InputStreamResource> getFileFromDb()	throws IOException {
+		
+		Proba proba = probaDao.findById(1);
+		InputStream inputStream = new ByteArrayInputStream(proba.getFileBlob());
+		
+		log.info("DEMO CONTROLLER - File display --------------------------------------------------------");
+
+		return ResponseEntity.ok().contentLength((int) proba.getFileBlob().length)
+				//.header("Content-Disposition", String.format("inline; filename=\"" + fileName + "\""))
+				.header("Content-Type", "application/octet-stream")
+				.contentType(MediaType.parseMediaType("application/pdf"))
+				.body(new InputStreamResource(inputStream));
+	}
 
 	@RequestMapping(value = "/downloadFile", method = RequestMethod.GET, produces = "application/pdf")
 	public ResponseEntity<InputStreamResource> displayFileInternal(@RequestParam(required = true) String fileName)

@@ -27,6 +27,7 @@ import com.vladimir.pma.data.dao.SlideDao;
 import com.vladimir.pma.data.dao.TestDao;
 import com.vladimir.pma.data.dao.UserDao;
 import com.vladimir.pma.data.entity.Proba;
+import com.vladimir.pma.data.entity.Slide;
 import com.vladimir.pma.data.entity.Test;
 import com.vladimir.pma.data.entity.UserAccounts;
 
@@ -43,16 +44,32 @@ public class TestController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Test> getTest(@PathVariable(value = "id") int id) {
-		log.info("----------------------GET----- /rest/tests ");
+		log.info("getTest(): /rest/tests ");
 		Test test = testDao.findById(id);
 		return new ResponseEntity<Test>(test, HttpStatus.OK);
 	}
 	
 	
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Test>> getAllUsers() {
-		log.info("----------------------GET----- /rest/tests ");
+	public ResponseEntity<List<Test>> getAllTests() {
+		log.info("getAllTests(): /rest/tests ");
 		List<Test> testList = testDao.findAll();
 		return new ResponseEntity<List<Test>>(testList, HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value = "/slides/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Slide> getSlide(@PathVariable(value = "id") int id) {
+		log.info("getSlide(): /rest/tests ");
+		Slide slide = slideDao.findById(id);
+		return new ResponseEntity<Slide>(slide, HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value = "/slides", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Slide>> getAllSlides() {
+		log.info("getAllSlides(): /rest/tests ");
+		List<Slide> testList = slideDao.findAll();
+		return new ResponseEntity<List<Slide>>(testList, HttpStatus.OK);
 	}
 }

@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -38,8 +40,9 @@ public class Slide implements java.io.Serializable {
 	
 	@Lob
 	@Column(name = "TEST_IMAGE", unique = true, nullable = false)
-	private byte[] tetstImage;
+	private byte[] testImage;
 		
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "TESTS", nullable = false)
 	private Test test;
@@ -89,13 +92,13 @@ public class Slide implements java.io.Serializable {
 	}
 
 
-	public byte[] getTetstImage() {
-		return tetstImage;
+	public byte[] getTestImage() {
+		return testImage;
 	}
 
 
-	public void setTetstImage(byte[] tetstImage) {
-		this.tetstImage = tetstImage;
+	public void setTestImage(byte[] testImage) {
+		this.testImage = testImage;
 	}
 
 

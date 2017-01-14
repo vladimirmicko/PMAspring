@@ -47,7 +47,7 @@ public class Test implements java.io.Serializable {
 	@Column(name = "CREATION_DATE", nullable = true)
 	private Date creationDate;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy = "test")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@Fetch(FetchMode.SUBSELECT)

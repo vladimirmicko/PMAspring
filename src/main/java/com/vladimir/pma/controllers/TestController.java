@@ -1,35 +1,24 @@
 package com.vladimir.pma.controllers;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Base64;
 import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vladimir.pma.data.dao.ProbaDao;
 import com.vladimir.pma.data.dao.SlideDao;
 import com.vladimir.pma.data.dao.TestDao;
-import com.vladimir.pma.data.dao.UserDao;
-import com.vladimir.pma.data.entity.Proba;
 import com.vladimir.pma.data.entity.Slide;
 import com.vladimir.pma.data.entity.Test;
-import com.vladimir.pma.data.entity.UserAccounts;
+
+
 
 @RestController
 @RequestMapping("/rest/tests")
@@ -64,6 +53,17 @@ public class TestController {
 		Slide slide = slideDao.findById(id);
 		return new ResponseEntity<Slide>(slide, HttpStatus.OK);
 	}
+	
+	
+	@RequestMapping(value = "/{id}/slides", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Slide>> getSlidesByTest(@PathVariable(value = "id") int id) {
+		log.info("getSlide(): /rest/tests/slides ");
+		Test test = testDao.findById(id);
+		List<Slide> slideList = test.getSlideList();
+		return new ResponseEntity<List<Slide>>(slideList, HttpStatus.OK);
+	}
+	
+
 	
 	
 	@RequestMapping(value = "/slides", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

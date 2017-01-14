@@ -1,7 +1,6 @@
 package com.vladimir.pma.security;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

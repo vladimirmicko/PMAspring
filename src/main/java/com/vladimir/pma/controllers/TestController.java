@@ -51,7 +51,7 @@ public class TestController {
 		 StringBuilder results = new StringBuilder();
 	        Integer counter = 1;
 	        for(Slide slide : test.getSlideList()){
-	            results.append(counter.toString()).append(". ").append(slide.getSlideName()).append(" - ").append((testScore.getScoreList().get(counter-1)==null ? 0 : testScore.getScoreList().get(counter-1)) +"\n");
+	            results.append(counter.toString()).append(". ").append(slide.getSlideName()).append(" = ").append((testScore.getScoreList().get(counter-1)==null ? 0 : testScore.getScoreList().get(counter-1)) +"\n");
 	            counter++;
 	        }
 		

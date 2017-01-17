@@ -1,5 +1,6 @@
 package com.vladimir.pma.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vladimir.pma.data.dao.SlideDao;
 import com.vladimir.pma.data.dao.TestDao;
+import com.vladimir.pma.data.dto.TestScore;
 import com.vladimir.pma.data.entity.Slide;
 import com.vladimir.pma.data.entity.Test;
 
@@ -42,18 +44,18 @@ public class TestController {
 	}
 	
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestParam(name="resultList", required=false) List<String> resultList) {
+	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody TestScore testScore) {
 		log.info("saveResults(): /rest/tests/results ");
-//		Test test = testDao.findById(id);
+		Test test = testDao.findById(id);
 		
-//		 StringBuilder results = new StringBuilder();
-//	        Integer counter = 1;
-//	        for(Slide slide : MyApplication.getSlideList()){
-//	            results.append(counter.toString()).append(". ").append(slide.getSlideName()).append(" - ").append(MyApplication.getTestScore().get(counter-1)+"\n");
-//	            counter++;
-//	        }
+		 StringBuilder results = new StringBuilder();
+	        Integer counter = 1;
+	        for(Slide slide : test.getSlideList()){
+	            results.append(counter.toString()).append(". ").append(slide.getSlideName()).append(" - ").append((testScore.getScoreList().get(counter-1)==null ? 0 : testScore.getScoreList().get(counter-1)) +"\n");
+	            counter++;
+	        }
 		
-		return new ResponseEntity<String>("These are the results!!!", HttpStatus.OK);
+		return new ResponseEntity<String>(results.toString(), HttpStatus.OK);
 	}
 	
 	

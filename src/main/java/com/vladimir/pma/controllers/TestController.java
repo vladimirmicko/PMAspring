@@ -23,16 +23,14 @@ import com.vladimir.pma.data.dto.TestScore;
 import com.vladimir.pma.data.entity.Slide;
 import com.vladimir.pma.data.entity.Test;
 
-
-
 @RestController
 @RequestMapping("/rest/tests")
 public class TestController {
 	private static final Log log = LogFactory.getLog(TestController.class);
-	
+
 	@Autowired
 	private TestDao testDao;
-	
+
 	@Autowired
 	private SlideDao slideDao;
 
@@ -42,39 +40,38 @@ public class TestController {
 		Test test = testDao.findById(id);
 		return new ResponseEntity<Test>(test, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody TestScore testScore) {
 		log.info("saveResults(): /rest/tests/results ");
 		Test test = testDao.findById(id);
-		
-		 StringBuilder results = new StringBuilder();
-	        Integer counter = 1;
-	        for(Slide slide : test.getSlideList()){
-	            results.append(counter.toString()).append(". ").append(slide.getSlideName()).append(" = ").append((testScore.getScoreList().get(counter-1)==null ? 0 : testScore.getScoreList().get(counter-1)) +"\n");
-	            counter++;
-	        }
-		
+
+		StringBuilder results = new StringBuilder();
+		Integer counter = 1;
+		for (Slide slide : test.getSlideList()) {
+			results.append(counter.toString()).append(". ").append(slide.getSlideName()).append(" = ").append(
+					(testScore.getScoreList().get(counter - 1) == null ? 0 : testScore.getScoreList().get(counter - 1))
+							+ "\n");
+			counter++;
+		}
+
 		return new ResponseEntity<String>(results.toString(), HttpStatus.OK);
 	}
-	
-	
+
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Test>> getAllTests() {
 		log.info("getAllTests(): /rest/tests ");
 		List<Test> testList = testDao.findAll();
 		return new ResponseEntity<List<Test>>(testList, HttpStatus.OK);
 	}
-	
-	
+
 	@RequestMapping(value = "/slides/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Slide> getSlide(@PathVariable(value = "id") int id) {
 		log.info("getSlide(): /rest/tests ");
 		Slide slide = slideDao.findById(id);
 		return new ResponseEntity<Slide>(slide, HttpStatus.OK);
 	}
-	
-	
+
 	@RequestMapping(value = "/{id}/slides", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Slide>> getSlidesByTest(@PathVariable(value = "id") int id) {
 		log.info("getSlide(): /rest/tests/slides ");
@@ -82,12 +79,30 @@ public class TestController {
 		List<Slide> slideList = test.getSlideList();
 		return new ResponseEntity<List<Slide>>(slideList, HttpStatus.OK);
 	}
-	
-	
+
 	@RequestMapping(value = "/slides", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Slide>> getAllSlides() {
 		log.info("getAllSlides(): /rest/tests ");
 		List<Slide> testList = slideDao.findAll();
 		return new ResponseEntity<List<Slide>>(testList, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/statistics/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getStatistics(@PathVariable(value = "id") int id, @RequestBody TestScore testScore) {
+		log.info("getStatistics(): /rest/tests/statistics ");
+		Test test = testDao.findById(id);
+
+		StringBuilder results = new StringBuilder();
+		Integer counter = 1;
+		for (Slide slide : test.getSlideList()) {
+			results.append(counter.toString())
+					.append(". ")
+					.append(slide.getSlideName()).append(" = ")
+					.append((testScore.getScoreList().get(counter - 1) == null ? 
+							0 : (testScore.getScoreList().get(counter - 1).equals("0") ? "You are belo average!" : "Great achievement!")) + "\n");
+			counter++;
+		}
+
+		return new ResponseEntity<String>(results.toString(), HttpStatus.OK);
 	}
 }

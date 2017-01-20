@@ -99,7 +99,7 @@ public class TestController {
 					.append(". ")
 					.append(slide.getSlideName()).append(" = ")
 					.append((testScore.getScoreList().get(counter - 1) == null ? 
-							0 : (testScore.getScoreList().get(counter - 1).equals("0") ? "You are belo average!" : "Great achievement!")) + "\n");
+							0 : (testScore.getScoreList().get(counter - 1).equals("0") ? "You are below average!" : "Great achievement!")) + "\n");
 			counter++;
 		}
 

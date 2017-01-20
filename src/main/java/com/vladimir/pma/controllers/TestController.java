@@ -55,6 +55,7 @@ public class TestController {
 			counter++;
 		}
 
+		log.info("RESULTS: "+"\n"+results.toString());
 		return new ResponseEntity<String>(results.toString(), HttpStatus.OK);
 	}
 
@@ -103,6 +104,7 @@ public class TestController {
 			counter++;
 		}
 
+		log.info("STATISTICS: "+"\n"+results.toString());
 		return new ResponseEntity<String>(results.toString(), HttpStatus.OK);
 	}
 }

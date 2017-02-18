@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var hero_service_1 = require('./hero.service');
+var ng2_bootstrap_1 = require('ng2-bootstrap');
 var AppComponent = (function () {
     function AppComponent(heroService) {
         this.heroService = heroService;
@@ -23,6 +24,13 @@ var AppComponent = (function () {
         this.heroService.getHeroes()
             .subscribe(function (heroes) { return _this.heroes = heroes; }, function (error) { return _this.errorMessage = error; });
     };
+    AppComponent.prototype.showRoleModal = function () {
+        this.addRoleModal.show();
+    };
+    __decorate([
+        core_1.ViewChild('addRoleModal'), 
+        __metadata('design:type', ng2_bootstrap_1.ModalDirective)
+    ], AppComponent.prototype, "addRoleModal", void 0);
     AppComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

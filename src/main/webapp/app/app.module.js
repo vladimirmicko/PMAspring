@@ -16,6 +16,7 @@ var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
 var hero_service_1 = require('./hero.service');
 var primeng_1 = require('primeng/primeng');
+var ng2_bootstrap_1 = require('ng2-bootstrap');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -27,7 +28,8 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
-                app_routing_module_1.AppRoutingModule
+                app_routing_module_1.AppRoutingModule,
+                ng2_bootstrap_1.ModalModule.forRoot(),
             ],
             declarations: [
                 app_component_1.AppComponent,

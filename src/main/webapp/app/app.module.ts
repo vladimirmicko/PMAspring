@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent }         from './app.component';
 import { HeroService }          from './hero.service';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
+import { ModalModule } from 'ng2-bootstrap';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ModalModule.forRoot(),
   ],
   declarations: [
     AppComponent,

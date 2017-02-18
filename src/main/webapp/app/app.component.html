@@ -18,3 +18,47 @@
         </template>
     </p-column>
 </p-dataTable>
+
+ <!--<button class="btn btn-success" (click)="showRoleModal()"></button>
+
+
+<div bsModal #addRoleModal="bs-modal" class="modal fade" id="addRoleModal" tabindex="-1" role="dialog" aria-labelledby="addRoleModal" (onHidden)="closeRoleModal(undefined, 'add')">
+        <div *ngIf="!selectedRole && modalAlreadyOpened" class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="closeRoleModal(undefined, 'add')" aria-label="Close">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">{{'fe.adminRoles.adding' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="modalAlert.show && (modalAlert.type=='danger' || modalAlert.type=='warning')" class="alert_box margin-0">
+                        <alert [type]="modalAlert.type" [dismissible]="modalAlert.dismissible" (close)="this._utilityService.setAlert(this.modalAlert)">
+                            <span [innerHTML]="modalAlert.message"></span>
+                        </alert>
+                    </div>
+                    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+                        <div [ngClass]="{'form-group': true, 'has-error has-feedback': editForm.get('name').hasError('notUnique')}">
+                            <validation-messages [errors]="formErrors" inputName="roleName">
+                                <label for="name">{{'fe.generalComponentContent.name' | translate}}</label>
+                                <span *ngIf="editForm.get('name').hasError('notUnique')" class="glyphicon glyphicon-remove form-control-feedback pull-right" aria-hidden="true"></span>
+                                <span *ngIf="editForm.get('name').hasError('notUnique')" class="label label-danger pull-right">{{'fe.adminRoles.roleUniqueMessage' | translate}}</span>
+                                <control-messages [control]="editForm.controls.name"></control-messages>
+                                <input maxlength="50" type="text" formControlName="name" class="form-control" id="name" [placeholder]="'fe.generalComponentContent.name' | translate">
+                            </validation-messages>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeout">{{'fe.adminRoles.fieldTimeout' | translate}}</label>
+                            <control-messages [control]="editForm.controls.timeout"></control-messages>
+                            <input maxlength="19" type="text" formControlName="timeout" class="form-control" id="timeout" [placeholder]="'fe.adminRoles.fieldTimeout' | translate" onlyNumber />
+                            <p class="help-block">{{'fe.adminRoles.timeoutHelpMessage' | translate}}</p>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="closeRoleModal(undefined, 'add')">{{'fe.generalComponentContent.close' | translate}}</button>
+                    <button type="button" class="btn btn-primary" (click)="updateOrAddRole(true)" [disabled]="!editForm.valid || btnClicked">{{'fe.generalComponentContent.save' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>-->

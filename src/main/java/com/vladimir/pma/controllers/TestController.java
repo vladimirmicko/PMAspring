@@ -109,7 +109,7 @@ public class TestController {
 	
 	
 	@RequestMapping(value = "/heros", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Hero> getAllHeros() {
+	public ResponseEntity<List<Hero>> getAllHeros() {
 		log.info("getAllHeros(): /rest/tests/heros ");
 				
 		List<Hero> heroList = new ArrayList();
@@ -124,6 +124,6 @@ public class TestController {
 		
 		Object[] heroLista = heroList.toArray();
 		
-		return heroList;
+		return new ResponseEntity<List<Hero>>(heroList, HttpStatus.OK);
 	}
 }

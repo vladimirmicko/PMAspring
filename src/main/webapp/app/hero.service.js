@@ -26,7 +26,7 @@ var HeroService = (function () {
     };
     HeroService.prototype.extractData = function (res) {
         var body = res.json();
-        return body.data || {};
+        return body || {};
     };
     HeroService.prototype.handleError = function (error) {
         // In a real world app, we might use a remote logging infrastructure

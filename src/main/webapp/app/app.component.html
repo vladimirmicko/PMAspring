@@ -1,15 +1,20 @@
 <h3>Top Heroes</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let hero of heroes"  [routerLink]="['/detail', hero.id]"  class="col-1-4">
-    <div class="module hero">
-      <h4>{{hero.name}}</h4>
-    </div>
-  </a>
+    <a *ngFor="let hero of heroes" [routerLink]="['/detail', hero.id]" class="col-1-4">
+        <div class="module hero">
+            <h4>{{hero.name}}</h4>
+        </div>
+    </a>
 </div>
 
 
 <h3>Data table</h3>
 <p-dataTable [value]="heroes">
     <p-column field="id" header="Id"></p-column>
-    <p-column field="name" header="Name"></p-column>
+    <p-column field="name" header="Name">
+        <template let-object="rowData" pTemplate="body">
+          <div class="text-center" >{{object.id}}</div>
+          <div class="text-center" >{{object.name}}</div>
+        </template>
+    </p-column>
 </p-dataTable>

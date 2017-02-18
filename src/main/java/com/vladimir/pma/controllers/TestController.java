@@ -122,8 +122,6 @@ public class TestController {
 		heroList.add(new Hero(17, "Cvile"));
 		heroList.add(new Hero(18, "Lale"));
 		
-		Object[] heroLista = heroList.toArray();
-		
 		return new ResponseEntity<List<Hero>>(heroList, HttpStatus.OK);
 	}
 }

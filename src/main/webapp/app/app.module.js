@@ -15,12 +15,15 @@ var http_1 = require('@angular/http');
 var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
 var hero_service_1 = require('./hero.service');
+var primeng_1 = require('primeng/primeng');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [
+                primeng_1.DataTableModule,
+                primeng_1.SharedModule,
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,

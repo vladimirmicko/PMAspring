@@ -51,6 +51,7 @@
       'rxjs':                      'npm:rxjs@5.0.1',
       'ts':                        'npm:plugin-typescript@5.2.7/lib/plugin.js',
       'typescript':                'npm:typescript@2.0.10/lib/typescript.js',
+      'primeng':                   'node_modules/primeng',
 
     },
     // packages tells the System loader how to load when no filename and/or no extension
@@ -61,7 +62,8 @@
       },
       rxjs: {
         defaultExtension: 'js'
-      }
+      },
+      primeng: { defaultExtension: 'js' }
     }
   });
 

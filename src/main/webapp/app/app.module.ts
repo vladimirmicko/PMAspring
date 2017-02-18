@@ -7,10 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent }         from './app.component';
 import { HeroService }          from './hero.service';
+import { DataTableModule, SharedModule } from 'primeng/primeng';
 
 
 @NgModule({
   imports: [
+    DataTableModule,
+    SharedModule,
     BrowserModule,
     FormsModule,
     HttpModule,

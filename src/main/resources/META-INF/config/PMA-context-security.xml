@@ -33,7 +33,7 @@
 					
 		<!-- Access Rights -->
 		<security:intercept-url pattern="/rest/**" access="permitAll()" />
-		<security:intercept-url method="GET" pattern="/rest/**" access="hasAnyRole('ROLE_ADMIN')" />
+		<!-- <security:intercept-url method="GET" pattern="/rest/**" access="hasAnyRole('ROLE_ADMIN')" /> -->
 		<security:csrf disabled="true"/>
 	</security:http>
 	

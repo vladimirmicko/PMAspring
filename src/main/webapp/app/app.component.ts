@@ -1,25 +1,32 @@
-import { Component }          from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { Hero }        from './hero';
+import { HeroService } from './hero.service';
 
 @Component({
   moduleId: module.id,
   selector: 'my-app',
-  template: `
-    <h1>{{title}}</h1>
-    <nav>
-      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-      <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
-    </nav>
-    <router-outlet></router-outlet>
-  `,
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ]
 })
-export class AppComponent {
-  title = 'Tour of Heroes 1123';
+export class AppComponent implements OnInit {
+  heroes: Hero[] = [];
+  errorMessage: string;
+
+  constructor(private heroService: HeroService) { }
+
+  ngOnInit(): void {
+    this.getHeroes(); 
+  }
+
+
+    getHeroes() {
+    this.heroService.getHeroes()
+                     .subscribe(
+                       heroes => this.heroes = heroes,
+                       error =>  this.errorMessage = <any>error);
+  }
+
 }
 
 
-/*
-Copyright 2017 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/

@@ -109,8 +109,9 @@ public class TestController {
 	
 	
 	@RequestMapping(value = "/heros", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Hero>> getAllHeros() {
+	public List<Hero> getAllHeros() {
 		log.info("getAllHeros(): /rest/tests/heros ");
+				
 		List<Hero> heroList = new ArrayList();
 		heroList.add(new Hero(11, "Micko"));
 		heroList.add(new Hero(12, "Cicko"));
@@ -121,6 +122,8 @@ public class TestController {
 		heroList.add(new Hero(17, "Cvile"));
 		heroList.add(new Hero(18, "Lale"));
 		
-		return new ResponseEntity<List<Hero>>(heroList, HttpStatus.OK);
+		Object[] heroLista = heroList.toArray();
+		
+		return heroList;
 	}
 }

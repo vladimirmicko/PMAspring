@@ -19,7 +19,8 @@
     </p-column>
 </p-dataTable>
 
-<button class="btn btn-success" (click)="showRoleModal()">Pritisni me</button>
+<button class="btn btn-success" (click)="showRoleModal()">Prikazi modal</button>
+<button class="btn btn-success" (click)="hideRoleModal()">Sakri modal</button>
 
 
 <div bsModal #addRoleModal="bs-modal" class="modal fade" id="addRoleModal" tabindex="-1" role="dialog" aria-labelledby="addRoleModal" (onHidden)="closeRoleModal(undefined, 'add')">

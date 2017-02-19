@@ -15,7 +15,7 @@ var AppComponent = (function () {
     function AppComponent(heroService) {
         this.heroService = heroService;
         this.heroes = [];
-        this.modalAlreadyOpened = false;
+        this.modalAlreadyOpened = true;
     }
     AppComponent.prototype.ngOnInit = function () {
         this.getHeroes();
@@ -26,8 +26,12 @@ var AppComponent = (function () {
             .subscribe(function (heroes) { return _this.heroes = heroes; }, function (error) { return _this.errorMessage = error; });
     };
     AppComponent.prototype.showRoleModal = function () {
-        this.addRoleModal.show();
+        // this.addRoleModal.show();
         this.modalAlreadyOpened = true;
+    };
+    AppComponent.prototype.hideRoleModal = function () {
+        // this.addRoleModal.hide();
+        this.modalAlreadyOpened = false;
     };
     __decorate([
         core_1.ViewChild('addRoleModal'), 

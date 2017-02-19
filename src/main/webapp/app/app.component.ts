@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   addRoleModal: ModalDirective;
 
   constructor(private heroService: HeroService) { 
-    this.modalAlreadyOpened=false;
+    this.modalAlreadyOpened=true;
   }
 
   ngOnInit(): void {
@@ -35,10 +35,14 @@ export class AppComponent implements OnInit {
   }
 
   public showRoleModal() {
-    this.addRoleModal.show();
+    // this.addRoleModal.show();
     this.modalAlreadyOpened=true;
   }
-
+  
+  public hideRoleModal() {
+    // this.addRoleModal.hide();
+    this.modalAlreadyOpened=false;
+  }
 }
 
 

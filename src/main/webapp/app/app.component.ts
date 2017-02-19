@@ -14,8 +14,8 @@ export class AppComponent implements OnInit {
   heroes: Hero[] = [];
   errorMessage: string;
 
-  @ViewChild('addRoleModal')
-  addRoleModal: ModalDirective;
+  @ViewChild('childModal') 
+  public childModal:ModalDirective;
 
   constructor(private heroService: HeroService) { }
 
@@ -23,6 +23,13 @@ export class AppComponent implements OnInit {
     this.getHeroes();
   }
 
+  public showChildModal():void {
+    this.childModal.show();
+  }
+ 
+  public hideChildModal():void {
+    this.childModal.hide();
+  }
 
   getHeroes() {
     this.heroService.getHeroes()
@@ -31,13 +38,6 @@ export class AppComponent implements OnInit {
       error => this.errorMessage = <any>error);
   }
 
-  public showRoleModal() {
-    this.addRoleModal.show();
-  }
-  
-  public hideRoleModal() {
-    this.addRoleModal.hide();
-  }
 }
 
 

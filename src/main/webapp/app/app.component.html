@@ -19,31 +19,18 @@
     </p-column>
 </p-dataTable>
 
-<button class="btn btn-success" (click)="showRoleModal()">Prikazi modal</button>
-<button class="btn btn-success" (click)="hideRoleModal()">Sakri modal</button>
-
-
-<div bsModal #addRoleModal="bs-modal" class="modal fade" id="addRoleModal" tabindex="-1" role="dialog" aria-labelledby="addRoleModal" (onHidden)="closeRoleModal(undefined, 'add')">
-        <button type="button" class="close" (click)="closeRoleModal(undefined, 'add')" aria-label="Close"> Ja sam u modalu </button>
-</div>
-
-
-
-<button type="button" class="btn btn-primary" (click)="staticModal.show()">Static modal</button>
- 
-<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
-     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<button type="button" class="btn btn-primary" (click)="showChildModal()">Open child modal</button>
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left">Static modal</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+        <h4 class="modal-title pull-left">Child modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        This is static modal, backdrop click will not close it.
-        Click <b>&times;</b> to close modal.
+        I am a child modal, opened from parent component!
       </div>
     </div>
   </div>

@@ -19,21 +19,21 @@ var AppComponent = (function () {
     AppComponent.prototype.ngOnInit = function () {
         this.getHeroes();
     };
+    AppComponent.prototype.showChildModal = function () {
+        this.childModal.show();
+    };
+    AppComponent.prototype.hideChildModal = function () {
+        this.childModal.hide();
+    };
     AppComponent.prototype.getHeroes = function () {
         var _this = this;
         this.heroService.getHeroes()
             .subscribe(function (heroes) { return _this.heroes = heroes; }, function (error) { return _this.errorMessage = error; });
     };
-    AppComponent.prototype.showRoleModal = function () {
-        this.addRoleModal.show();
-    };
-    AppComponent.prototype.hideRoleModal = function () {
-        this.addRoleModal.hide();
-    };
     __decorate([
-        core_1.ViewChild('addRoleModal'), 
+        core_1.ViewChild('childModal'), 
         __metadata('design:type', ng2_bootstrap_1.ModalDirective)
-    ], AppComponent.prototype, "addRoleModal", void 0);
+    ], AppComponent.prototype, "childModal", void 0);
     AppComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

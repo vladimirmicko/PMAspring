@@ -29,7 +29,7 @@ var AppModule = (function () {
                 forms_1.FormsModule,
                 http_1.HttpModule,
                 app_routing_module_1.AppRoutingModule,
-                ng2_bootstrap_1.ModalModule.forRoot(),
+                ng2_bootstrap_1.ModalModule.forRoot()
             ],
             declarations: [
                 app_component_1.AppComponent,

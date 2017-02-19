@@ -13,11 +13,14 @@ import { ModalDirective } from 'ng2-bootstrap';
 export class AppComponent implements OnInit {
   heroes: Hero[] = [];
   errorMessage: string;
+  modalAlreadyOpened: boolean;
 
   @ViewChild('addRoleModal')
   addRoleModal: ModalDirective;
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService) { 
+    this.modalAlreadyOpened=false;
+  }
 
   ngOnInit(): void {
     this.getHeroes();
@@ -33,6 +36,7 @@ export class AppComponent implements OnInit {
 
   public showRoleModal() {
     this.addRoleModal.show();
+    this.modalAlreadyOpened=true;
   }
 
 }

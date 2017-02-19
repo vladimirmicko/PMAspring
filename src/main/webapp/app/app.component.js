@@ -15,6 +15,7 @@ var AppComponent = (function () {
     function AppComponent(heroService) {
         this.heroService = heroService;
         this.heroes = [];
+        this.modalAlreadyOpened = false;
     }
     AppComponent.prototype.ngOnInit = function () {
         this.getHeroes();
@@ -26,6 +27,7 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.showRoleModal = function () {
         this.addRoleModal.show();
+        this.modalAlreadyOpened = true;
     };
     __decorate([
         core_1.ViewChild('addRoleModal'), 

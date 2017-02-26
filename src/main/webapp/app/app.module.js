@@ -14,25 +14,24 @@ var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
+var admin_component_1 = require('./admin.component');
+var testing_component_1 = require('./testing.component');
 var hero_service_1 = require('./hero.service');
-var primeng_1 = require('primeng/primeng');
-var ng2_bootstrap_1 = require('ng2-bootstrap');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [
-                primeng_1.DataTableModule,
-                primeng_1.SharedModule,
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
                 app_routing_module_1.AppRoutingModule,
-                ng2_bootstrap_1.ModalModule.forRoot()
             ],
             declarations: [
                 app_component_1.AppComponent,
+                admin_component_1.AdminComponent,
+                testing_component_1.TestingComponent
             ],
             providers: [hero_service_1.HeroService],
             bootstrap: [app_component_1.AppComponent]

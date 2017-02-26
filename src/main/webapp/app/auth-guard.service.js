@@ -9,27 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var auth_guard_service_1 = require('./auth-guard.service');
-var admin_component_1 = require('./admin.component');
-var routes = [
-    {
-        path: 'admin',
-        component: admin_component_1.AdminComponent,
-        canLoad: [auth_guard_service_1.AuthGuard]
-    },
-];
-var AppRoutingModule = (function () {
-    function AppRoutingModule() {
+var AuthGuard = (function () {
+    function AuthGuard() {
     }
-    AppRoutingModule = __decorate([
-        core_1.NgModule({
-            imports: [router_1.RouterModule.forRoot(routes)],
-            exports: [router_1.RouterModule]
-        }), 
+    AuthGuard.prototype.canActivate = function () {
+        console.log('AuthGuard#canActivate called');
+        return true;
+    };
+    AuthGuard = __decorate([
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], AppRoutingModule);
-    return AppRoutingModule;
+    ], AuthGuard);
+    return AuthGuard;
 }());
-exports.AppRoutingModule = AppRoutingModule;
-//# sourceMappingURL=app-routing.module.js.map
+exports.AuthGuard = AuthGuard;
+//# sourceMappingURL=auth-guard.service.js.map

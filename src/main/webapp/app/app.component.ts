@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Hero } from './hero';
-import { HeroService } from './hero.service';
+import { TestService } from './test.service';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalDirective } from 'ng2-bootstrap';
 

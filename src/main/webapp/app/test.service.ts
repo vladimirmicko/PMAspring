@@ -7,14 +7,14 @@ import { Hero } from './hero';
 
 
 @Injectable()
-export class HeroService {
+export class TestService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private heroesUrl = 'rest/tests/heros';  // URL to web api
 
   constructor(private http: Http) { }
 
-  getHeroes (): Observable<Hero[]> {
+  getTests (): Observable<Hero[]> {
     return this.http.get(this.heroesUrl)
                     .map(this.extractData)
                     .catch(this.handleError);

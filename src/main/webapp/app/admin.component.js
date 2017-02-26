@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var hero_service_1 = require('./hero.service');
+var test_service_1 = require('./test.service');
 var ng2_bootstrap_1 = require('ng2-bootstrap');
 var AdminComponent = (function () {
     function AdminComponent(heroService) {
@@ -17,7 +17,7 @@ var AdminComponent = (function () {
         this.heroes = [];
     }
     AdminComponent.prototype.ngOnInit = function () {
-        this.getHeroes();
+        this.getTests();
     };
     AdminComponent.prototype.showChildModal = function () {
         this.childModal.show();
@@ -25,9 +25,9 @@ var AdminComponent = (function () {
     AdminComponent.prototype.hideChildModal = function () {
         this.childModal.hide();
     };
-    AdminComponent.prototype.getHeroes = function () {
+    AdminComponent.prototype.getTests = function () {
         var _this = this;
-        this.heroService.getHeroes()
+        this.heroService.getTests()
             .subscribe(function (heroes) { return _this.heroes = heroes; }, function (error) { return _this.errorMessage = error; });
     };
     __decorate([
@@ -41,7 +41,7 @@ var AdminComponent = (function () {
             templateUrl: './admin.component.html',
             styleUrls: ['./admin.component.css']
         }), 
-        __metadata('design:paramtypes', [hero_service_1.HeroService])
+        __metadata('design:paramtypes', [test_service_1.TestService])
     ], AdminComponent);
     return AdminComponent;
 }());

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Hero } from './hero';
-import { HeroService } from './hero.service';
+import { TestService } from './test.service';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalDirective } from 'ng2-bootstrap';
 
@@ -17,10 +17,10 @@ export class AdminComponent implements OnInit {
   @ViewChild('childModal') 
   public childModal:ModalDirective;
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: TestService) { }
 
   ngOnInit(): void {
-    this.getHeroes();
+    this.getTests();
   }
 
   public showChildModal():void {
@@ -31,8 +31,8 @@ export class AdminComponent implements OnInit {
     this.childModal.hide();
   }
 
-  getHeroes() {
-    this.heroService.getHeroes()
+  getTests() {
+    this.heroService.getTests()
       .subscribe(
       heroes => this.heroes = heroes,
       error => this.errorMessage = <any>error);

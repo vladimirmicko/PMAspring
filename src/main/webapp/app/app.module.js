@@ -16,7 +16,7 @@ var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
 var admin_component_1 = require('./admin.component');
 var testing_component_1 = require('./testing.component');
-var hero_service_1 = require('./hero.service');
+var test_service_1 = require('./test.service');
 var primeng_1 = require('primeng/primeng');
 var AppModule = (function () {
     function AppModule() {
@@ -36,7 +36,7 @@ var AppModule = (function () {
                 admin_component_1.AdminComponent,
                 testing_component_1.TestingComponent
             ],
-            providers: [hero_service_1.HeroService],
+            providers: [test_service_1.TestService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

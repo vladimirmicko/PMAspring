@@ -11,7 +11,7 @@ import { AppRoutingModule}  from './app-routing.module'
 import { AppComponent }     from './app.component';
 import { AdminComponent }   from './admin.component'
 import { TestingComponent } from './testing.component'
-import { HeroService }      from './hero.service';
+import { TestService }      from './test.service';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalModule }      from 'ng2-bootstrap';
 
@@ -31,7 +31,7 @@ import { ModalModule }      from 'ng2-bootstrap';
     AdminComponent,
     TestingComponent
   ],
-  providers: [ HeroService ],
+  providers: [ TestService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -16,7 +16,6 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalModule }      from 'ng2-bootstrap';
 
 
-
 @NgModule({
   imports: [
     DataTableModule,
@@ -25,6 +24,7 @@ import { ModalModule }      from 'ng2-bootstrap';
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    ModalModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -35,3 +35,4 @@ import { ModalModule }      from 'ng2-bootstrap';
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
+

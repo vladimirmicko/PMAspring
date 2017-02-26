@@ -18,6 +18,7 @@ var admin_component_1 = require('./admin.component');
 var testing_component_1 = require('./testing.component');
 var test_service_1 = require('./test.service');
 var primeng_1 = require('primeng/primeng');
+var ng2_bootstrap_1 = require('ng2-bootstrap');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,6 +31,7 @@ var AppModule = (function () {
                 forms_1.FormsModule,
                 http_1.HttpModule,
                 app_routing_module_1.AppRoutingModule,
+                ng2_bootstrap_1.ModalModule.forRoot()
             ],
             declarations: [
                 app_component_1.AppComponent,

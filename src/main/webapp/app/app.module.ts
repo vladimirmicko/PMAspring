@@ -19,6 +19,8 @@ import { ModalModule }      from 'ng2-bootstrap';
 
 @NgModule({
   imports: [
+    DataTableModule,
+    SharedModule,
     BrowserModule,
     FormsModule,
     HttpModule,

@@ -12,11 +12,17 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var auth_guard_service_1 = require('./auth-guard.service');
 var admin_component_1 = require('./admin.component');
+var testing_component_1 = require('./testing.component');
 var routes = [
     { path: '', redirectTo: '/admin', pathMatch: 'full' },
     {
         path: 'admin',
         component: admin_component_1.AdminComponent,
+        canLoad: [auth_guard_service_1.AuthGuard]
+    },
+    {
+        path: 'testing',
+        component: testing_component_1.TestingComponent,
         canLoad: [auth_guard_service_1.AuthGuard]
     },
 ];

@@ -15,6 +15,12 @@ const routes: Routes = [
     canLoad: [AuthGuard]
     // outlet: 'popup'
   },
+    {
+    path: 'testing',
+    component: TestingComponent,
+    canLoad: [AuthGuard]
+    // outlet: 'popup'
+  },
 ];
 
 

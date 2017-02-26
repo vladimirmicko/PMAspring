@@ -1,4 +1,4 @@
-<h3>Top Heroes</h3>
+<h3>Top Heroes 1</h3>
 <div class="grid grid-pad">
     <a *ngFor="let hero of heroes" [routerLink]="['/detail', hero.id]" class="col-1-4">
         <div class="module hero">
@@ -8,7 +8,7 @@
 </div>
 
 
-<h3>Data table</h3>
+<h3>Data table 1</h3>
 <p-dataTable [value]="heroes">
     <p-column field="id" header="Id"></p-column>
     <p-column field="name" header="Name">
@@ -19,7 +19,8 @@
     </p-column>
 </p-dataTable>
 
-<!--<button type="button" class="btn btn-primary" (click)="showChildModal()">Open child modal</button>
+<!--<h3>Hello, this is modal</h3>
+<button type="button" class="btn btn-primary" (click)="showChildModal()">Open child modal</button>
 <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">

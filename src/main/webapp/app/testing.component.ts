@@ -6,9 +6,9 @@ import { ModalDirective } from 'ng2-bootstrap';
 
 @Component({
   moduleId: module.id,
-  selector: 'my-app',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'testing',
+  templateUrl: './testing.component.html',
+  styleUrls: ['./testing.component.css']
 })
 export class TestingComponent implements OnInit {
   heroes: Hero[] = [];

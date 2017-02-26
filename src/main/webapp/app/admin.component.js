@@ -37,9 +37,9 @@ var AdminComponent = (function () {
     AdminComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'my-app',
-            templateUrl: './app.component.html',
-            styleUrls: ['./app.component.css']
+            selector: 'admin',
+            templateUrl: './admin.component.html',
+            styleUrls: ['./admin.component.css']
         }), 
         __metadata('design:paramtypes', [hero_service_1.HeroService])
     ], AdminComponent);

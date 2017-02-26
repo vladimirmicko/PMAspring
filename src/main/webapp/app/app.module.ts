@@ -2,6 +2,7 @@ import { NgModule }         from '@angular/core';
 import { BrowserModule }    from '@angular/platform-browser';
 import { FormsModule }      from '@angular/forms';
 import { Router }           from '@angular/router';
+import { RouterModule }     from '@angular/router';
 
 import { HttpModule }       from '@angular/http';
 
@@ -13,7 +14,7 @@ import { TestingComponent } from './testing.component'
 import { HeroService }      from './hero.service';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalModule }      from 'ng2-bootstrap';
-import { RouterModule }     from '@angular/router';
+
 
 
 @NgModule({

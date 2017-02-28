@@ -1,17 +1,17 @@
-<h3>Top Heroes 1</h3>
+<h3>Top Tests 1</h3>
 <div class="grid grid-pad">
-    <a *ngFor="let hero of heroes" [routerLink]="['/detail', hero.id]" class="col-1-4">
+    <a *ngFor="let test of tests" [routerLink]="['/detail', test.id]" class="col-1-4">
         <div class="module hero">
-            <h4>{{hero.name}}</h4>
+            <h4>{{test.testName}}</h4>
         </div>
     </a>
 </div>
 
 
 <h3>Data table 1</h3>
-<p-dataTable [value]="heroes">
+<p-dataTable [value]="tests">
     <p-column field="id" header="Id"></p-column>
-    <p-column field="name" header="Name">
+    <p-column field="testName" header="Name">
         <template let-object="rowData" pTemplate="body">
           <div class="text-center" >{{object.id}}</div>
           <div class="text-center" >{{object.name}}</div>

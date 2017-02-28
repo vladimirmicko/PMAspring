@@ -3,19 +3,19 @@ import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { Hero } from './hero';
+import { Test } from './test';
 
 
 @Injectable()
 export class TestService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private heroesUrl = 'rest/tests/heros';  // URL to web api
+  private testsUrl = 'rest/tests';  // URL to web api
 
   constructor(private http: Http) { }
 
-  getTests (): Observable<Hero[]> {
-    return this.http.get(this.heroesUrl)
+  getTests (): Observable<Test[]> {
+    return this.http.get(this.testsUrl)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

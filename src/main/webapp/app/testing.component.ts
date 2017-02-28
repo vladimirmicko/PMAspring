@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Hero } from './hero';
+import { Test } from './test';
 import { TestService } from './test.service';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalDirective } from 'ng2-bootstrap';
@@ -11,13 +11,13 @@ import { ModalDirective } from 'ng2-bootstrap';
   styleUrls: ['./testing.component.css']
 })
 export class TestingComponent implements OnInit {
-  heroes: Hero[] = [];
+  tests: Test[] = [];
   errorMessage: string;
 
   @ViewChild('childModal') 
   public childModal:ModalDirective;
 
-  constructor(private heroService: TestService) { }
+  constructor(private testService: TestService) { }
 
   ngOnInit(): void {
     this.getTests();
@@ -32,9 +32,9 @@ export class TestingComponent implements OnInit {
   }
 
   getTests() {
-    this.heroService.getTests()
+    this.testService.getTests()
       .subscribe(
-      heroes => this.heroes = heroes,
+      tests => this.tests = tests,
       error => this.errorMessage = <any>error);
   }
 

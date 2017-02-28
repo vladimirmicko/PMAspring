@@ -17,10 +17,10 @@ var TestService = (function () {
     function TestService(http) {
         this.http = http;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.heroesUrl = 'rest/tests/heros'; // URL to web api
+        this.testsUrl = 'rest/tests'; // URL to web api
     }
     TestService.prototype.getTests = function () {
-        return this.http.get(this.heroesUrl)
+        return this.http.get(this.testsUrl)
             .map(this.extractData)
             .catch(this.handleError);
     };

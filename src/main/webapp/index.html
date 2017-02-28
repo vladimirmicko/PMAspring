@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script>document.write('<base href="' + document.location + '" />');</script>
-    <title>Angular Tour of Heroes</title>
+
+<head>
+    <script>
+        document.write('<base href="' + document.location + '" />');
+    </script>
+    <title>PrimingTests</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="styles.css">
- <!-- CSS -->
+    <!-- CSS -->
     <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="node_modules/primeng/resources/primeng.css" />
@@ -39,11 +42,14 @@
 
     <script src="systemjs.config.js"></script>
     <script>
-      System.import('main.js').catch(function(err){ console.error(err); });
+        System.import('main.js').catch(function(err) {
+            console.error(err);
+        });
     </script>
-  </head>
+</head>
 
-  <body>
+<body>
     <my-app>Loading...</my-app>
-  </body>
+</body>
+
 </html>

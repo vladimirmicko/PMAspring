@@ -12,9 +12,9 @@ var core_1 = require('@angular/core');
 var test_service_1 = require('./test.service');
 var ng2_bootstrap_1 = require('ng2-bootstrap');
 var AdminComponent = (function () {
-    function AdminComponent(heroService) {
-        this.heroService = heroService;
-        this.heroes = [];
+    function AdminComponent(testService) {
+        this.testService = testService;
+        this.tests = [];
     }
     AdminComponent.prototype.ngOnInit = function () {
         this.getTests();
@@ -27,8 +27,8 @@ var AdminComponent = (function () {
     };
     AdminComponent.prototype.getTests = function () {
         var _this = this;
-        this.heroService.getTests()
-            .subscribe(function (heroes) { return _this.heroes = heroes; }, function (error) { return _this.errorMessage = error; });
+        this.testService.getTests()
+            .subscribe(function (tests) { return _this.tests = tests; }, function (error) { return _this.errorMessage = error; });
     };
     __decorate([
         core_1.ViewChild('childModal'), 

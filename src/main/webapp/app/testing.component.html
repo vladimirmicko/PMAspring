@@ -13,10 +13,10 @@
 <h3>Data table 1</h3>
 <p-dataTable [value]="tests">
     <p-column field="id" header="Id"></p-column>
-    <p-column field="testName" header="Name">
+    <p-column field="testPromoImage" header="Name">
         <template let-object="rowData" pTemplate="body">
           <div class="text-center" >{{object.id}}</div>
-          <div class="text-center" >{{object.testName}}</div>
+          <div>{{object.testName}}<img [src]="object.testPromoImage"></div>
         </template>
     </p-column>
 </p-dataTable>

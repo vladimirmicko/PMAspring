@@ -1,6 +1,9 @@
 package com.vladimir.pma.controllers;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -62,8 +65,30 @@ public class TestController {
 	public ResponseEntity<List<Test>> getAllTests() {
 		log.info("getAllTests(): /rest/tests ");
 		List<Test> testList = testDao.findAll();
+		
+		for(Test test : testList){
+			test.setPromoImage(new String(Base64.getEncoder().encode(test.getTestPromoImage())));
+		}
+		
 		return new ResponseEntity<List<Test>>(testList, HttpStatus.OK);
 	}
+	
+	
+//	@RequestMapping(value = "/captchacode", method = RequestMethod.GET)
+//	public ResponseEntity<RestResponseDto> getCaptchaCode() {
+//		HashMap<String, String> map = new HashMap<>();
+//
+//		String text = CSRCaptchaEngine.generateRandomWords();
+//		byte[] imageBytes = CSRCaptchaEngine.generateImage(text);
+//		byte[] encoded = Base64.getEncoder().encode(imageBytes);
+//		String captchaCode = new String(encoded);
+//
+//		String hashCode = Hashing.sha256().hashString(text, StandardCharsets.UTF_8).toString();
+//		map.put("imageBase64", captchaCode);
+//		map.put("hashedCode", hashCode);
+//		return new ResponseEntity<RestResponseDto>(new RestResponseDto(map, HttpStatus.OK.value()), HttpStatus.OK);
+//	}
+	
 
 	@RequestMapping(value = "/slides/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Slide> getSlide(@PathVariable(value = "id") int id) {

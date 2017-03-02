@@ -4,7 +4,8 @@ export class Test {
   id: number;
   testName: string;
   description: string;
-  testPromoImage: string;
+  testPromoImage: CharacterData[];
+  testImage: string;
   creationDate: Date;
   slideList: Slide[];
 }

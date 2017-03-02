@@ -17,7 +17,7 @@ var TestService = (function () {
     function TestService(http) {
         this.http = http;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.testsUrl = 'rest/tests'; // URL to web api
+        this.testsUrl = 'rest/tests/1'; // URL to web api
     }
     TestService.prototype.getTests = function () {
         return this.http.get(this.testsUrl)

@@ -11,7 +11,7 @@ import { ModalDirective } from 'ng2-bootstrap';
   styleUrls: ['./testing.component.css']
 })
 export class TestingComponent implements OnInit {
-  tests: Test[] = [];
+  test: Test = new Test();
   errorMessage: string;
 
   @ViewChild('childModal') 
@@ -31,10 +31,11 @@ export class TestingComponent implements OnInit {
     this.childModal.hide();
   }
 
+
   getTests() {
     this.testService.getTests()
       .subscribe(
-      tests => this.tests = tests,
+      test => this.test = test,
       error => this.errorMessage = <any>error);
   }
 

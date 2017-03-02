@@ -13,6 +13,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -43,6 +44,9 @@ public class Test implements java.io.Serializable {
 	@Lob
 	@Column(name = "TEST_PROMO_IMAGE", nullable = true)
 	private byte[] testPromoImage;
+	
+	@Transient
+	private String promoImage;
 		
 	@Column(name = "CREATION_DATE", nullable = true)
 	private Date creationDate;
@@ -107,6 +111,14 @@ public class Test implements java.io.Serializable {
 
 	public void setSlideList(List<Slide> slideList) {
 		this.slideList = slideList;
+	}
+
+	public String getPromoImage() {
+		return promoImage;
+	}
+
+	public void setPromoImage(String promoImage) {
+		this.promoImage = promoImage;
 	}
 	
 	

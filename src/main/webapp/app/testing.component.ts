@@ -33,7 +33,7 @@ export class TestingComponent implements OnInit {
 
 
   getTests() {
-    this.testService.getTests()
+    this.testService.getTest()
       .subscribe(
       test => this.test = test,
       error => this.errorMessage = <any>error);

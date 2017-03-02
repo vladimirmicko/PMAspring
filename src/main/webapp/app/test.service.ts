@@ -10,12 +10,19 @@ import { Test } from './test';
 export class TestService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private testsUrl = 'rest/tests/1';  // URL to web api
+  private getTestUrl = 'rest/tests/1';  // URL to web api
+  private getTestsUrl = 'rest/tests';  // URL to web api
 
   constructor(private http: Http) { }
 
-  getTests (): Observable<Test> {
-    return this.http.get(this.testsUrl)
+  getTests (): Observable<Test[]> {
+    return this.http.get(this.getTestsUrl)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  getTest (): Observable<Test> {
+   return this.http.get(this.getTestUrl)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

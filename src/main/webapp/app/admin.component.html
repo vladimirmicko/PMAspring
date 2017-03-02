@@ -19,6 +19,22 @@
     </p-column>
 </p-dataTable>
 
+<div *ngIf="test">
+    <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" />
+</div>
+
+<h3>Data table 11</h3>
+<p-dataTable [value]="tests">
+    <p-column field="id" header="Id"></p-column>
+    <p-column field="testPromoImage" header="Name">
+        <template let-object="rowData" pTemplate="body">
+            <div *ngIf="object">
+                <img [src]="'data:image/jpeg;base64,' + object.testPromoImage" />
+            </div>
+        </template>
+    </p-column>
+</p-dataTable>
+
 <h3>Hello, this is modal</h3>
 <button type="button" class="btn btn-primary" (click)="showChildModal()">Open child modal</button>
 <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

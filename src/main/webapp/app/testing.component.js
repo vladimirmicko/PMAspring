@@ -28,7 +28,7 @@ var TestingComponent = (function () {
     };
     TestingComponent.prototype.getTests = function () {
         var _this = this;
-        this.testService.getTests()
+        this.testService.getTest()
             .subscribe(function (test) { return _this.test = test; }, function (error) { return _this.errorMessage = error; });
     };
     __decorate([

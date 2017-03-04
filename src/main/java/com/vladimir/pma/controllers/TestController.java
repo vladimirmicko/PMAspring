@@ -1,5 +1,6 @@
 package com.vladimir.pma.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -153,6 +154,14 @@ public class TestController {
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes="multipart/form-data")
 	public ResponseEntity<String> uploadFile(@RequestPart(name="imageFile") MultipartFile imageFile) {
+		Test test = testDao.findById(1);
+		try {
+			test.setTestPromoImage(imageFile.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		testDao.merge(test);
 		return new ResponseEntity<String>("OK", HttpStatus.OK);
 	}
 

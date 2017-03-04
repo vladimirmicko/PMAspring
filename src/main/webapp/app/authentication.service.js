@@ -24,7 +24,7 @@ var AuthenticationService = (function () {
     }
     AuthenticationService.prototype.login = function (username, password) {
         var _this = this;
-        return this.http.post('rest/security/authenticate', JSON.stringify({ 'username': username, 'password': password }))
+        return this.http.post('rest/security/authenticate', JSON.stringify({ username: username, password: password }), this.options)
             .map(function (response) {
             var token = response.json() && response.json().token;
             if (token) {

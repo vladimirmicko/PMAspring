@@ -23,7 +23,7 @@ export class AuthenticationService {
 
 
   login(username: string, password: string): Observable<boolean> {
-        return this.http.post('rest/security/authenticate', JSON.stringify({ 'username': username, 'password': password }))
+        return this.http.post('rest/security/authenticate', JSON.stringify({ username: username, password: password }), this.options)
             .map((response: Response) => {
                 let token = response.json() && response.json().token;
                 if (token) {

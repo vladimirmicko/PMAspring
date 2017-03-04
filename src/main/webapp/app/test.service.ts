@@ -15,6 +15,14 @@ export class TestService {
 
   constructor(private http: Http) { }
 
+
+
+  uploadRest(formData: FormData): Observable<any> {
+      return this.http.post('rest/tests/upload', formData)
+          .map(this.extractData)
+          .catch(this.handleError);
+  }
+
   getTests (): Observable<Test[]> {
     return this.http.get(this.getTestsUrl)
                     .map(this.extractData)

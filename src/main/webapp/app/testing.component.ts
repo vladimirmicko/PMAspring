@@ -13,9 +13,11 @@ import { ModalDirective } from 'ng2-bootstrap';
 export class TestingComponent implements OnInit {
   test: Test = new Test();
   errorMessage: string;
+  imageFile: any;
+  subscriptions: Object;
 
-  @ViewChild('childModal') 
-  public childModal:ModalDirective;
+  @ViewChild('childModal')
+  public childModal: ModalDirective;
 
   constructor(private testService: TestService) { }
 
@@ -23,11 +25,11 @@ export class TestingComponent implements OnInit {
     this.getTests();
   }
 
-  public showChildModal():void {
+  public showChildModal(): void {
     this.childModal.show();
   }
- 
-  public hideChildModal():void {
+
+  public hideChildModal(): void {
     this.childModal.hide();
   }
 
@@ -37,6 +39,28 @@ export class TestingComponent implements OnInit {
       .subscribe(
       test => this.test = test,
       error => this.errorMessage = <any>error);
+  }
+
+
+
+  onChangeJavaFile(event: any): void {
+    if (event.target.files[0]) {
+      this.imageFile = event.target.files[0];
+    }
+  }
+
+
+  upload() {
+    let formData = new FormData();
+    formData.append('imageFile', this.imageFile);
+
+    this.subscriptions['upload'] = this.testService.uploadRest(formData)
+      .subscribe(
+      (res: any) => {
+      },
+      (err: any) => {
+        
+      })
   }
 
 }

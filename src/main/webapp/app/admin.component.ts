@@ -14,12 +14,14 @@ export class AdminComponent implements OnInit {
   tests: Test[] = [];
   errorMessage: string;
 
+
+
   @ViewChild('childModal') 
   public childModal:ModalDirective;
 
   constructor(private testService: TestService) { }
 
-  ngOnInit(): void {
+ ngOnInit(): void {
     this.getTests();
   }
 
@@ -37,5 +39,4 @@ export class AdminComponent implements OnInit {
       tests => this.tests = tests,
       error => this.errorMessage = <any>error);
   }
-
 }

@@ -20,6 +20,11 @@
     <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" />
 </div>
 
+
+<input type="file" id="javaFileInput" #javaFileInput accept="." (change)="onChangeJavaFile($event)">
+
+<button type="button" class="btn btn-primary" (click)="upload()">Upload</button>
+
 <!--<h3>Data table 11</h3>
 <p-dataTable [value]="tests">
     <p-column field="id" header="Id"></p-column>

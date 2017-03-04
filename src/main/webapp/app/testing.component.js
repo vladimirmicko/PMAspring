@@ -31,6 +31,19 @@ var TestingComponent = (function () {
         this.testService.getTest()
             .subscribe(function (test) { return _this.test = test; }, function (error) { return _this.errorMessage = error; });
     };
+    TestingComponent.prototype.onChangeJavaFile = function (event) {
+        if (event.target.files[0]) {
+            this.imageFile = event.target.files[0];
+        }
+    };
+    TestingComponent.prototype.upload = function () {
+        var formData = new FormData();
+        formData.append('imageFile', this.imageFile);
+        this.subscriptions['upload'] = this.testService.uploadRest(formData)
+            .subscribe(function (res) {
+        }, function (err) {
+        });
+    };
     __decorate([
         core_1.ViewChild('childModal'), 
         __metadata('design:type', ng2_bootstrap_1.ModalDirective)

@@ -5,6 +5,7 @@ import { AuthGuard }               from './auth-guard.service';
 
 import { AdminComponent }   from './admin.component';
 import { TestingComponent }      from './testing.component';
+import { LoginComponent }      from './login.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
     component: TestingComponent,
     canLoad: [AuthGuard]
     // outlet: 'popup'
+  },
+    {
+    path: 'login',
+    component: LoginComponent
   },
 ];
 

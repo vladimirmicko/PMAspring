@@ -8,10 +8,11 @@ import {RequestOptions, Request, RequestMethod} from '@angular/http';
 
 
 @Injectable()
-export class TestService {
+export class AuthenticationService {
 
   private headers = new Headers();
   private options: RequestOptions;
+  private token: string;
   
   
   constructor(private http: Http) { 
@@ -19,6 +20,26 @@ export class TestService {
     this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
     this.options = new RequestOptions({ headers: this.headers });
   }
+
+
+  login(username: string, password: string): Observable<boolean> {
+        return this.http.post('rest/security/authenticate', JSON.stringify({ 'username': username, 'password': password }))
+            .map((response: Response) => {
+                let token = response.json() && response.json().token;
+                if (token) {
+                    this.token = token;
+                    localStorage.setItem('currentUser',  ('Basic ' + btoa(username + ':' + password)));
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+    }
+
+    logout(): void {
+        this.token = null;
+        localStorage.removeItem('currentUser');
+    }
 
   uploadRest(formData: FormData): Observable<any> {
       return this.http.post('rest/tests/upload', formData, this.options)

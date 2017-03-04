@@ -14,34 +14,53 @@ var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 var http_2 = require('@angular/http');
-var TestService = (function () {
-    function TestService(http) {
+var AuthenticationService = (function () {
+    function AuthenticationService(http) {
         this.http = http;
         this.headers = new http_1.Headers();
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
         this.options = new http_2.RequestOptions({ headers: this.headers });
     }
-    TestService.prototype.uploadRest = function (formData) {
+    AuthenticationService.prototype.login = function (username, password) {
+        var _this = this;
+        return this.http.post('rest/security/authenticate', JSON.stringify({ 'username': username, 'password': password }))
+            .map(function (response) {
+            var token = response.json() && response.json().token;
+            if (token) {
+                _this.token = token;
+                localStorage.setItem('currentUser', ('Basic ' + btoa(username + ':' + password)));
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+    };
+    AuthenticationService.prototype.logout = function () {
+        this.token = null;
+        localStorage.removeItem('currentUser');
+    };
+    AuthenticationService.prototype.uploadRest = function (formData) {
         return this.http.post('rest/tests/upload', formData, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    TestService.prototype.getTests = function () {
+    AuthenticationService.prototype.getTests = function () {
         return this.http.get('rest/tests', this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    TestService.prototype.getTest = function () {
+    AuthenticationService.prototype.getTest = function () {
         return this.http.get('rest/tests/1', this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    TestService.prototype.extractData = function (res) {
+    AuthenticationService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};
     };
-    TestService.prototype.handleError = function (error) {
+    AuthenticationService.prototype.handleError = function (error) {
         var errMsg;
         if (error instanceof http_1.Response) {
             var body = error.json() || '';
@@ -54,11 +73,11 @@ var TestService = (function () {
         console.error(errMsg);
         return Observable_1.Observable.throw(errMsg);
     };
-    TestService = __decorate([
+    AuthenticationService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], TestService);
-    return TestService;
+    ], AuthenticationService);
+    return AuthenticationService;
 }());
-exports.TestService = TestService;
-//# sourceMappingURL=test.service.js.map
+exports.AuthenticationService = AuthenticationService;
+//# sourceMappingURL=authentication.service.js.map

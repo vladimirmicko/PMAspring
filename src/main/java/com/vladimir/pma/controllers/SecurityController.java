@@ -1,5 +1,8 @@
 package com.vladimir.pma.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
@@ -16,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class SecurityController {
 	private static final Log log = LogFactory.getLog(SecurityController.class);
 	
-	@RequestMapping(value = "/authenticate", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity getAllUsers(HttpServletRequest request) {
+	@RequestMapping(value = "/authenticate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map> getAllUsers(HttpServletRequest request) {
 		log.info("HTTP request-GET: /rest/security/authenticate");
-		return new ResponseEntity(null, HttpStatus.OK);
+		Map<String, String> map = new HashMap();
+		map.put("token", "OK");
+		return new ResponseEntity(map, HttpStatus.OK);
 	}
 }

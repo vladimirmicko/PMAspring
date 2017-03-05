@@ -55,7 +55,7 @@ var AuthenticationService = (function () {
         var errMsg;
         if (error.status === 401) {
             error.status = 200;
-            return " "; //Observable.throw('Unauthorized');
+            return Observable_1.Observable.throw('Unauthorized');
         }
         if (error instanceof http_1.Response) {
             var body = error.json() || '';

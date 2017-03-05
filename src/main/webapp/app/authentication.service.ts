@@ -57,7 +57,7 @@ export class AuthenticationService {
     let errMsg: string;
     if (error.status === 401) {
        error.status = 200;
-       return " "; //Observable.throw('Unauthorized');
+       return Observable.throw('Unauthorized');
     }
     if (error instanceof Response) {
       const body = error.json() || '';

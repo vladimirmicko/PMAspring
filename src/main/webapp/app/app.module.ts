@@ -10,7 +10,7 @@ import { AppRoutingModule}  from './app-routing.module'
 
 import { AppComponent }     from './app.component';
 import { AdminComponent }   from './admin.component';
-import { LoginComponent } from './login.component';
+import { LoginComponent }   from './login.component';
 import { TestingComponent } from './testing.component';
 import { TestService }      from './test.service';
 import { AuthenticationService }      from './authentication.service';

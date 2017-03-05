@@ -23,17 +23,26 @@ var TestService = (function () {
         // this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
         this.options = new http_2.RequestOptions({ headers: this.headers });
     }
+    TestService.prototype.prepareHeaders = function () {
+        this.headers = new http_1.Headers();
+        this.headers.append('Content-Type', 'application/json');
+        this.headers.append('Authorization', localStorage.getItem('currentUser'));
+        this.options = new http_2.RequestOptions({ headers: this.headers });
+    };
     TestService.prototype.uploadRest = function (formData) {
+        this.prepareHeaders();
         return this.http.post('rest/tests/upload', formData, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     TestService.prototype.getTests = function () {
+        this.prepareHeaders();
         return this.http.get('rest/tests', this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     TestService.prototype.getTest = function () {
+        this.prepareHeaders();
         return this.http.get('rest/tests/1', this.options)
             .map(this.extractData)
             .catch(this.handleError);

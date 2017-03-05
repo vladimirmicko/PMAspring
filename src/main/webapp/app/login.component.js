@@ -42,6 +42,9 @@ var LoginComponent = (function () {
             }
         });
     };
+    LoginComponent.prototype.logout = function () {
+        this.authenticationService.logout();
+    };
     LoginComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

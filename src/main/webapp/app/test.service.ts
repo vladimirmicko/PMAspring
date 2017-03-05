@@ -21,20 +21,30 @@ export class TestService {
     this.options = new RequestOptions({ headers: this.headers });
   }
 
+  prepareHeaders(){
+    this.headers = new Headers();
+    this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Authorization', localStorage.getItem('currentUser'));
+    this.options = new RequestOptions({ headers: this.headers });
+  }
+
   uploadRest(formData: FormData): Observable<any> {
+      this.prepareHeaders();
       return this.http.post('rest/tests/upload', formData, this.options)
           .map(this.extractData)
           .catch(this.handleError);
   }
 
   getTests (): Observable<Test[]> {
+    this.prepareHeaders();
     return this.http.get('rest/tests', this.options)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
   getTest (): Observable<Test> {
-   return this.http.get('rest/tests/1', this.options)
+    this.prepareHeaders();
+    return this.http.get('rest/tests/1', this.options)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

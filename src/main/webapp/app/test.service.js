@@ -19,7 +19,8 @@ var TestService = (function () {
         this.http = http;
         this.headers = new http_1.Headers();
         this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
+        this.headers.append('Authorization', localStorage.getItem('currentUser'));
+        // this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
         this.options = new http_2.RequestOptions({ headers: this.headers });
     }
     TestService.prototype.uploadRest = function (formData) {

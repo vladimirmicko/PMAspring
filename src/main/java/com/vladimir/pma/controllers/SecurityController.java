@@ -21,11 +21,11 @@ public class SecurityController {
 	private static final Log log = LogFactory.getLog(SecurityController.class);
 	
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map> authenticate(@RequestBody UserLogin login) {
+	public ResponseEntity<Map<String, String>> authenticate(@RequestBody UserLogin login) {
 		log.info("HTTP request-POST: /rest/security/authenticate");
 		Map<String, String> map = new HashMap();
 		map.put("token", "OK");
-		return new ResponseEntity(map, HttpStatus.OK);
+		return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
 	}
 	
 }

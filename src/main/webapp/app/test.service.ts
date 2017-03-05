@@ -16,7 +16,8 @@ export class TestService {
   
   constructor(private http: Http) { 
     this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
+    this.headers.append('Authorization', localStorage.getItem('currentUser'));
+    // this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
     this.options = new RequestOptions({ headers: this.headers });
   }
 

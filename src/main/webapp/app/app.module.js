@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
-var router_1 = require('@angular/router');
 var http_1 = require('@angular/http');
 var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
@@ -37,9 +36,6 @@ var AppModule = (function () {
                 app_routing_module_1.AppRoutingModule,
                 ng2_bootstrap_1.ModalModule.forRoot()
             ],
-            exports: [
-                router_1.RouterModule
-            ],
             declarations: [
                 app_component_1.AppComponent,
                 login_component_1.LoginComponent,
@@ -47,9 +43,9 @@ var AppModule = (function () {
                 testing_component_1.TestingComponent
             ],
             providers: [
+                auth_guard_service_1.AuthGuard,
                 test_service_1.TestService,
-                authentication_service_1.AuthenticationService,
-                auth_guard_service_1.AuthGuard
+                authentication_service_1.AuthenticationService
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

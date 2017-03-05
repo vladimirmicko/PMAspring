@@ -26,9 +26,6 @@ import { ModalModule }      from 'ng2-bootstrap';
     AppRoutingModule,
     ModalModule.forRoot()
   ],
-   exports: [
-    RouterModule
-  ],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -36,9 +33,9 @@ import { ModalModule }      from 'ng2-bootstrap';
     TestingComponent
   ],
   providers: [ 
+    AuthGuard,
     TestService, 
-    AuthenticationService,
-    AuthGuard
+    AuthenticationService
   ],
   bootstrap: [ AppComponent ]
 })

@@ -15,10 +15,7 @@ export class TestService {
   
   
   constructor(private http: Http) { 
-    this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Authorization', localStorage.getItem('currentUser'));
-    // this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
-    this.options = new RequestOptions({ headers: this.headers });
+    this.prepareHeaders();
   }
 
   prepareHeaders(){
@@ -29,7 +26,10 @@ export class TestService {
   }
 
   uploadRest(formData: FormData): Observable<any> {
-      this.prepareHeaders();
+    this.headers = new Headers();
+    this.headers.append('Accept', 'application/json');
+    this.headers.append('Authorization', localStorage.getItem('currentUser'));
+    this.options = new RequestOptions({ headers: this.headers });
       return this.http.post('rest/tests/upload', formData, this.options)
           .map(this.extractData)
           .catch(this.handleError);

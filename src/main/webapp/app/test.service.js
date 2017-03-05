@@ -18,10 +18,7 @@ var TestService = (function () {
     function TestService(http) {
         this.http = http;
         this.headers = new http_1.Headers();
-        this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Authorization', localStorage.getItem('currentUser'));
-        // this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
-        this.options = new http_2.RequestOptions({ headers: this.headers });
+        this.prepareHeaders();
     }
     TestService.prototype.prepareHeaders = function () {
         this.headers = new http_1.Headers();
@@ -30,7 +27,10 @@ var TestService = (function () {
         this.options = new http_2.RequestOptions({ headers: this.headers });
     };
     TestService.prototype.uploadRest = function (formData) {
-        this.prepareHeaders();
+        this.headers = new http_1.Headers();
+        this.headers.append('Accept', 'application/json');
+        this.headers.append('Authorization', localStorage.getItem('currentUser'));
+        this.options = new http_2.RequestOptions({ headers: this.headers });
         return this.http.post('rest/tests/upload', formData, this.options)
             .map(this.extractData)
             .catch(this.handleError);

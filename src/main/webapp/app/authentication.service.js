@@ -19,11 +19,15 @@ var AuthenticationService = (function () {
         this.http = http;
         this.headers = new http_1.Headers();
         this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
+        // this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
         this.options = new http_2.RequestOptions({ headers: this.headers });
     }
     AuthenticationService.prototype.login = function (username, password) {
         var _this = this;
+        this.headers = new http_1.Headers();
+        this.headers.append('Content-Type', 'application/json');
+        this.headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
+        this.options = new http_2.RequestOptions({ headers: this.headers });
         return this.http.post('rest/security/authenticate', JSON.stringify({ username: username, password: password }), this.options)
             .map(function (response) {
             var token = response.json() && response.json().token;
@@ -35,26 +39,12 @@ var AuthenticationService = (function () {
             else {
                 return false;
             }
-        });
+        })
+            .catch(this.handleError);
     };
     AuthenticationService.prototype.logout = function () {
         this.token = null;
         localStorage.removeItem('currentUser');
-    };
-    AuthenticationService.prototype.uploadRest = function (formData) {
-        return this.http.post('rest/tests/upload', formData, this.options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    AuthenticationService.prototype.getTests = function () {
-        return this.http.get('rest/tests', this.options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    AuthenticationService.prototype.getTest = function () {
-        return this.http.get('rest/tests/1', this.options)
-            .map(this.extractData)
-            .catch(this.handleError);
     };
     AuthenticationService.prototype.extractData = function (res) {
         var body = res.json();
@@ -62,6 +52,9 @@ var AuthenticationService = (function () {
     };
     AuthenticationService.prototype.handleError = function (error) {
         var errMsg;
+        if (error.status === 401) {
+            return " "; //Observable.throw('Unauthorized');
+        }
         if (error instanceof http_1.Response) {
             var body = error.json() || '';
             var err = body.error || JSON.stringify(body);

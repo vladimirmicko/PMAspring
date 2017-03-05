@@ -17,12 +17,17 @@ export class AuthenticationService {
   
   constructor(private http: Http) { 
     this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
+    // this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
     this.options = new RequestOptions({ headers: this.headers });
   }
 
 
   login(username: string, password: string): Observable<boolean> {
+        this.headers = new Headers();
+        this.headers.append('Content-Type', 'application/json');
+        this.headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
+        this.options = new RequestOptions({ headers: this.headers });
+        
         return this.http.post('rest/security/authenticate', JSON.stringify({ username: username, password: password }), this.options)
             .map((response: Response) => {
                 let token = response.json() && response.json().token;
@@ -32,33 +37,14 @@ export class AuthenticationService {
                     return true;
                 } else {
                     return false;
-                }
-            });
+                }})
+              .catch(this.handleError);
     }
 
     logout(): void {
         this.token = null;
         localStorage.removeItem('currentUser');
     }
-
-  uploadRest(formData: FormData): Observable<any> {
-      return this.http.post('rest/tests/upload', formData, this.options)
-          .map(this.extractData)
-          .catch(this.handleError);
-  }
-
-  getTests (): Observable<Test[]> {
-    return this.http.get('rest/tests', this.options)
-                    .map(this.extractData)
-                    .catch(this.handleError);
-  }
-
-  getTest (): Observable<Test> {
-   return this.http.get('rest/tests/1', this.options)
-                    .map(this.extractData)
-                    .catch(this.handleError);
-  }
-
 
   private extractData(res: Response) {
     let body = res.json();
@@ -68,6 +54,9 @@ export class AuthenticationService {
 
   private handleError (error: Response | any) {
     let errMsg: string;
+    if (error.status === 401) {
+       return " "; //Observable.throw('Unauthorized');
+    }
     if (error instanceof Response) {
       const body = error.json() || '';
       const err = body.error || JSON.stringify(body);

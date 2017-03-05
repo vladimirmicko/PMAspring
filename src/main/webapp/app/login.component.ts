@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
 
 @Component({
-  moduleId: module.id,
-  selector: 'login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    moduleId: module.id,
+    selector: 'login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
 
 
@@ -16,12 +16,12 @@ export class LoginComponent implements OnInit {
     loading = false;
     error = '';
 
-        constructor(
+    constructor(
         private router: Router,
         private authenticationService: AuthenticationService) { }
 
-    ngOnInit() {
-        // reset login status
+
+    ngOnInit(): void {
         this.authenticationService.logout();
     }
 
@@ -34,7 +34,11 @@ export class LoginComponent implements OnInit {
                 } else {
                     this.error = 'Username or password is incorrect';
                     this.loading = false;
-                }
-            });
+                    this.router.navigate(['/login']);
+                }}, (err) => {
+                    if (err === 'Unauthorized') {
+                        this.router.navigateByUrl('/login');
+                    }
+                });
     }
 }

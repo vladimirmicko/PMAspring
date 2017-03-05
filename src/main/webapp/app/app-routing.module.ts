@@ -1,26 +1,22 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { AuthGuard }               from './auth-guard.service';
-
-import { AdminComponent }   from './admin.component';
-import { TestingComponent }      from './testing.component';
-import { LoginComponent }      from './login.component';
+import { AuthGuard }            from './auth-guard.service';
+import { AdminComponent }       from './admin.component';
+import { TestingComponent }     from './testing.component';
+import { LoginComponent }       from './login.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/admin', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'admin',
     component: AdminComponent,
     canLoad: [AuthGuard]
-    // outlet: 'popup'
   },
     {
     path: 'testing',
     component: TestingComponent,
     canLoad: [AuthGuard]
-    // outlet: 'popup'
   },
     {
     path: 'login',
@@ -30,7 +26,11 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, { useHash: true }) ],
+  imports: 
+  [ 
+    RouterModule.forRoot(routes, { useHash: true }),
+    AuthGuard
+   ],
   exports: [ RouterModule ]
 })
 

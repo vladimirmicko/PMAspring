@@ -15,7 +15,7 @@ var admin_component_1 = require('./admin.component');
 var testing_component_1 = require('./testing.component');
 var login_component_1 = require('./login.component');
 var routes = [
-    { path: '', redirectTo: '/admin', pathMatch: 'full' },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     {
         path: 'admin',
         component: admin_component_1.AdminComponent,
@@ -36,7 +36,10 @@ var AppRoutingModule = (function () {
     }
     AppRoutingModule = __decorate([
         core_1.NgModule({
-            imports: [router_1.RouterModule.forRoot(routes, { useHash: true })],
+            imports: [
+                router_1.RouterModule.forRoot(routes, { useHash: true }),
+                auth_guard_service_1.AuthGuard
+            ],
             exports: [router_1.RouterModule]
         }), 
         __metadata('design:paramtypes', [])

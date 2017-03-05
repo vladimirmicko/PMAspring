@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
+var router_1 = require('@angular/router');
 var http_1 = require('@angular/http');
 var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
@@ -19,6 +20,7 @@ var login_component_1 = require('./login.component');
 var testing_component_1 = require('./testing.component');
 var test_service_1 = require('./test.service');
 var authentication_service_1 = require('./authentication.service');
+var auth_guard_service_1 = require('./auth-guard.service');
 var primeng_1 = require('primeng/primeng');
 var ng2_bootstrap_1 = require('ng2-bootstrap');
 var AppModule = (function () {
@@ -35,13 +37,20 @@ var AppModule = (function () {
                 app_routing_module_1.AppRoutingModule,
                 ng2_bootstrap_1.ModalModule.forRoot()
             ],
+            exports: [
+                router_1.RouterModule
+            ],
             declarations: [
                 app_component_1.AppComponent,
                 login_component_1.LoginComponent,
                 admin_component_1.AdminComponent,
                 testing_component_1.TestingComponent
             ],
-            providers: [test_service_1.TestService, authentication_service_1.AuthenticationService],
+            providers: [
+                test_service_1.TestService,
+                authentication_service_1.AuthenticationService,
+                auth_guard_service_1.AuthGuard
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

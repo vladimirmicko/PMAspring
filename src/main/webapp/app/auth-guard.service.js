@@ -13,8 +13,12 @@ var AuthGuard = (function () {
     function AuthGuard() {
     }
     AuthGuard.prototype.canActivate = function () {
+        // return false;
         console.log('AuthGuard#canActivate called');
-        return true;
+        if (localStorage.getItem('currentUser'))
+            return true;
+        else
+            return false;
     };
     AuthGuard = __decorate([
         core_1.Injectable(), 

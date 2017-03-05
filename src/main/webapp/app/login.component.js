@@ -36,6 +36,7 @@ var LoginComponent = (function () {
                 _this.router.navigate(['/login']);
             }
         }, function (err) {
+            _this.router.navigateByUrl('/login');
             if (err === 'Unauthorized') {
                 _this.router.navigateByUrl('/login');
             }

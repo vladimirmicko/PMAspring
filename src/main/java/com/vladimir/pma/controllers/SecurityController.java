@@ -22,7 +22,7 @@ public class SecurityController {
 	
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map> authenticate(@RequestBody UserLogin login) {
-		log.info("HTTP request-GET: /rest/security/authenticate");
+		log.info("HTTP request-POST: /rest/security/authenticate");
 		Map<String, String> map = new HashMap();
 		map.put("token", "OK");
 		return new ResponseEntity(map, HttpStatus.OK);

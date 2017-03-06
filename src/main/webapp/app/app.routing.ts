@@ -13,13 +13,13 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canLoad: [AuthGuard]
+    canActivate: [AuthGuard]
     // outlet: 'popup'
   },
     {
     path: 'testing',
     component: TestingComponent,
-    canLoad: [AuthGuard]
+    canActivate: [AuthGuard]
     // outlet: 'popup'
   },
     {
@@ -34,4 +34,4 @@ const routes: Routes = [
   exports: [ RouterModule ]
 })
 
-export class AppRoutingModule {}
+export const routing = RouterModule.forRoot(routes);

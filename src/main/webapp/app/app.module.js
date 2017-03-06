@@ -12,15 +12,16 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
-var app_routing_module_1 = require('./app-routing.module');
+var primeng_1 = require('primeng/primeng');
+var ng2_bootstrap_1 = require('ng2-bootstrap');
+var app_routing_1 = require('./app.routing');
 var app_component_1 = require('./app.component');
 var admin_component_1 = require('./admin.component');
 var login_component_1 = require('./login.component');
 var testing_component_1 = require('./testing.component');
 var test_service_1 = require('./test.service');
+var auth_guard_service_1 = require('./auth-guard.service');
 var authentication_service_1 = require('./authentication.service');
-var primeng_1 = require('primeng/primeng');
-var ng2_bootstrap_1 = require('ng2-bootstrap');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -32,7 +33,7 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
-                app_routing_module_1.AppRoutingModule,
+                app_routing_1.routing,
                 ng2_bootstrap_1.ModalModule.forRoot()
             ],
             declarations: [
@@ -41,7 +42,11 @@ var AppModule = (function () {
                 admin_component_1.AdminComponent,
                 testing_component_1.TestingComponent
             ],
-            providers: [test_service_1.TestService, authentication_service_1.AuthenticationService],
+            providers: [
+                test_service_1.TestService,
+                authentication_service_1.AuthenticationService,
+                auth_guard_service_1.AuthGuard
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

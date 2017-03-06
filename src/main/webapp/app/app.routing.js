@@ -5,7 +5,7 @@ var admin_component_1 = require('./admin.component');
 var testing_component_1 = require('./testing.component');
 var login_component_1 = require('./login.component');
 var routes = [
-    { path: '', redirectTo: '/admin', pathMatch: 'full' },
+    { path: '**', redirectTo: '', pathMatch: 'full' },
     {
         path: 'admin',
         component: admin_component_1.AdminComponent,

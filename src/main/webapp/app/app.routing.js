@@ -5,7 +5,7 @@ var admin_component_1 = require('./admin.component');
 var testing_component_1 = require('./testing.component');
 var login_component_1 = require('./login.component');
 var routes = [
-    { path: '**', redirectTo: '', pathMatch: 'full' },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     {
         path: 'admin',
         component: admin_component_1.AdminComponent,
@@ -20,6 +20,7 @@ var routes = [
         path: 'login',
         component: login_component_1.LoginComponent
     },
+    { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 exports.routing = router_1.RouterModule.forRoot(routes);
 //# sourceMappingURL=app.routing.js.map

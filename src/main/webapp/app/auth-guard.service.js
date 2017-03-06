@@ -9,16 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var AuthGuard = (function () {
-    function AuthGuard() {
+    function AuthGuard(router) {
+        this.router = router;
     }
     AuthGuard.prototype.canActivate = function () {
-        console.log('AuthGuard#canActivate called');
         return true;
+        if (localStorage.getItem('currentUser')) {
+            return true;
+        }
+        this.router.navigate(['/login']);
+        return false;
     };
     AuthGuard = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], AuthGuard);
     return AuthGuard;
 }());

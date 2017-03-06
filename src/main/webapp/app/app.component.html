@@ -4,11 +4,11 @@
             <p class="navbar-brand" href="#">PrimingTests</p>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/PMAspring/#/admin">Tests</a></li>
-            <li><a href="/PMAspring/#/testing">Slides</a></li>
+            <li><a [routerLink]="['/admin']">Tests</a></li>
+            <li><a [routerLink]="['/testing']">Slides</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/PMAspring/#/login">Logout</a></li>
+            <li><a [routerLink]="['/login']">Login</a></li>
         </ul>
     </div>
 </nav>

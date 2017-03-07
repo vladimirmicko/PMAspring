@@ -4,6 +4,7 @@ import { FormsModule }      from '@angular/forms';
 import { HttpModule }       from '@angular/http';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalModule }      from 'ng2-bootstrap';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { routing }          from './app.routing';
 
@@ -36,7 +37,11 @@ import { AuthenticationService }      from './authentication.service';
   providers: [ 
     TestService, 
     AuthenticationService ,
-    AuthGuard
+    AuthGuard,
+    {
+            provide: LocationStrategy,
+            useClass: HashLocationStrategy
+    }
   ],
   bootstrap: [ AppComponent ]
 })

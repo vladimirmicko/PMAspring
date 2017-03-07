@@ -10,6 +10,7 @@ import { routing }          from './app.routing';
 
 import { AppComponent }     from './app.component';
 import { AdminComponent }   from './admin.component';
+import { AboutComponent }   from './about.component';
 import { LoginComponent }   from './login.component';
 import { TestingComponent } from './testing.component';
 
@@ -32,6 +33,7 @@ import { AuthenticationService }      from './authentication.service';
     AppComponent,
     LoginComponent,
     AdminComponent,
+    AboutComponent,
     TestingComponent
   ],
   providers: [ 

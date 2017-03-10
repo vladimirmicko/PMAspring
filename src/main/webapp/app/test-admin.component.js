@@ -25,6 +25,9 @@ var TestAdminComponent = (function () {
     TestAdminComponent.prototype.hideChildModal = function () {
         this.childModal.hide();
     };
+    TestAdminComponent.prototype.proba = function (test) {
+        console.log(test.testName);
+    };
     TestAdminComponent.prototype.getTests = function () {
         var _this = this;
         this.testService.getTests()

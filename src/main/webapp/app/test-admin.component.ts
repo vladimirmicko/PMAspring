@@ -15,23 +15,28 @@ export class TestAdminComponent implements OnInit {
   errorMessage: string;
 
 
-
-  @ViewChild('childModal') 
-  public childModal:ModalDirective;
-
   constructor(private testService: TestService) { }
 
- ngOnInit(): void {
+  ngOnInit(): void {
     this.getTests();
   }
 
-  public showChildModal():void {
-    this.childModal.show();
+  public editTest(test: Test, modal: ModalDirective): void {
+    console.log(test.testName);
+    modal.show();
   }
- 
-  public hideChildModal():void {
-    this.childModal.hide();
+
+  public hideEditModal(modal: ModalDirective){
+    modal.hide();
+
   }
+
+  public deleteTest(test: Test, modal: ModalDirective): void {
+    console.log(test.testName);
+    modal.show();
+  }
+
+
 
   getTests() {
     this.testService.getTests()

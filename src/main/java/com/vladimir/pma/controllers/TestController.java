@@ -52,11 +52,6 @@ public class TestController {
 	public ResponseEntity<List<Test>> getAllTests() {
 		log.info("getAllTests(): /rest/tests ");
 		List<Test> testList = testDao.findAll();
-		
-		for(Test test : testList){
-			test.setPromoImage(new String(Base64.getEncoder().encode(test.getTestPromoImage())));
-		}
-		
 		return new ResponseEntity<List<Test>>(testList, HttpStatus.OK);
 	}
 	

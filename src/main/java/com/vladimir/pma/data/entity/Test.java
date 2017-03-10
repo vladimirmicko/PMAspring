@@ -45,13 +45,10 @@ public class Test implements java.io.Serializable {
 	@Column(name = "TEST_PROMO_IMAGE", nullable = true)
 	private byte[] testPromoImage;
 	
-	@Transient
-	private String promoImage;
 		
 	@Column(name = "CREATION_DATE", nullable = true)
 	private Date creationDate;
 	
-//	@JsonIgnore
 	@OneToMany(mappedBy = "test")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@Fetch(FetchMode.SUBSELECT)
@@ -113,14 +110,4 @@ public class Test implements java.io.Serializable {
 		this.slideList = slideList;
 	}
 
-	public String getPromoImage() {
-		return promoImage;
-	}
-
-	public void setPromoImage(String promoImage) {
-		this.promoImage = promoImage;
-	}
-	
-	
-	
 }

@@ -6,6 +6,7 @@
             <div>{{object.id}}</div>
         </template>
         </p-column>
+        <p-column field="testName" header="Test name"></p-column>
         <p-column field="testPromoImage" header="Name">
             <template let-object="rowData" pTemplate="body">
             <div *ngIf="object">
@@ -18,7 +19,7 @@
 					<button class="btn btn-warning edit-button" (click)="editTest(object, editModal)">
 						<span class="glyphicon glyphicon-edit">{{object}}}</span>
 					</button>
-					<button class="btn btn-danger delete-button" (click)="deleteTest(object, editModal)">
+					<button class="btn btn-danger delete-button" (click)="deleteTest(object, deleteModal)">
 						<span class="glyphicon glyphicon-trash">{{object}}}</span>
 					</button>
 				</template>
@@ -26,20 +27,33 @@
     </p-dataTable>
 
 
-    <h3>Hello, this is modal</h3>
-    <button type="button" class="btn btn-primary" (click)="showChildModal()">Open child modal</button>
-
     <div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title pull-left">Child modal</h4>
+                    <h4 class="modal-title pull-left">Edit test</h4>
                     <button type="button" class="close pull-right" aria-label="Close" (click)="hideEditModal(editModal)">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
                 <div class="modal-body">
-                    I am a child modal, opened from parent component!
+                    Edit test
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Confirm delete of test</h4>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="hideEditModal(editModal)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    Test is about to be deleted!
                 </div>
             </div>
         </div>

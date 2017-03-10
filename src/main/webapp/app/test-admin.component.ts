@@ -28,7 +28,6 @@ export class TestAdminComponent implements OnInit {
 
   public hideEditModal(modal: ModalDirective){
     modal.hide();
-
   }
 
   public deleteTest(test: Test, modal: ModalDirective): void {
@@ -36,7 +35,9 @@ export class TestAdminComponent implements OnInit {
     modal.show();
   }
 
-
+  public hideDeleteModal(modal: ModalDirective){
+    modal.hide();
+  }
 
   getTests() {
     this.testService.getTests()

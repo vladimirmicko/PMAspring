@@ -5,7 +5,6 @@ export class Test {
   testName: string;
   description: string;
   testPromoImage: CharacterData[];
-  testImage: string;
   creationDate: Date;
   slideList: Slide[];
 }

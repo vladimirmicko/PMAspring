@@ -1,26 +1,24 @@
 <div class="container">
-    <h3>Data table 11</h3>
-    <p-dataTable [value]="tests">
-        <p-column field="id" header="Id">
+    <h3>List of tests</h3>
+    <p-dataTable [value]="tests" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
+        <p-column field="id" header="Id" [style]="{'width':'5%'}"></p-column>
+        <p-column field="testName" header="Test name" [style]="{'width':'20%'}"></p-column>
+        <p-column field="description" header="Description" [style]="{'width':'40%'}"></p-column>
+        <p-column field="creationDate" header="Creation date" [style]="{'width':'10%'}"></p-column>
+        <p-column field="testPromoImage" header="Test logo" [style]="{'width':'15%'}">
             <template let-object="rowData" pTemplate="body">
-            <div>{{object.id}}</div>
-        </template>
+                <div *ngIf="object.testPromoImage">
+                    <img [src]="'data:image/jpeg;base64,' + object.testPromoImage" />
+                </div>
+            </template>
         </p-column>
-        <p-column field="testName" header="Test name"></p-column>
-        <p-column field="testPromoImage" header="Name">
-            <template let-object="rowData" pTemplate="body">
-            <div *ngIf="object">
-                <img [src]="'data:image/jpeg;base64,' + object.testPromoImage" />
-            </div>
-        </template>
-        </p-column>
-        <p-column field="name" [style]="{'width': '84px'}">
+        <p-column field="Actions" [style]="{'width':'10%'}">
             <template let-object="rowData" pTemplate="body">
 					<button class="btn btn-warning edit-button" (click)="editTest(object, editModal)">
-						<span class="glyphicon glyphicon-edit">{{object}}}</span>
+						<span class="glyphicon glyphicon-edit"></span>
 					</button>
 					<button class="btn btn-danger delete-button" (click)="deleteTest(object, deleteModal)">
-						<span class="glyphicon glyphicon-trash">{{object}}}</span>
+						<span class="glyphicon glyphicon-trash"></span>
 					</button>
 				</template>
         </p-column>

@@ -13,6 +13,7 @@ import { ModalDirective } from 'ng2-bootstrap';
 export class TestAdminComponent implements OnInit {
   tests: Test[] = [];
   errorMessage: string;
+  test: Test;
 
 
   constructor(private testService: TestService) { }
@@ -21,21 +22,20 @@ export class TestAdminComponent implements OnInit {
     this.getTests();
   }
 
-  public editTest(test: Test, modal: ModalDirective): void {
+  public editTestModal(test: Test, modal: ModalDirective): void {
     console.log(test.testName);
+    this.test=test;
     modal.show();
   }
 
-  public hideEditModal(modal: ModalDirective){
-    modal.hide();
-  }
-
-  public deleteTest(test: Test, modal: ModalDirective): void {
+  public deleteTestModal(test: Test, modal: ModalDirective): void {
     console.log(test.testName);
+    this.test=test;
     modal.show();
   }
 
-  public hideDeleteModal(modal: ModalDirective){
+  deleteTest(test: Test, modal: ModalDirective) {
+    console.log('Test deleted:' + test.testName);
     modal.hide();
   }
 

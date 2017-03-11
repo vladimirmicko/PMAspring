@@ -14,15 +14,47 @@
         </p-column>
         <p-column field="Actions" [style]="{'width':'10%'}">
             <template let-object="rowData" pTemplate="body">
-					<button class="btn btn-warning edit-button" (click)="editTest(object, editModal)">
+					<button class="btn btn-warning edit-button" (click)="editTestModal(object, editModal)">
 						<span class="glyphicon glyphicon-edit"></span>
 					</button>
-					<button class="btn btn-danger delete-button" (click)="deleteTest(object, deleteModal)">
+					<button class="btn btn-danger delete-button" (click)="deleteTestModal(object, deleteModal)">
 						<span class="glyphicon glyphicon-trash"></span>
 					</button>
-				</template>
+			</template>
         </p-column>
     </p-dataTable>
+
+
+    <div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div *ngIf="test" class="modal-dialog modal-md modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="deleteModal.hide()">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+                    <h4 class="modal-title">Confirm delte</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" />
+                    </div>
+                    <div>
+                        <b>Test name:</b> {{test.testName}}
+                    </div>
+                    <div>
+                        <b>Test description:</b> {{test.description}}
+                    </div>
+                    <div>
+                        <b>Creation date:</b> {{test.creationDate}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default modal-cancel" (click)="deleteModal.hide();$event.stopPropagation()">Cancel</button>
+                    <button class="btn btn-primary modal-delete" (click)="deleteTest(test, deleteModal);$event.stopPropagation()">Confirm delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -30,28 +62,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title pull-left">Edit test</h4>
-                    <button type="button" class="close pull-right" aria-label="Close" (click)="hideEditModal(editModal)">
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
                 <div class="modal-body">
                     Edit test
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title pull-left">Confirm delete of test</h4>
-                    <button type="button" class="close pull-right" aria-label="Close" (click)="hideEditModal(editModal)">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                    Test is about to be deleted!
                 </div>
             </div>
         </div>

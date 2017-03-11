@@ -66,20 +66,26 @@
                 <h4 class="modal-title">Edit test modal title</h4>
             </div>
             <div class="modal-body">
-                <form [formGroup]="editForm" novalidate (ngSubmit)="editTest(editForm.value, editForm.valid)">
+                <form [formGroup]="editForm" #editForma="ngForm" id="ngForm" novalidate (ngSubmit)="editTest(editForm.value, editForm.valid)">
                     <div>
                         <label>Name</label>
-                        <input type="text" formControlName="name">
+                        <input type="text" formControlName="name" class="form-control">
                         <small [hidden]="editForm.controls.name.valid || (editForm.controls.name.pristine && !submitted)">
                                 Name is required (minimum 5 characters).
                         </small>
                     </div>
-                    <button type="submit">Submit</button>
+                    <div>
+                        <label>Description</label>
+                        <input type="text" formControlName="description" class="form-control">
+                        <small [hidden]="editForm.controls.description.valid || (editForm.controls.description.pristine && !submitted)">
+                                Description is required (minimum 5 characters).
+                        </small>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" (click)="editModal.hide();$event.stopPropagation;">Cancel</button>
-                <!--<button type="button" class="btn btn-primary" [disabled]="validateUploadForm()" (click)="upload(addEditModal)">Upload</button>-->
+                <button type="button" class="btn btn-primary" (click)="editForma.ngSubmit.emit()" [disabled]="!editForm.valid">Save</button>
             </div>
         </div>
     </div>

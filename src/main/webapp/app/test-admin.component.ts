@@ -55,7 +55,6 @@ export class TestAdminComponent implements OnInit {
     modal.hide();
   }
 
-
   getTests() {
     this.testService.getTests()
       .subscribe(

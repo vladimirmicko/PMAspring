@@ -45,9 +45,10 @@ export class TestAdminComponent implements OnInit {
     modal.show();
   }
 
-  editTest(test: Test, isValid: boolean) {
+  editTest(test: Test, isValid: boolean, modal: ModalDirective) {
         this.submitted = true;
         console.log(test, isValid);
+        modal.hide();
     }
 
   deleteTest(test: Test, modal: ModalDirective) {

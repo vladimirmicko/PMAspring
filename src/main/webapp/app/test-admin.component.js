@@ -34,9 +34,10 @@ var TestAdminComponent = (function () {
         this.test = test;
         modal.show();
     };
-    TestAdminComponent.prototype.editTest = function (test, isValid) {
+    TestAdminComponent.prototype.editTest = function (test, isValid, modal) {
         this.submitted = true;
         console.log(test, isValid);
+        modal.hide();
     };
     TestAdminComponent.prototype.deleteTest = function (test, modal) {
         console.log('Test deleted:' + test.testName);

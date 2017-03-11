@@ -66,18 +66,18 @@
                 <h4 class="modal-title">Edit test modal title</h4>
             </div>
             <div class="modal-body">
-                <form [formGroup]="editForm" #editForma="ngForm" id="ngForm" novalidate (ngSubmit)="editTest(editForm.value, editForm.valid)">
+                <form [formGroup]="editForm" #editForma="ngForm" id="ngForm" novalidate (ngSubmit)="editTest(editForm.value, editForm.valid, editModal)">
                     <div>
                         <label>Name</label>
                         <input type="text" formControlName="name" class="form-control">
-                        <small [hidden]="editForm.controls.name.valid || (editForm.controls.name.pristine && !submitted)">
+                        <small [hidden]="editForm.controls.name.valid || (editForm.controls.name.pristine && !submitted)" class="text-danger">
                                 Name is required (minimum 5 characters).
                         </small>
                     </div>
-                    <div>
+                    <div style="margin-top:20px;">
                         <label>Description</label>
                         <input type="text" formControlName="description" class="form-control">
-                        <small [hidden]="editForm.controls.description.valid || (editForm.controls.description.pristine && !submitted)">
+                        <small [hidden]="editForm.controls.description.valid || (editForm.controls.description.pristine && !submitted)" class="text-danger">
                                 Description is required (minimum 5 characters).
                         </small>
                     </div>

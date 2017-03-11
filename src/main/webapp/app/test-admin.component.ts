@@ -21,7 +21,6 @@ export class TestAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTests();
-    this.javaFile=null;
   }
 
   public editTestModal(test: Test, modal: ModalDirective): void {

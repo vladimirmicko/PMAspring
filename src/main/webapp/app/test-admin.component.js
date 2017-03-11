@@ -10,13 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var test_service_1 = require('./test.service');
+var forms_1 = require('@angular/forms');
 var TestAdminComponent = (function () {
     function TestAdminComponent(testService) {
         this.testService = testService;
+        this.events = [];
         this.tests = [];
     }
     TestAdminComponent.prototype.ngOnInit = function () {
         this.getTests();
+        this.editForm = new forms_1.FormGroup({
+            name: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
+            description: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
+        });
     };
     TestAdminComponent.prototype.editTestModal = function (test, modal) {
         console.log(test.testName);
@@ -27,6 +33,10 @@ var TestAdminComponent = (function () {
         console.log(test.testName);
         this.test = test;
         modal.show();
+    };
+    TestAdminComponent.prototype.editTest = function (test, isValid) {
+        this.submitted = true;
+        console.log(test, isValid);
     };
     TestAdminComponent.prototype.deleteTest = function (test, modal) {
         console.log('Test deleted:' + test.testName);

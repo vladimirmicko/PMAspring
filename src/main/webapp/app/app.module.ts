@@ -1,6 +1,6 @@
 import { NgModule }             from '@angular/core';
 import { BrowserModule }        from '@angular/platform-browser';
-import { FormsModule }          from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule }           from '@angular/http';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalModule }          from 'ng2-bootstrap';
@@ -26,6 +26,7 @@ import { AuthenticationService }      from './authentication.service';
     SharedModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     routing,
     ModalModule.forRoot()

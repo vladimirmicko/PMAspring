@@ -3,6 +3,7 @@ import { Test } from './test';
 import { TestService } from './test.service';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalDirective } from 'ng2-bootstrap';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   moduleId: module.id,
@@ -10,17 +11,26 @@ import { ModalDirective } from 'ng2-bootstrap';
   templateUrl: './test-admin.component.html',
   styleUrls: ['./test-admin.component.css']
 })
+
+
 export class TestAdminComponent implements OnInit {
+  public editForm: FormGroup; 
+  public submitted: boolean; 
+  public events: any[] = [];
   tests: Test[] = [];
   errorMessage: string;
   test: Test;
-  javaFile: String;
 
 
   constructor(private testService: TestService) { }
 
   ngOnInit(): void {
     this.getTests();
+
+    this.editForm = new FormGroup({
+        name: new FormControl('', [<any>Validators.required, <any>Validators.minLength(5)]),
+        description: new FormControl('', [<any>Validators.required, <any>Validators.minLength(5)]),
+    });
   }
 
   public editTestModal(test: Test, modal: ModalDirective): void {
@@ -35,10 +45,16 @@ export class TestAdminComponent implements OnInit {
     modal.show();
   }
 
+  editTest(test: Test, isValid: boolean) {
+        this.submitted = true;
+        console.log(test, isValid);
+    }
+
   deleteTest(test: Test, modal: ModalDirective) {
     console.log('Test deleted:' + test.testName);
     modal.hide();
   }
+
 
   getTests() {
     this.testService.getTests()

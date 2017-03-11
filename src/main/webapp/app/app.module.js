@@ -35,6 +35,7 @@ var AppModule = (function () {
                 primeng_1.SharedModule,
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
                 http_1.HttpModule,
                 app_routing_1.routing,
                 ng2_bootstrap_1.ModalModule.forRoot()

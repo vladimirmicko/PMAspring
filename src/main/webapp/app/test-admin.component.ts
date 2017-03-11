@@ -26,14 +26,21 @@ export class TestAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTests();
+    this.setEditForm();
+  }
 
+  public setEditForm(test?:Test){
+    if (!test){
+      test=new Test();
+    }
     this.editForm = new FormGroup({
-        name: new FormControl('', [<any>Validators.required, <any>Validators.minLength(5)]),
-        description: new FormControl('', [<any>Validators.required, <any>Validators.minLength(5)]),
+        name: new FormControl(test.testName, [<any>Validators.required, <any>Validators.minLength(5)]),
+        description: new FormControl(test.description, [<any>Validators.required, <any>Validators.minLength(5)]),
     });
   }
 
   public editTestModal(test: Test, modal: ModalDirective): void {
+    this.setEditForm(test);
     console.log(test.testName);
     this.test=test;
     modal.show();

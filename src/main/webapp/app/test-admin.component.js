@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var test_1 = require('./test');
 var test_service_1 = require('./test.service');
 var forms_1 = require('@angular/forms');
 var TestAdminComponent = (function () {
@@ -19,12 +20,19 @@ var TestAdminComponent = (function () {
     }
     TestAdminComponent.prototype.ngOnInit = function () {
         this.getTests();
+        this.setEditForm();
+    };
+    TestAdminComponent.prototype.setEditForm = function (test) {
+        if (!test) {
+            test = new test_1.Test();
+        }
         this.editForm = new forms_1.FormGroup({
-            name: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
-            description: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
+            name: new forms_1.FormControl(test.testName, [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
+            description: new forms_1.FormControl(test.description, [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
         });
     };
     TestAdminComponent.prototype.editTestModal = function (test, modal) {
+        this.setEditForm(test);
         console.log(test.testName);
         this.test = test;
         modal.show();

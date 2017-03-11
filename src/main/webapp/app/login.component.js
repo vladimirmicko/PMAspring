@@ -28,7 +28,7 @@ var LoginComponent = (function () {
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(function (result) {
             if (result === true) {
-                _this.router.navigate(['/admin']);
+                _this.router.navigate(['/tests']);
             }
             else {
                 _this.error = 'Username or password is incorrect';

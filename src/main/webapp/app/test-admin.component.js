@@ -17,6 +17,7 @@ var TestAdminComponent = (function () {
     }
     TestAdminComponent.prototype.ngOnInit = function () {
         this.getTests();
+        this.javaFile = null;
     };
     TestAdminComponent.prototype.editTestModal = function (test, modal) {
         console.log(test.testName);

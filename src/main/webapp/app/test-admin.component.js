@@ -29,6 +29,7 @@ var TestAdminComponent = (function () {
         this.editForm = new forms_1.FormGroup({
             name: new forms_1.FormControl(test.testName, [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
             description: new forms_1.FormControl(test.description, [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
+            creationDate: new forms_1.FormControl(test.creationDate)
         });
     };
     TestAdminComponent.prototype.editTestModal = function (test, modal) {
@@ -50,6 +51,19 @@ var TestAdminComponent = (function () {
     TestAdminComponent.prototype.deleteTest = function (test, modal) {
         console.log('Test deleted:' + test.testName);
         modal.hide();
+    };
+    TestAdminComponent.prototype.onChangeJavaFile = function (event) {
+        if (event.target.files[0]) {
+            this.imageFile = event.target.files[0];
+        }
+    };
+    TestAdminComponent.prototype.upload = function () {
+        var formData = new FormData();
+        formData.append('imageFile', this.imageFile);
+        this.subscriptions = this.testService.uploadRest(formData)
+            .subscribe(function (res) {
+        }, function (err) {
+        });
     };
     TestAdminComponent.prototype.getTests = function () {
         var _this = this;

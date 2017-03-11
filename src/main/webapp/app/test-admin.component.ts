@@ -20,6 +20,8 @@ export class TestAdminComponent implements OnInit {
   tests: Test[] = [];
   errorMessage: string;
   test: Test;
+  imageFile: any;
+  subscriptions: Object;
 
 
   constructor(private testService: TestService) { }
@@ -36,6 +38,7 @@ export class TestAdminComponent implements OnInit {
     this.editForm = new FormGroup({
         name: new FormControl(test.testName, [<any>Validators.required, <any>Validators.minLength(5)]),
         description: new FormControl(test.description, [<any>Validators.required, <any>Validators.minLength(5)]),
+        creationDate: new FormControl(test.creationDate)
     });
   }
 
@@ -52,18 +55,38 @@ export class TestAdminComponent implements OnInit {
     modal.show();
   }
 
-  editTest(test: Test, isValid: boolean, modal: ModalDirective) {
+  public editTest(test: Test, isValid: boolean, modal: ModalDirective) {
         this.submitted = true;
         console.log(test, isValid);
         modal.hide();
     }
 
-  deleteTest(test: Test, modal: ModalDirective) {
+  public deleteTest(test: Test, modal: ModalDirective) {
     console.log('Test deleted:' + test.testName);
     modal.hide();
   }
 
-  getTests() {
+   public onChangeJavaFile(event: any): void {
+    if (event.target.files[0]) {
+      this.imageFile = event.target.files[0];
+    }
+  }
+
+
+  public upload() {
+    let formData = new FormData();
+    formData.append('imageFile', this.imageFile);
+
+    this.subscriptions = this.testService.uploadRest(formData)
+      .subscribe(
+      (res: any) => {
+      },
+      (err: any) => {
+        
+      })
+  }
+
+  public getTests() {
     this.testService.getTests()
       .subscribe(
       tests => this.tests = tests,

@@ -17,6 +17,7 @@ var TestAdminComponent = (function () {
         this.testService = testService;
         this.events = [];
         this.tests = [];
+        this.test = new test_1.Test();
     }
     TestAdminComponent.prototype.ngOnInit = function () {
         this.getTests();

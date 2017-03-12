@@ -19,7 +19,7 @@ export class TestAdminComponent implements OnInit {
   public events: any[] = [];
   tests: Test[] = [];
   errorMessage: string;
-  test: Test;
+  test: Test = new Test();
   imageFile: any;
   subscriptions: Object;
 

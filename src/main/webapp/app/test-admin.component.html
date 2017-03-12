@@ -2,9 +2,9 @@
     <h3>List of tests</h3>
     <p-dataTable [value]="tests" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
         <p-column field="id" header="Id" [style]="{'width':'5%'}"></p-column>
-        <p-column field="testName" header="Test name" [style]="{'width':'20%'}"></p-column>
+        <p-column field="testName" header="Test name" sortable="true" [style]="{'width':'20%'}"></p-column>
         <p-column field="description" header="Description" [style]="{'width':'40%'}"></p-column>
-        <p-column field="creationDate" header="Creation date" [style]="{'width':'10%'}"></p-column>
+        <p-column field="creationDate" header="Creation date" sortable="true" [style]="{'width':'10%'}"></p-column>
         <p-column field="testPromoImage" header="Test logo" [style]="{'width':'15%'}">
             <template let-object="rowData" pTemplate="body">
                 <div *ngIf="object.testPromoImage">

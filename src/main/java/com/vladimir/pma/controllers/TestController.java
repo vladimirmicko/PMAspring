@@ -1,18 +1,14 @@
 package com.vladimir.pma.controllers;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -122,7 +118,7 @@ public class TestController {
 	
 	
 	@RequestMapping(value = "/upload/{id}", method = RequestMethod.POST, consumes="multipart/form-data")
-	public ResponseEntity<Map> uploadFile(@RequestPart(name="imageFile") MultipartFile imageFile, @PathVariable(value = "id") int id) {
+	public ResponseEntity<Map<String, String>> uploadFile(@RequestPart(name="imageFile") MultipartFile imageFile, @PathVariable(value = "id") int id) {
 		Test test = testDao.findById(id);
 		try {
 			test.setTestPromoImage(imageFile.getBytes());
@@ -131,19 +127,36 @@ public class TestController {
 			e.printStackTrace();
 		}
 		testDao.merge(test);
-		Map response = new HashMap();
+		Map<String, String> response = new HashMap<String, String>();
 		response.put("Status", "OK");
-		return new ResponseEntity<Map>(response, HttpStatus.OK);
+		return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);
 	}
 	
 	
-	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map> postTest(@RequestBody Test test) {
+	@RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, String>> postTest(@RequestBody Test test) {
 		testDao.post(test);
-		log.info("postTest(): " + test.getTestName());
-		Map response = new HashMap();
+		log.info("putTest(): " + test.getTestName());
+		Map<String, String> response = new HashMap<String, String>();
 		response.put("Status", "OK");
-		return new ResponseEntity<Map>(response, HttpStatus.OK);
+		return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, String>> persistTest(@RequestBody Test test) {
+		testDao.persist(test);
+		log.info("postTest(): " + test.getTestName());
+		Map<String, String> response = new HashMap<String, String>();
+		response.put("Status", "OK");
+		return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, String>> uploadFile(@PathVariable(value = "id") int id) {
+		testDao.deleteById(id);
+		Map<String, String> response = new HashMap<String, String>();
+		response.put("Status", "OK");
+		return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);
 	}
 
 }

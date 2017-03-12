@@ -53,6 +53,18 @@ var TestService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    TestService.prototype.putTest = function (test) {
+        this.prepareHeaders();
+        return this.http.put('rest/tests', test, this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    TestService.prototype.deleteTest = function (test) {
+        this.prepareHeaders();
+        return this.http.delete('rest/tests/' + test.id, this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     TestService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};

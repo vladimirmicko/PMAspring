@@ -50,7 +50,7 @@ export class TestService {
   }
 
 
-  postTest (test: Test): Observable<Test> {
+  postTest (test: Test): Observable<any> {
     this.prepareHeaders();
     return this.http.post('rest/tests', test, this.options)
                     .map(this.extractData)
@@ -58,6 +58,20 @@ export class TestService {
   }
 
 
+  putTest (test: Test): Observable<any> {
+    this.prepareHeaders();
+    return this.http.put('rest/tests', test, this.options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+
+    deleteTest (test: Test): Observable<any> {
+    this.prepareHeaders();
+    return this.http.delete('rest/tests/'+test.id, this.options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
 
   private extractData(res: Response) {
     let body = res.json();

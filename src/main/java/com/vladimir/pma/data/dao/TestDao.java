@@ -1,5 +1,6 @@
 package com.vladimir.pma.data.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -42,6 +43,7 @@ public class TestDao {
 	
 	@Transactional
 	public void persist(Test transientInstance) {
+		transientInstance.setCreationDate(new Date());
 			sessionFactory.getCurrentSession().persist(transientInstance);
 	}
 	

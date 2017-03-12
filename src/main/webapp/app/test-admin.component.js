@@ -41,6 +41,9 @@ var TestAdminComponent = (function () {
         modal.show();
     };
     TestAdminComponent.prototype.addNewTestModal = function (modal) {
+        var test = new test_1.Test();
+        this.test = test;
+        this.setEditForm(test);
         modal.show();
     };
     TestAdminComponent.prototype.deleteTestModal = function (test, modal) {
@@ -48,7 +51,15 @@ var TestAdminComponent = (function () {
         this.test = test;
         modal.show();
     };
-    TestAdminComponent.prototype.editTest = function (test, isValid, modal) {
+    TestAdminComponent.prototype.addEditTest = function (test, isValid, modal) {
+        if (test.id) {
+            this.editTest(test, isValid, modal);
+        }
+        else {
+            this.addTest(test, isValid, modal);
+        }
+    };
+    TestAdminComponent.prototype.addTest = function (test, isValid, modal) {
         var _this = this;
         this.submitted = true;
         console.log(test, isValid);
@@ -59,9 +70,26 @@ var TestAdminComponent = (function () {
         }, function (err) {
         });
     };
+    TestAdminComponent.prototype.editTest = function (test, isValid, modal) {
+        var _this = this;
+        this.submitted = true;
+        console.log(test, isValid);
+        modal.hide();
+        this.subscriptions = this.testService.putTest(test)
+            .subscribe(function (res) {
+            _this.getTests();
+        }, function (err) {
+        });
+    };
     TestAdminComponent.prototype.deleteTest = function (test, modal) {
+        var _this = this;
         console.log('Test deleted:' + test.testName);
         modal.hide();
+        this.subscriptions = this.testService.deleteTest(test)
+            .subscribe(function (res) {
+            _this.getTests();
+        }, function (err) {
+        });
     };
     TestAdminComponent.prototype.onChangeJavaFile = function (event) {
         if (event.target.files[0]) {

@@ -51,6 +51,9 @@ export class TestAdminComponent implements OnInit {
   }
 
   public addNewTestModal(modal: ModalDirective): void {
+    let test = new Test();
+    this.test = test;
+    this.setEditForm(test);
     modal.show();
   }
 
@@ -60,11 +63,33 @@ export class TestAdminComponent implements OnInit {
     modal.show();
   }
 
-  public editTest(test: Test, isValid: boolean, modal: ModalDirective) {
+  public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
+    if(test.id){
+      this.editTest(test, isValid, modal);
+    }
+    else{
+      this.addTest(test, isValid, modal);
+    }
+  }
+
+public addTest(test: Test, isValid: boolean, modal: ModalDirective) {
     this.submitted = true;
     console.log(test, isValid);
     modal.hide();
     this.subscriptions = this.testService.postTest(test)
+      .subscribe(
+      (res: any) => {
+        this.getTests();
+      },
+      (err: any) => {
+      })
+  }
+
+  public editTest(test: Test, isValid: boolean, modal: ModalDirective) {
+    this.submitted = true;
+    console.log(test, isValid);
+    modal.hide();
+    this.subscriptions = this.testService.putTest(test)
       .subscribe(
       (res: any) => {
         this.getTests();
@@ -77,6 +102,14 @@ export class TestAdminComponent implements OnInit {
   public deleteTest(test: Test, modal: ModalDirective) {
     console.log('Test deleted:' + test.testName);
     modal.hide();
+    this.subscriptions = this.testService.deleteTest(test)
+      .subscribe(
+      (res: any) => {
+        this.getTests();
+      },
+      (err: any) => {
+
+      })
   }
 
   public onChangeJavaFile(event: any): void {

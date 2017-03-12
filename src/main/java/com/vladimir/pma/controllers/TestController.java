@@ -121,9 +121,9 @@ public class TestController {
 	}
 	
 	
-	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes="multipart/form-data")
-	public ResponseEntity<Map> uploadFile(@RequestPart(name="imageFile") MultipartFile imageFile) {
-		Test test = testDao.findById(1);
+	@RequestMapping(value = "/upload/{id}", method = RequestMethod.POST, consumes="multipart/form-data")
+	public ResponseEntity<Map> uploadFile(@RequestPart(name="imageFile") MultipartFile imageFile, @PathVariable(value = "id") int id) {
+		Test test = testDao.findById(id);
 		try {
 			test.setTestPromoImage(imageFile.getBytes());
 		} catch (IOException e) {

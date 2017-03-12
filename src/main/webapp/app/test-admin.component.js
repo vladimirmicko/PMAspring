@@ -61,7 +61,7 @@ var TestAdminComponent = (function () {
         var _this = this;
         var formData = new FormData();
         formData.append('imageFile', this.imageFile);
-        this.subscriptions = this.testService.uploadRest(formData)
+        this.subscriptions = this.testService.uploadRest(this.test.id, formData)
             .subscribe(function (res) {
             _this.getTests();
         }, function (err) {

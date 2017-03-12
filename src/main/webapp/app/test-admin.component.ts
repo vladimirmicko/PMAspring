@@ -76,8 +76,7 @@ export class TestAdminComponent implements OnInit {
   public upload() {
     let formData = new FormData();
     formData.append('imageFile', this.imageFile);
-
-    this.subscriptions = this.testService.uploadRest(formData)
+    this.subscriptions = this.testService.uploadRest(this.test.id, formData)
       .subscribe(
       (res: any) => {this.getTests();
       },

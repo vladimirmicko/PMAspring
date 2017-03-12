@@ -69,8 +69,8 @@
                 <form [formGroup]="editForm" #editForma="ngForm" id="ngForm" novalidate (ngSubmit)="editTest(editForm.value, editForm.valid, editModal)">
                     <div>
                         <label>Name</label>
-                        <input type="text" formControlName="name" class="form-control">
-                        <small [hidden]="editForm.controls.name.valid || (editForm.controls.name.pristine && !submitted)" class="text-danger">
+                        <input type="text" formControlName="testName" class="form-control">
+                        <small [hidden]="editForm.controls.testName.valid || (editForm.controls.testName.pristine && !submitted)" class="text-danger">
                                 Name is required (minimum 5 characters).
                         </small>
                     </div>

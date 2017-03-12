@@ -50,6 +50,15 @@ export class TestService {
   }
 
 
+  postTest (test: Test): Observable<Test> {
+    this.prepareHeaders();
+    return this.http.post('rest/tests', test, this.options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+
+
   private extractData(res: Response) {
     let body = res.json();
     return body || { };

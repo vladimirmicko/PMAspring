@@ -14,8 +14,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 
 export class TestAdminComponent implements OnInit {
-  public editForm: FormGroup; 
-  public submitted: boolean; 
+  public editForm: FormGroup;
+  public submitted: boolean;
   public events: any[] = [];
   tests: Test[] = [];
   errorMessage: string;
@@ -31,42 +31,51 @@ export class TestAdminComponent implements OnInit {
     this.setEditForm();
   }
 
-  public setEditForm(test?:Test){
-    if (!test){
-      test=new Test();
+  public setEditForm(test?: Test) {
+    if (!test) {
+      test = new Test();
     }
     this.editForm = new FormGroup({
-        name: new FormControl(test.testName, [<any>Validators.required, <any>Validators.minLength(5)]),
-        description: new FormControl(test.description, [<any>Validators.required, <any>Validators.minLength(5)]),
-        creationDate: new FormControl(test.creationDate)
+      id: new FormControl(test.id),
+      testName: new FormControl(test.testName, [<any>Validators.required, <any>Validators.minLength(5)]),
+      description: new FormControl(test.description, [<any>Validators.required, <any>Validators.minLength(5)]),
+      creationDate: new FormControl(test.creationDate)
     });
   }
 
   public editTestModal(test: Test, modal: ModalDirective): void {
     this.setEditForm(test);
     console.log(test.testName);
-    this.test=test;
+    this.test = test;
     modal.show();
   }
 
   public deleteTestModal(test: Test, modal: ModalDirective): void {
     console.log(test.testName);
-    this.test=test;
+    this.test = test;
     modal.show();
   }
 
   public editTest(test: Test, isValid: boolean, modal: ModalDirective) {
-        this.submitted = true;
-        console.log(test, isValid);
-        modal.hide();
-    }
+    this.submitted = true;
+    console.log(test, isValid);
+    modal.hide();
+    this.subscriptions = this.testService.postTest(test)
+      .subscribe(
+      (res: any) => {
+        this.getTests();
+      },
+      (err: any) => {
+
+      })
+  }
 
   public deleteTest(test: Test, modal: ModalDirective) {
     console.log('Test deleted:' + test.testName);
     modal.hide();
   }
 
-   public onChangeJavaFile(event: any): void {
+  public onChangeJavaFile(event: any): void {
     if (event.target.files[0]) {
       this.imageFile = event.target.files[0];
     }
@@ -78,10 +87,11 @@ export class TestAdminComponent implements OnInit {
     formData.append('imageFile', this.imageFile);
     this.subscriptions = this.testService.uploadRest(this.test.id, formData)
       .subscribe(
-      (res: any) => {this.getTests();
+      (res: any) => {
+        this.getTests();
       },
       (err: any) => {
-        
+
       })
   }
 

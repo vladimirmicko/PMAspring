@@ -135,5 +135,15 @@ public class TestController {
 		response.put("Status", "OK");
 		return new ResponseEntity<Map>(response, HttpStatus.OK);
 	}
+	
+	
+	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map> postTest(@RequestBody Test test) {
+		testDao.post(test);
+		log.info("postTest(): " + test.getTestName());
+		Map response = new HashMap();
+		response.put("Status", "OK");
+		return new ResponseEntity<Map>(response, HttpStatus.OK);
+	}
 
 }

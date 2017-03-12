@@ -47,6 +47,12 @@ var TestService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    TestService.prototype.postTest = function (test) {
+        this.prepareHeaders();
+        return this.http.post('rest/tests', test, this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     TestService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};

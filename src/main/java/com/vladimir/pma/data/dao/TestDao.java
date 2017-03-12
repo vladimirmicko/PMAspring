@@ -56,6 +56,16 @@ public class TestDao {
 	public Test merge(Test detachedInstance) {
 			return (Test) sessionFactory.getCurrentSession().merge(detachedInstance);
 	}
+	
+	
+	@Transactional
+	public Test post(Test detachedInstance) {
+			Test test = this.findById(detachedInstance.getId());
+			test.setTestName(detachedInstance.getTestName());
+			test.setCreationDate(detachedInstance.getCreationDate());
+			test.setDescription(detachedInstance.getDescription());
+			return test;
+	}
 
 
 	@Transactional(readOnly=true)

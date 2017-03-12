@@ -96,7 +96,14 @@
                     <strong>Upload test promo image:</strong>
                 </div>
                 <div style="margin-top:20px;">
-                    <input type="file" id="javaFileInput" #javaFileInput accept="." (change)="onChangeJavaFile($event)">
+                    <!--<input type="file" id="javaFileInput" #javaFileInput accept="." (change)="onChangeJavaFile($event)">-->
+                    <!--<input type="file" id="javaFileInput" #javaFileInput accept="." (change)="onChangeJavaFile($event)" style="display:none;">-->
+                    <label class="btn btn-primary" for="javaFileInput">
+                        <!--<input id="my-file-selector" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">-->
+                        <input type="file" id="javaFileInput" #javaFileInput accept="." (change)="onChangeJavaFile($event)" style="display:none;">
+                            Browse file for upload
+                    </label>
+                    <span class='label label-info' id="upload-file-info">{{imageFile?.name}}</span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" (click)="editModal.hide()">Cancel</button>

@@ -40,6 +40,9 @@ var TestAdminComponent = (function () {
         this.test = test;
         modal.show();
     };
+    TestAdminComponent.prototype.addNewTestModal = function (modal) {
+        modal.show();
+    };
     TestAdminComponent.prototype.deleteTestModal = function (test, modal) {
         console.log(test.testName);
         this.test = test;

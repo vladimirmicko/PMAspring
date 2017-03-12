@@ -17,6 +17,13 @@
             </template>
         </p-column>
         <p-column field="Actions" [style]="{'width':'10%'}">
+            <template pTemplate="header">
+					<span>
+						<button class="btn btn-success" (click)="addNewTestModal(editModal)">
+							<span class="glyphicon glyphicon-refresh"></span>
+						</button>
+					</span>
+			</template>
             <template let-object="rowData" pTemplate="body">
 					<button class="btn btn-warning edit-button" (click)="editTestModal(object, editModal)">
 						<span class="glyphicon glyphicon-edit"></span>
@@ -39,7 +46,7 @@
                     <h4 class="modal-title">Confirm delte</h4>
                 </div>
                 <div class="modal-body">
-                    <div>
+                    <div *ngIf="test.testPromoImage">
                         <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" />
                     </div>
                     <div>
@@ -99,7 +106,7 @@
                 <div>
                     <strong>Upload test promo image:</strong>
                 </div>
-                <div *ngIf="test">
+                <div *ngIf="test.testPromoImage">
                     <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" />
                 </div>
                 <div style="margin-top:20px;">

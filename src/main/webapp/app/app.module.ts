@@ -12,8 +12,6 @@ import { AppComponent }         from './app.component';
 import { TestAdminComponent }   from './test-admin.component';
 import { AboutComponent }       from './about.component';
 import { LoginComponent }       from './login.component';
-import { AdminComponent }       from './admin.component';
-import { TestingComponent }     from './testing.component';
 
 import { TestService }          from './test.service';
 import { AuthGuard }            from './auth-guard.service';
@@ -35,9 +33,7 @@ import { AuthenticationService }      from './authentication.service';
     AppComponent,
     LoginComponent,
     TestAdminComponent,
-    AboutComponent,
-    AdminComponent,
-    TestingComponent
+    AboutComponent
   ],
   providers: [ 
     TestService, 

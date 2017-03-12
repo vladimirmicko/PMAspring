@@ -20,8 +20,6 @@ var app_component_1 = require('./app.component');
 var test_admin_component_1 = require('./test-admin.component');
 var about_component_1 = require('./about.component');
 var login_component_1 = require('./login.component');
-var admin_component_1 = require('./admin.component');
-var testing_component_1 = require('./testing.component');
 var test_service_1 = require('./test.service');
 var auth_guard_service_1 = require('./auth-guard.service');
 var authentication_service_1 = require('./authentication.service');
@@ -44,9 +42,7 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 login_component_1.LoginComponent,
                 test_admin_component_1.TestAdminComponent,
-                about_component_1.AboutComponent,
-                admin_component_1.AdminComponent,
-                testing_component_1.TestingComponent
+                about_component_1.AboutComponent
             ],
             providers: [
                 test_service_1.TestService,

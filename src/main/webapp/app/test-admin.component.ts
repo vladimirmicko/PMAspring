@@ -50,6 +50,10 @@ export class TestAdminComponent implements OnInit {
     modal.show();
   }
 
+  public addNewTestModal(modal: ModalDirective): void {
+    modal.show();
+  }
+
   public deleteTestModal(test: Test, modal: ModalDirective): void {
     console.log(test.testName);
     this.test = test;

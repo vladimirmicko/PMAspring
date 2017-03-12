@@ -79,7 +79,7 @@ export class TestAdminComponent implements OnInit {
 
     this.subscriptions = this.testService.uploadRest(formData)
       .subscribe(
-      (res: any) => {
+      (res: any) => {this.getTests();
       },
       (err: any) => {
         

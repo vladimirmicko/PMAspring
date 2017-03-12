@@ -58,10 +58,12 @@ var TestAdminComponent = (function () {
         }
     };
     TestAdminComponent.prototype.upload = function () {
+        var _this = this;
         var formData = new FormData();
         formData.append('imageFile', this.imageFile);
         this.subscriptions = this.testService.uploadRest(formData)
             .subscribe(function (res) {
+            _this.getTests();
         }, function (err) {
         });
     };

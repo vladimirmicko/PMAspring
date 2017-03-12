@@ -92,14 +92,17 @@
                 <button type="button" class="btn btn-primary" (click)="editForma.ngSubmit.emit()" [disabled]="!editForm.valid">Save</button>
             </div>
             <div class="modal-body">
+                <div>
+                    <strong>Upload test promo image:</strong>
+                </div>
                 <div style="margin-top:20px;">
                     <input type="file" id="javaFileInput" #javaFileInput accept="." (change)="onChangeJavaFile($event)">
-                    <button type="button" class="btn btn-primary" (click)="upload()">Upload</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="editModal.hide()">Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="upload(); editModal.hide();">Upload</button>
                 </div>
             </div>
         </div>
     </div>
-
-
-
 </div>

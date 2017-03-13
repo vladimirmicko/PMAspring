@@ -31,7 +31,7 @@ var TestAdminComponent = (function () {
         this.editForm = new forms_1.FormGroup({
             id: new forms_1.FormControl(test.id),
             testName: new forms_1.FormControl(test.testName, [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
-            description: new forms_1.FormControl(test.description, [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
+            description: new forms_1.FormControl(test.description),
             creationDate: new forms_1.FormControl(test.creationDate)
         });
         this.testDescription = test.description;

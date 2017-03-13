@@ -39,7 +39,7 @@ export class TestAdminComponent implements OnInit {
     this.editForm = new FormGroup({
       id: new FormControl(test.id),
       testName: new FormControl(test.testName, [<any>Validators.required, <any>Validators.minLength(5)]),
-      description: new FormControl(test.description, [<any>Validators.required, <any>Validators.minLength(5)]),
+      description: new FormControl(test.description),
       creationDate: new FormControl(test.creationDate)
     });
     this.testDescription = test.description;

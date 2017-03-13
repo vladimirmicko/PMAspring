@@ -118,18 +118,16 @@ public class TestController {
 	
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes="multipart/form-data")
-	public ResponseEntity<Map<String, String>> uploadFile(@RequestPart(required = false, name="imageFile") MultipartFile imageFile, @RequestPart(name="test") Test test) {
+	public ResponseEntity<Map<String, String>> uploadFile(@RequestPart(required = false, name="imageFile") MultipartFile imageFile, @RequestPart(name="test") Test receivedTest) {
+		
 		try {
 			if(imageFile !=null && !imageFile.isEmpty()){
-				test.setTestPromoImage(imageFile.getBytes());
-			}
-			else{
-				test.setTestPromoImage(null);
+				receivedTest.setTestPromoImage(imageFile.getBytes());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		testDao.merge(test);
+		testDao.merge(receivedTest);
 		Map<String, String> response = new HashMap<String, String>();
 		response.put("Status", "OK");
 		return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);

@@ -55,8 +55,24 @@ public class TestDao {
 	
 	
 	@Transactional
-	public Test merge(Test detachedInstance) {
-			return (Test) sessionFactory.getCurrentSession().merge(detachedInstance);
+	public Test merge(Test receivedTest) {
+		Test test;
+		if (receivedTest.getId() != null){
+			test = findById(receivedTest.getId());
+			test.setCreationDate(receivedTest.getCreationDate());
+			test.setDescription(receivedTest.getDescription());
+			test.setTestName(receivedTest.getTestName());
+			if(receivedTest.getTestPromoImage().length > 0){
+				test.setTestPromoImage(receivedTest.getTestPromoImage());
+			}
+			if(receivedTest.getSlideList()!=null && !receivedTest.getSlideList().isEmpty()){
+				test.setSlideList(receivedTest.getSlideList());
+			}
+		}
+		else{
+			test=receivedTest;
+		}
+		return (Test) sessionFactory.getCurrentSession().merge(test);
 	}
 	
 	

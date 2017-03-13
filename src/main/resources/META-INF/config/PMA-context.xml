@@ -40,7 +40,7 @@
 	
 	<!-- file upload -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"  p:defaultEncoding="utf-8">
-  		<property name="maxUploadSize" value="1048576" />
+  		<property name="maxUploadSize" value="5048576" />
  	</bean>
 </beans>
     

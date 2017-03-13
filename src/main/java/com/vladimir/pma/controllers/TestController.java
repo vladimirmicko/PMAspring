@@ -117,11 +117,15 @@ public class TestController {
 	}
 	
 	
-	@RequestMapping(value = "/upload/{id}", method = RequestMethod.POST, consumes="multipart/form-data")
-	public ResponseEntity<Map<String, String>> uploadFile(@RequestPart(name="imageFile") MultipartFile imageFile, @PathVariable(value = "id") int id) {
-		Test test = testDao.findById(id);
+	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes="multipart/form-data")
+	public ResponseEntity<Map<String, String>> uploadFile(@RequestPart(required = false, name="imageFile") MultipartFile imageFile, @RequestPart(name="test") Test test) {
 		try {
-			test.setTestPromoImage(imageFile.getBytes());
+			if(imageFile !=null && !imageFile.isEmpty()){
+				test.setTestPromoImage(imageFile.getBytes());
+			}
+			else{
+				test.setTestPromoImage(null);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -63,33 +63,16 @@ export class TestAdminComponent implements OnInit {
     modal.show();
   }
 
-  public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
-    if(test.id){
-      this.editTest(test, isValid, modal);
-    }
-    else{
-      this.addTest(test, isValid, modal);
-    }
-  }
 
-public addTest(test: Test, isValid: boolean, modal: ModalDirective) {
+public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
     this.submitted = true;
     console.log(test, isValid);
     modal.hide();
-    this.subscriptions = this.testService.postTest(test)
-      .subscribe(
-      (res: any) => {
-        this.getTests();
-      },
-      (err: any) => {
-      })
-  }
 
-  public editTest(test: Test, isValid: boolean, modal: ModalDirective) {
-    this.submitted = true;
-    console.log(test, isValid);
-    modal.hide();
-    this.subscriptions = this.testService.putTest(test)
+    let formData = new FormData();
+    formData.append('imageFile', this.imageFile);
+    formData.append('test', new Blob([JSON.stringify(test)], {type: "application/json"}));
+    this.subscriptions = this.testService.uploadTest(formData)
       .subscribe(
       (res: any) => {
         this.getTests();
@@ -98,6 +81,7 @@ public addTest(test: Test, isValid: boolean, modal: ModalDirective) {
 
       })
   }
+
 
   public deleteTest(test: Test, modal: ModalDirective) {
     console.log('Test deleted:' + test.testName);
@@ -118,19 +102,6 @@ public addTest(test: Test, isValid: boolean, modal: ModalDirective) {
     }
   }
 
-
-  public upload() {
-    let formData = new FormData();
-    formData.append('imageFile', this.imageFile);
-    this.subscriptions = this.testService.uploadRest(this.test.id, formData)
-      .subscribe(
-      (res: any) => {
-        this.getTests();
-      },
-      (err: any) => {
-
-      })
-  }
 
   public getTests() {
     this.testService.getTests()

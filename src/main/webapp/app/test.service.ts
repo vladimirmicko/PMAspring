@@ -25,12 +25,12 @@ export class TestService {
     this.options = new RequestOptions({ headers: this.headers });
   }
 
-  uploadRest(id:number, formData: FormData): Observable<any> {
+  uploadTest(formData: FormData): Observable<any> {
     this.headers = new Headers();
     this.headers.append('Accept', 'application/json');
     this.headers.append('Authorization', localStorage.getItem('currentUser'));
     this.options = new RequestOptions({ headers: this.headers });
-      return this.http.post('rest/tests/upload/'+id, formData, this.options)
+      return this.http.post('rest/tests/upload', formData, this.options)
           .map(this.extractData)
           .catch(this.handleError);
   }

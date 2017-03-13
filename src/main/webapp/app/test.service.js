@@ -26,12 +26,12 @@ var TestService = (function () {
         this.headers.append('Authorization', localStorage.getItem('currentUser'));
         this.options = new http_2.RequestOptions({ headers: this.headers });
     };
-    TestService.prototype.uploadRest = function (id, formData) {
+    TestService.prototype.uploadTest = function (formData) {
         this.headers = new http_1.Headers();
         this.headers.append('Accept', 'application/json');
         this.headers.append('Authorization', localStorage.getItem('currentUser'));
         this.options = new http_2.RequestOptions({ headers: this.headers });
-        return this.http.post('rest/tests/upload/' + id, formData, this.options)
+        return this.http.post('rest/tests/upload', formData, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };

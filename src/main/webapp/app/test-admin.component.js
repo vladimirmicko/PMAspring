@@ -52,30 +52,14 @@ var TestAdminComponent = (function () {
         modal.show();
     };
     TestAdminComponent.prototype.addEditTest = function (test, isValid, modal) {
-        if (test.id) {
-            this.editTest(test, isValid, modal);
-        }
-        else {
-            this.addTest(test, isValid, modal);
-        }
-    };
-    TestAdminComponent.prototype.addTest = function (test, isValid, modal) {
         var _this = this;
         this.submitted = true;
         console.log(test, isValid);
         modal.hide();
-        this.subscriptions = this.testService.postTest(test)
-            .subscribe(function (res) {
-            _this.getTests();
-        }, function (err) {
-        });
-    };
-    TestAdminComponent.prototype.editTest = function (test, isValid, modal) {
-        var _this = this;
-        this.submitted = true;
-        console.log(test, isValid);
-        modal.hide();
-        this.subscriptions = this.testService.putTest(test)
+        var formData = new FormData();
+        formData.append('imageFile', this.imageFile);
+        formData.append('test', new Blob([JSON.stringify(test)], { type: "application/json" }));
+        this.subscriptions = this.testService.uploadTest(formData)
             .subscribe(function (res) {
             _this.getTests();
         }, function (err) {
@@ -95,16 +79,6 @@ var TestAdminComponent = (function () {
         if (event.target.files[0]) {
             this.imageFile = event.target.files[0];
         }
-    };
-    TestAdminComponent.prototype.upload = function () {
-        var _this = this;
-        var formData = new FormData();
-        formData.append('imageFile', this.imageFile);
-        this.subscriptions = this.testService.uploadRest(this.test.id, formData)
-            .subscribe(function (res) {
-            _this.getTests();
-        }, function (err) {
-        });
     };
     TestAdminComponent.prototype.getTests = function () {
         var _this = this;

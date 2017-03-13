@@ -96,30 +96,24 @@
                         <label>Creation date</label>
                         <input type="date" formControlName="creationDate" class="form-control">
                     </div>-->
+                    <div>
+                        <strong>Upload test promo image:</strong>
+                    </div>
+                    <div *ngIf="test.testPromoImage" style="margin-top:20px;">
+                        <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" />
+                    </div>
+                    <div style="margin-top:20px;">
+                        <label class="btn btn-primary" for="javaFileInput">
+                        <input type="file" id="javaFileInput" #javaFileInput accept="." (change)="onChangeJavaFile($event)" style="display:none;">
+                            Browse file for upload
+                    </label>
+                        <span class='label label-info' id="upload-file-info">{{imageFile?.name}}</span>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" (click)="editModal.hide();$event.stopPropagation;">Cancel</button>
                 <button type="button" class="btn btn-primary" (click)="editForma.ngSubmit.emit()" [disabled]="!editForm.valid">Save</button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <strong>Upload test promo image:</strong>
-                </div>
-                <div *ngIf="test.testPromoImage" style="margin-top:20px;">
-                    <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" />
-                </div>
-                <div style="margin-top:20px;">
-                    <label class="btn btn-primary" for="javaFileInput">
-                        <input type="file" id="javaFileInput" #javaFileInput accept="." (change)="onChangeJavaFile($event)" style="display:none;">
-                            Browse file for upload
-                    </label>
-                    <span class='label label-info' id="upload-file-info">{{imageFile?.name}}</span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" (click)="editModal.hide()">Cancel</button>
-                    <button type="button" class="btn btn-primary" (click)="upload(); editModal.hide();">Upload</button>
-                </div>
             </div>
         </div>
     </div>

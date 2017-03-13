@@ -87,7 +87,7 @@
                     </div>
                     <div style="margin-top:20px;">
                         <label>Description</label>
-                        <input type="text" formControlName="description" class="form-control">
+                        <textarea [(ngModel)]="testDescription" [ngModelOptions]="{standalone: true}" rows="4" cols="50" class="form-control"></textarea>
                         <small [hidden]="editForm.controls.description.valid || (editForm.controls.description.pristine && !submitted)" class="text-danger">
                                 Description is required (minimum 5 characters).
                         </small>
@@ -96,7 +96,7 @@
                         <label>Creation date</label>
                         <input type="date" formControlName="creationDate" class="form-control">
                     </div>-->
-                    <div>
+                    <div style="margin-top:30px;">
                         <strong>Upload test promo image:</strong>
                     </div>
                     <div *ngIf="test.testPromoImage" style="margin-top:20px;">

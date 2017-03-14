@@ -18,7 +18,6 @@ var TestAdminComponent = (function () {
         this.events = [];
         this.tests = [];
         this.test = new test_1.Test();
-        this.testDescription = "";
     }
     TestAdminComponent.prototype.ngOnInit = function () {
         this.getTests();
@@ -34,7 +33,6 @@ var TestAdminComponent = (function () {
             description: new forms_1.FormControl(test.description),
             creationDate: new forms_1.FormControl(test.creationDate)
         });
-        this.testDescription = test.description;
     };
     TestAdminComponent.prototype.editTestModal = function (test, modal) {
         this.setEditForm(test);
@@ -56,7 +54,6 @@ var TestAdminComponent = (function () {
     TestAdminComponent.prototype.addEditTest = function (test, isValid, modal) {
         var _this = this;
         this.submitted = true;
-        test.description = this.testDescription;
         console.log(test, isValid);
         modal.hide();
         var formData = new FormData();

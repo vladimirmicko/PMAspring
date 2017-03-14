@@ -22,7 +22,6 @@ export class TestAdminComponent implements OnInit {
   test: Test = new Test();
   imageFile: any;
   subscriptions: Object;
-  testDescription:string = "";
 
 
   constructor(private testService: TestService) { }
@@ -42,7 +41,6 @@ export class TestAdminComponent implements OnInit {
       description: new FormControl(test.description),
       creationDate: new FormControl(test.creationDate)
     });
-    this.testDescription = test.description;
   }
 
   public editTestModal(test: Test, modal: ModalDirective): void {
@@ -68,7 +66,6 @@ export class TestAdminComponent implements OnInit {
 
 public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
     this.submitted = true;
-    test.description = this.testDescription;
     console.log(test, isValid);
     modal.hide();
 

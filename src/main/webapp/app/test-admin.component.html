@@ -87,7 +87,8 @@
                     </div>
                     <div style="margin-top:20px;">
                         <label>Description</label>
-                        <textarea [(ngModel)]="testDescription" [ngModelOptions]="{standalone: true}" rows="4" cols="50" class="form-control"></textarea>
+                        <!--<textarea [(ngModel)]="testDescription" [ngModelOptions]="{standalone: true}" rows="4" cols="50" class="form-control"></textarea>-->
+                        <textarea formControlName="description" rows="4" cols="50" class="form-control"></textarea>
                         <small [hidden]="editForm.controls.description.valid || (editForm.controls.description.pristine && !submitted)" class="text-danger">
                                 Description is required (minimum 5 characters).
                         </small>

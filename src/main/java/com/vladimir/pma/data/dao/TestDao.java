@@ -62,7 +62,7 @@ public class TestDao {
 			test.setCreationDate(receivedTest.getCreationDate());
 			test.setDescription(receivedTest.getDescription());
 			test.setTestName(receivedTest.getTestName());
-			if(receivedTest.getTestPromoImage().length > 0){
+			if(receivedTest.getTestPromoImage()!=null && receivedTest.getTestPromoImage().length > 0){
 				test.setTestPromoImage(receivedTest.getTestPromoImage());
 			}
 			if(receivedTest.getSlideList()!=null && !receivedTest.getSlideList().isEmpty()){
@@ -71,6 +71,7 @@ public class TestDao {
 		}
 		else{
 			test=receivedTest;
+			test.setCreationDate(new Date());
 		}
 		return (Test) sessionFactory.getCurrentSession().merge(test);
 	}

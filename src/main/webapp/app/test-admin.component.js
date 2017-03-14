@@ -12,9 +12,11 @@ var core_1 = require('@angular/core');
 var test_1 = require('./test');
 var test_service_1 = require('./test.service');
 var forms_1 = require('@angular/forms');
+var router_1 = require('@angular/router');
 var TestAdminComponent = (function () {
-    function TestAdminComponent(testService) {
+    function TestAdminComponent(testService, router) {
         this.testService = testService;
+        this.router = router;
         this.events = [];
         this.tests = [];
         this.test = new test_1.Test();
@@ -85,6 +87,9 @@ var TestAdminComponent = (function () {
         this.testService.getTests()
             .subscribe(function (tests) { return _this.tests = tests; }, function (error) { return _this.errorMessage = error; });
     };
+    TestAdminComponent.prototype.redirectToTest = function (test, modal) {
+        this.router.navigate(['tests/' + test.id]);
+    };
     TestAdminComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -92,7 +97,7 @@ var TestAdminComponent = (function () {
             templateUrl: './test-admin.component.html',
             styleUrls: ['./test-admin.component.css']
         }), 
-        __metadata('design:paramtypes', [test_service_1.TestService])
+        __metadata('design:paramtypes', [test_service_1.TestService, router_1.Router])
     ], TestAdminComponent);
     return TestAdminComponent;
 }());

@@ -2,7 +2,7 @@
     <h3>List of tests</h3>
     <p-dataTable [value]="tests" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
         <p-column field="id" header="Id" [style]="{'width':'5%'}"></p-column>
-        <p-column field="testName" header="Test name" sortable="true" [style]="{'width':'20%'}"></p-column>
+        <p-column field="testName" header="Test name" sortable="true" [style]="{'width':'15%'}"></p-column>
         <p-column field="description" header="Description" [style]="{'width':'40%'}"></p-column>
         <p-column field="creationDate" header="Creation date" sortable="true" [style]="{'width':'10%'}">
             <template let-col let-test="rowData" pTemplate="body">
@@ -16,7 +16,7 @@
                 </div>
             </template>
         </p-column>
-        <p-column field="Actions" [style]="{'width':'10%'}">
+        <p-column field="Actions" [style]="{'width':'15%'}">
             <template pTemplate="header">
 					<span>
 						<button class="btn btn-success" (click)="addNewTestModal(editModal)">
@@ -25,6 +25,9 @@
 					</span>
 			</template>
             <template let-object="rowData" pTemplate="body">
+            		<button class="btn btn-primary edit-button" (click)="redirectToTest(object, editModal)">
+						<span class="glyphicon glyphicon glyphicon-film"></span>
+					</button>
 					<button class="btn btn-warning edit-button" (click)="editTestModal(object, editModal)">
 						<span class="glyphicon glyphicon-edit"></span>
 					</button>

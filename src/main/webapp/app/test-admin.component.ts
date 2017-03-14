@@ -4,6 +4,7 @@ import { TestService } from './test.service';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalDirective } from 'ng2-bootstrap';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -24,7 +25,7 @@ export class TestAdminComponent implements OnInit {
   subscriptions: Object;
 
 
-  constructor(private testService: TestService) { }
+  constructor(private testService: TestService,  private router: Router) { }
 
   ngOnInit(): void {
     this.getTests();
@@ -108,5 +109,10 @@ public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
       .subscribe(
       tests => this.tests = tests,
       error => this.errorMessage = <any>error);
+  }
+
+
+  public redirectToTest(test: Test, modal: ModalDirective){
+    this.router.navigate(['tests/'+test.id]);
   }
 }

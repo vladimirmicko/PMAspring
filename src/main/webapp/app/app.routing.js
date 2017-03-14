@@ -2,6 +2,7 @@
 var router_1 = require('@angular/router');
 var auth_guard_service_1 = require('./auth-guard.service');
 var test_admin_component_1 = require('./test-admin.component');
+var slide_admin_component_1 = require('./slide-admin.component');
 var about_component_1 = require('./about.component');
 var login_component_1 = require('./login.component');
 var routes = [
@@ -9,6 +10,11 @@ var routes = [
     {
         path: 'tests',
         component: test_admin_component_1.TestAdminComponent,
+        canActivate: [auth_guard_service_1.AuthGuard]
+    },
+    {
+        path: 'tests/:id',
+        component: slide_admin_component_1.SlideAdminComponent,
         canActivate: [auth_guard_service_1.AuthGuard]
     },
     {

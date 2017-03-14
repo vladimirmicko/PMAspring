@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard }            from './auth-guard.service';
 
 import { TestAdminComponent }   from './test-admin.component';
+import { SlideAdminComponent }   from './slide-admin.component';
 import { AboutComponent }       from './about.component';
 import { LoginComponent }       from './login.component';
 
@@ -12,6 +13,11 @@ const routes: Routes = [
   {
     path: 'tests',
     component: TestAdminComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'tests/:id',
+    component: SlideAdminComponent,
     canActivate: [AuthGuard]
   },
   {

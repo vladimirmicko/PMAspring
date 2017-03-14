@@ -41,21 +41,9 @@ var TestService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
-    TestService.prototype.getTest = function () {
+    TestService.prototype.getTest = function (id) {
         this.prepareHeaders();
-        return this.http.get('rest/tests/1', this.options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    TestService.prototype.postTest = function (test) {
-        this.prepareHeaders();
-        return this.http.post('rest/tests', test, this.options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    TestService.prototype.putTest = function (test) {
-        this.prepareHeaders();
-        return this.http.put('rest/tests', test, this.options)
+        return this.http.get('rest/tests/' + id, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };

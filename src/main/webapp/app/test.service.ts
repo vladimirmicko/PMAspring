@@ -42,25 +42,9 @@ export class TestService {
                     .catch(this.handleError);
   }
 
-  getTest (): Observable<Test> {
+  getTest (id: number): Observable<Test> {
     this.prepareHeaders();
-    return this.http.get('rest/tests/1', this.options)
-                    .map(this.extractData)
-                    .catch(this.handleError);
-  }
-
-
-  postTest (test: Test): Observable<any> {
-    this.prepareHeaders();
-    return this.http.post('rest/tests', test, this.options)
-                    .map(this.extractData)
-                    .catch(this.handleError);
-  }
-
-
-  putTest (test: Test): Observable<any> {
-    this.prepareHeaders();
-    return this.http.put('rest/tests', test, this.options)
+    return this.http.get('rest/tests/'+id, this.options)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

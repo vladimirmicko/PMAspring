@@ -77,16 +77,6 @@ public class TestDao {
 	}
 	
 	
-	@Transactional
-	public Test post(Test detachedInstance) {
-			Test test = this.findById(detachedInstance.getId());
-			test.setTestName(detachedInstance.getTestName());
-			test.setCreationDate(detachedInstance.getCreationDate());
-			test.setDescription(detachedInstance.getDescription());
-			return test;
-	}
-
-
 	@Transactional(readOnly=true)
 	public List<Test> findAll() {
 		return sessionFactory.getCurrentSession().createCriteria(Test.class).list();

@@ -12,7 +12,7 @@
         <p-column field="testPromoImage" header="Test logo" [style]="{'width':'15%'}">
             <template let-object="rowData" pTemplate="body">
                 <div *ngIf="object.testPromoImage">
-                    <img [src]="'data:image/jpeg;base64,' + object.testPromoImage" />
+                    <img [src]="'data:image/jpeg;base64,' + object.testPromoImage"  height="128" width="128"/>
                 </div>
             </template>
         </p-column>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="modal-body">
                     <div *ngIf="test.testPromoImage">
-                        <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" />
+                        <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" height="128" width="128" />
                     </div>
                     <div>
                         <b>Test name:</b> {{test.testName}}
@@ -104,7 +104,7 @@
                         <strong>Upload test promo image:</strong>
                     </div>
                     <div *ngIf="test.testPromoImage" style="margin-top:20px;">
-                        <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" />
+                        <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" height="128" width="128" />
                     </div>
                     <div style="margin-top:20px;">
                         <label class="btn btn-primary" for="javaFileInput">

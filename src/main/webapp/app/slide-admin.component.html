@@ -7,14 +7,14 @@
         <p-column field="primingImage" header="Priminig image" [style]="{'width':'15%'}">
             <template let-object="rowData" pTemplate="body">
                 <div *ngIf="object.primingImage">
-                    <img [src]="'data:image/jpeg;base64,' + object.primingImage" />
+                    <img [src]="'data:image/jpeg;base64,' + object.primingImage" height="128" width="128"/>
                 </div>
             </template>
         </p-column>
         <p-column field="testImage" header="Test image" [style]="{'width':'15%'}">
             <template let-object="rowData" pTemplate="body">
                 <div *ngIf="object.testImage">
-                    <img [src]="'data:image/jpeg;base64,' + object.testImage" />
+                    <img [src]="'data:image/jpeg;base64,' + object.testImage"  height="128" width="128"/>
                 </div>
             </template>
         </p-column>
@@ -49,10 +49,10 @@
                 </div>
                 <div class="modal-body">
                     <div *ngIf="slide.primingImage">
-                        <img [src]="'data:image/jpeg;base64,' + slide.primingImage" />
+                        <img [src]="'data:image/jpeg;base64,' + slide.primingImage" height="128" width="128" />
                     </div>
                     <div *ngIf="slide.testImage">
-                        <img [src]="'data:image/jpeg;base64,' + slide.testImage" />
+                        <img [src]="'data:image/jpeg;base64,' + slide.testImage" height="128" width="128" />
                     </div>
                     <div>
                         <b>Slide name:</b> {{slide.slideName}}
@@ -98,7 +98,7 @@
                         <strong>Upload priming image:</strong>
                     </div>
                     <div *ngIf="slide.primingImage" style="margin-top:20px;">
-                        <img [src]="'data:image/jpeg;base64,' + slide.primingImage" />
+                        <img [src]="'data:image/jpeg;base64,' + slide.primingImage" height="128" width="128" />
                     </div>
                     <div style="margin-top:20px;">
                         <label class="btn btn-primary" for="primingImageFile">

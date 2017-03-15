@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Test } from './test';
+import { Slide } from './slide';
 import {RequestOptions, Request, RequestMethod} from '@angular/http';
 
 
@@ -35,6 +36,17 @@ export class TestService {
           .catch(this.handleError);
   }
 
+  uploadSlide(formData: FormData): Observable<any> {
+    this.headers = new Headers();
+    this.headers.append('Accept', 'application/json');
+    this.headers.append('Authorization', localStorage.getItem('currentUser'));
+    this.options = new RequestOptions({ headers: this.headers });
+      return this.http.post('rest/tests/slides/upload', formData, this.options)
+          .map(this.extractData)
+          .catch(this.handleError);
+  }
+
+
   getTests (): Observable<Test[]> {
     this.prepareHeaders();
     return this.http.get('rest/tests', this.options)
@@ -50,9 +62,17 @@ export class TestService {
   }
 
 
-    deleteTest (test: Test): Observable<any> {
+  deleteTest (test: Test): Observable<any> {
     this.prepareHeaders();
     return this.http.delete('rest/tests/'+test.id, this.options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+   
+  deleteSlide (slide: Slide): Observable<any> {
+    this.prepareHeaders();
+    return this.http.delete('rest/tests/slides/'+slide.id, this.options)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

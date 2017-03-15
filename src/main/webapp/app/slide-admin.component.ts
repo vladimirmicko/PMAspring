@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Test } from './test';
+import { Slide } from './slide';
 import { TestService } from './test.service';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalDirective } from 'ng2-bootstrap';
@@ -18,10 +19,12 @@ export class SlideAdminComponent implements OnInit, OnDestroy {
   public editForm: FormGroup;
   public submitted: boolean;
   public events: any[] = [];
-  tests: Test[] = [];
   errorMessage: string;
   test: Test = new Test();
-  imageFile: any;
+  slide: Slide = new Slide();
+  slides: Slide[] = [];
+  primingImageFile: any;
+  testImageFile: any;
   subscriptions: Object;
   id: number;
   private sub: any;
@@ -29,62 +32,59 @@ export class SlideAdminComponent implements OnInit, OnDestroy {
   constructor(private testService: TestService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getTests();
-    this.setEditForm();
-
     this.sub = this.route.params.subscribe(params => {
-       this.id = +params['id']; 
-
-       console.log("This is the id: "+this.id);
-       // In a real app: dispatch action to load the details here.
+      this.id = + params['id']; 
+      console.log("This is the id: " + this.id);
+      this.getTest(this.id);
+      this.setEditForm();
     });
   }
 
-  public setEditForm(test?: Test) {
-    if (!test) {
-      test = new Test();
+  public setEditForm(slide?: Slide) {
+    if (!slide) {
+      slide = new Slide();
     }
     this.editForm = new FormGroup({
-      id: new FormControl(test.id),
-      testName: new FormControl(test.testName, [<any>Validators.required, <any>Validators.minLength(5)]),
-      description: new FormControl(test.description),
-      creationDate: new FormControl(test.creationDate)
+      id: new FormControl(slide.id),
+      slideName: new FormControl(slide.slideName, [<any>Validators.required, <any>Validators.minLength(5)]),
+      delay: new FormControl(slide.delay, [<any>Validators.required])
     });
   }
 
-  public editTestModal(test: Test, modal: ModalDirective): void {
-    this.setEditForm(test);
-    console.log(test.testName);
-    this.test = test;
+  public editSlideModal(slide: Slide, modal: ModalDirective): void {
+    this.setEditForm(slide);
+    console.log(slide.slideName);
+    this.slide = slide;
     modal.show();
   }
 
-  public addNewTestModal(modal: ModalDirective): void {
-    let test = new Test();
-    this.test = test;
-    this.setEditForm(test);
+  public addNewSlideModal(modal: ModalDirective): void {
+    let slide = new Slide();
+    this.slide = slide;
+    this.setEditForm(slide);
     modal.show();
   }
 
-  public deleteTestModal(test: Test, modal: ModalDirective): void {
-    console.log(test.testName);
-    this.test = test;
+  public deleteSlideModal(slide: Slide, modal: ModalDirective): void {
+    console.log(slide.slideName);
+    this.slide = slide;
     modal.show();
   }
 
 
-public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
+public addEditSlide(test: Test, isValid: boolean, modal: ModalDirective) {
     this.submitted = true;
     console.log(test, isValid);
     modal.hide();
 
     let formData = new FormData();
-    formData.append('imageFile', this.imageFile);
+    formData.append('primingImageFile', this.primingImageFile);
+    formData.append('testImageFile', this.testImageFile);
     formData.append('test', new Blob([JSON.stringify(test)], {type: "application/json"}));
-    this.subscriptions = this.testService.uploadTest(formData)
+    this.subscriptions = this.testService.uploadSlide(formData)
       .subscribe(
       (res: any) => {
-        this.getTests();
+        this.getTest(test.id);
       },
       (err: any) => {
 
@@ -92,13 +92,13 @@ public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
   }
 
 
-  public deleteTest(test: Test, modal: ModalDirective) {
-    console.log('Test deleted:' + test.testName);
+  public deleteSlide(slide: Slide, modal: ModalDirective) {
+    console.log('Slide deleted:' + slide.slideName);
     modal.hide();
-    this.subscriptions = this.testService.deleteTest(test)
+    this.subscriptions = this.testService.deleteSlide(slide)
       .subscribe(
       (res: any) => {
-        this.getTests();
+        this.getTest(this.test.id);
       },
       (err: any) => {
 
@@ -107,15 +107,15 @@ public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
 
   public onChangeJavaFile(event: any): void {
     if (event.target.files[0]) {
-      this.imageFile = event.target.files[0];
+      this.primingImageFile = event.target.files[0];
     }
   }
 
 
-  public getTests() {
-    this.testService.getTests()
+  public getTest(id: number) {
+    this.testService.getTest(id)
       .subscribe(
-      tests => this.tests = tests,
+      test => {this.test = test; this.slides = test.slideList},
       error => this.errorMessage = <any>error);
   }
 

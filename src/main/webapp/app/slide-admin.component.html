@@ -1,34 +1,36 @@
 <div class="container">
     <h3>Test number</h3>
-    <p-dataTable [value]="tests" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
+    <p-dataTable [value]="slides" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
         <p-column field="id" header="Id" [style]="{'width':'5%'}"></p-column>
-        <p-column field="testName" header="Test name" sortable="true" [style]="{'width':'20%'}"></p-column>
-        <p-column field="description" header="Description" [style]="{'width':'40%'}"></p-column>
-        <p-column field="creationDate" header="Creation date" sortable="true" [style]="{'width':'10%'}">
-            <template let-col let-test="rowData" pTemplate="body">
-                {{test[col.field]|date }}
+        <p-column field="slideName" header="Test name" sortable="true" [style]="{'width':'20%'}"></p-column>
+        <p-column field="delay" header="Delay" [style]="{'width':'40%'}"></p-column>
+        <p-column field="primingImage" header="Priminig image" [style]="{'width':'15%'}">
+            <template let-object="rowData" pTemplate="body">
+                <div *ngIf="object.primingImage">
+                    <img [src]="'data:image/jpeg;base64,' + object.primingImage" />
+                </div>
             </template>
         </p-column>
-        <p-column field="testPromoImage" header="Test logo" [style]="{'width':'15%'}">
+        <p-column field="testImage" header="Test image" [style]="{'width':'15%'}">
             <template let-object="rowData" pTemplate="body">
-                <div *ngIf="object.testPromoImage">
-                    <img [src]="'data:image/jpeg;base64,' + object.testPromoImage" />
+                <div *ngIf="object.testImage">
+                    <img [src]="'data:image/jpeg;base64,' + object.testImage" />
                 </div>
             </template>
         </p-column>
         <p-column field="Actions" [style]="{'width':'10%'}">
             <template pTemplate="header">
 					<span>
-						<button class="btn btn-success" (click)="addNewTestModal(editModal)">
+						<button class="btn btn-success" (click)="addNewSlideModal(editModal)">
 							<span class="glyphicon glyphicon-plus-sign"></span>
 						</button>
 					</span>
 			</template>
             <template let-object="rowData" pTemplate="body">
-					<button class="btn btn-warning edit-button" (click)="editTestModal(object, editModal)">
+					<button class="btn btn-warning edit-button" (click)="editSlideModal(object, editModal)">
 						<span class="glyphicon glyphicon-edit"></span>
 					</button>
-					<button class="btn btn-danger delete-button" (click)="deleteTestModal(object, deleteModal)">
+					<button class="btn btn-danger delete-button" (click)="deleteSlideModal(object, deleteModal)">
 						<span class="glyphicon glyphicon-trash"></span>
 					</button>
 			</template>
@@ -46,22 +48,22 @@
                     <h4 class="modal-title">Confirm delte</h4>
                 </div>
                 <div class="modal-body">
-                    <div *ngIf="test.testPromoImage">
-                        <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" />
+                    <div *ngIf="slide.primingImage">
+                        <img [src]="'data:image/jpeg;base64,' + slide.primingImage" />
+                    </div>
+                    <div *ngIf="slide.testImage">
+                        <img [src]="'data:image/jpeg;base64,' + slide.testImage" />
                     </div>
                     <div>
-                        <b>Test name:</b> {{test.testName}}
+                        <b>Slide name:</b> {{slide.slideName}}
                     </div>
                     <div>
-                        <b>Test description:</b> {{test.description}}
-                    </div>
-                    <div>
-                        <b>Creation date:</b> {{test.creationDate | date}}
+                        <b>Delay:</b> {{slide.delay}}
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default modal-cancel" (click)="deleteModal.hide();$event.stopPropagation()">Cancel</button>
-                    <button class="btn btn-primary modal-delete" (click)="deleteTest(test, deleteModal);$event.stopPropagation()">Confirm delete</button>
+                    <button class="btn btn-primary modal-delete" (click)="deleteTest(slide, deleteModal);$event.stopPropagation()">Confirm delete</button>
                 </div>
             </div>
         </div>
@@ -74,41 +76,36 @@
                 <button type="button" class="close" aria-label="Close" (click)="editModal.hide()">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 				</button>
-                <h4 class="modal-title">Edit test modal title</h4>
+                <h4 class="modal-title">Edit slide modal title</h4>
             </div>
             <div class="modal-body">
-                <form [formGroup]="editForm" #editForma="ngForm" id="ngForm" novalidate (ngSubmit)="addEditTest(editForm.value, editForm.valid, editModal)">
+                <form [formGroup]="editForm" #editForma="ngForm" id="ngForm" novalidate (ngSubmit)="addEditSlide(editForm.value, editForm.valid, editModal)">
                     <div>
                         <label>Name</label>
-                        <input type="text" formControlName="testName" class="form-control">
-                        <small [hidden]="editForm.controls.testName.valid || (editForm.controls.testName.pristine && !submitted)" class="text-danger">
+                        <input type="text" formControlName="slideName" class="form-control">
+                        <small [hidden]="editForm.controls.slideName.valid || (editForm.controls.slideName.pristine && !submitted)" class="text-danger">
                                 Name is required (minimum 5 characters).
                         </small>
                     </div>
-                    <div style="margin-top:20px;">
-                        <label>Description</label>
-                        <!--<textarea [(ngModel)]="testDescription" [ngModelOptions]="{standalone: true}" rows="4" cols="50" class="form-control"></textarea>-->
-                        <textarea formControlName="description" rows="4" cols="50" class="form-control"></textarea>
-                        <small [hidden]="editForm.controls.description.valid || (editForm.controls.description.pristine && !submitted)" class="text-danger">
-                                Description is required (minimum 5 characters).
+                    <div>
+                        <label>Delay</label>
+                        <input type="text" formControlName="delay" class="form-control">
+                        <small [hidden]="editForm.controls.delay.valid || (editForm.controls.delay.pristine && !submitted)" class="text-danger">
+                                Delay is required (minimum 5 characters).
                         </small>
                     </div>
-                    <!--<div style="margin-top:20px;">
-                        <label>Creation date</label>
-                        <input type="date" formControlName="creationDate" class="form-control">
-                    </div>-->
                     <div style="margin-top:30px;">
-                        <strong>Upload test promo image:</strong>
+                        <strong>Upload priming image:</strong>
                     </div>
-                    <div *ngIf="test.testPromoImage" style="margin-top:20px;">
-                        <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" />
+                    <div *ngIf="slide.primingImage" style="margin-top:20px;">
+                        <img [src]="'data:image/jpeg;base64,' + slide.primingImage" />
                     </div>
                     <div style="margin-top:20px;">
-                        <label class="btn btn-primary" for="javaFileInput">
-                        <input type="file" id="javaFileInput" #javaFileInput accept="." (change)="onChangeJavaFile($event)" style="display:none;">
+                        <label class="btn btn-primary" for="primingImageFile">
+                        <input type="file" id="primingImageFile" #primingImageFile accept="." (change)="onChangeJavaFile($event)" style="display:none;">
                             Browse file for upload
                     </label>
-                        <span class='label label-info' id="upload-file-info">{{imageFile?.name}}</span>
+                        <span class='label label-info' id="upload-file-info">{{primingImageFile?.name}}</span>
                     </div>
                 </form>
             </div>

@@ -1,5 +1,6 @@
 package com.vladimir.pma.data.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vladimir.pma.data.entity.Slide;
+import com.vladimir.pma.data.entity.Test;
 
 @Repository
 public class SlideDao {
@@ -53,8 +55,23 @@ public class SlideDao {
 	
 	
 	@Transactional
-	public Slide merge(Slide detachedInstance) {
-			return (Slide) sessionFactory.getCurrentSession().merge(detachedInstance);
+	public Slide merge(Slide receivedSlide) {
+		Slide slide;
+		if (receivedSlide.getId() != null){
+			slide = findById(receivedSlide.getId());
+			slide.setDelay(receivedSlide.getDelay());
+			slide.setSlideName(receivedSlide.getSlideName());
+			if(receivedSlide.getPrimingImage()!=null && receivedSlide.getPrimingImage().length > 0){
+				slide.setPrimingImage(receivedSlide.getPrimingImage());
+			}
+			if(receivedSlide.getTestImage()!=null && receivedSlide.getTestImage().length > 0){
+				slide.setTestImage(receivedSlide.getTestImage());
+			}
+		}
+		else{
+			slide=receivedSlide;
+		}
+		return (Slide) sessionFactory.getCurrentSession().merge(slide);
 	}
 
 

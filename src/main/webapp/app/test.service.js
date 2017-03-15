@@ -35,6 +35,15 @@ var TestService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    TestService.prototype.uploadSlide = function (formData) {
+        this.headers = new http_1.Headers();
+        this.headers.append('Accept', 'application/json');
+        this.headers.append('Authorization', localStorage.getItem('currentUser'));
+        this.options = new http_2.RequestOptions({ headers: this.headers });
+        return this.http.post('rest/tests/slides/upload', formData, this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     TestService.prototype.getTests = function () {
         this.prepareHeaders();
         return this.http.get('rest/tests', this.options)
@@ -50,6 +59,12 @@ var TestService = (function () {
     TestService.prototype.deleteTest = function (test) {
         this.prepareHeaders();
         return this.http.delete('rest/tests/' + test.id, this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    TestService.prototype.deleteSlide = function (slide) {
+        this.prepareHeaders();
+        return this.http.delete('rest/tests/slides/' + slide.id, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };

@@ -118,8 +118,7 @@ public class TestController {
 	
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes="multipart/form-data")
-	public ResponseEntity<Map<String, String>> uploadFile(@RequestPart(required = false, name="imageFile") MultipartFile imageFile, @RequestPart(name="test") Test receivedTest) {
-		
+	public ResponseEntity<Map<String, String>> uploadTest(@RequestPart(required = false, name="imageFile") MultipartFile imageFile, @RequestPart(name="test") Test receivedTest) {
 		try {
 			if(imageFile !=null && !imageFile.isEmpty()){
 				receivedTest.setTestPromoImage(imageFile.getBytes());
@@ -134,14 +133,25 @@ public class TestController {
 	}
 	
 	
-	@RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map<String, String>> postTest(@RequestBody Test test) {
-		testDao.post(test);
-		log.info("putTest(): " + test.getTestName());
+	@RequestMapping(value = "/slides/upload", method = RequestMethod.POST, consumes="multipart/form-data")
+	public ResponseEntity<Map<String, String>> uploadSlide(@RequestPart(required = false, name="primingImageFile") MultipartFile primingImageFile, @RequestPart(required = false, name="testImageFile") MultipartFile testImageFile, @RequestPart(name="slide") Slide receivedSlide) {
+		try {
+			if(primingImageFile !=null && !primingImageFile.isEmpty()){
+				receivedSlide.setPrimingImage(primingImageFile.getBytes());
+			}
+			if(testImageFile !=null && !testImageFile.isEmpty()){
+				receivedSlide.setTestImage(testImageFile.getBytes());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		slideDao.merge(receivedSlide);
 		Map<String, String> response = new HashMap<String, String>();
 		response.put("Status", "OK");
 		return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);
 	}
+	
+	
 	
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, String>> persistTest(@RequestBody Test test) {
@@ -153,8 +163,16 @@ public class TestController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map<String, String>> uploadFile(@PathVariable(value = "id") int id) {
+	public ResponseEntity<Map<String, String>> deleteTest(@PathVariable(value = "id") int id) {
 		testDao.deleteById(id);
+		Map<String, String> response = new HashMap<String, String>();
+		response.put("Status", "OK");
+		return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/slides/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, String>> deleteSlide(@PathVariable(value = "id") int id) {
+		slideDao.deleteById(id);
 		Map<String, String> response = new HashMap<String, String>();
 		response.put("Status", "OK");
 		return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);

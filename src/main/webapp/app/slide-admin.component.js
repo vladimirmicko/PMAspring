@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var test_1 = require('./test');
+var slide_1 = require('./slide');
 var test_service_1 = require('./test.service');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
@@ -18,80 +19,80 @@ var SlideAdminComponent = (function () {
         this.testService = testService;
         this.route = route;
         this.events = [];
-        this.tests = [];
         this.test = new test_1.Test();
+        this.slide = new slide_1.Slide();
+        this.slides = [];
     }
     SlideAdminComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.getTests();
-        this.setEditForm();
         this.sub = this.route.params.subscribe(function (params) {
             _this.id = +params['id'];
             console.log("This is the id: " + _this.id);
-            // In a real app: dispatch action to load the details here.
+            _this.getTest(_this.id);
+            _this.setEditForm();
         });
     };
-    SlideAdminComponent.prototype.setEditForm = function (test) {
-        if (!test) {
-            test = new test_1.Test();
+    SlideAdminComponent.prototype.setEditForm = function (slide) {
+        if (!slide) {
+            slide = new slide_1.Slide();
         }
         this.editForm = new forms_1.FormGroup({
-            id: new forms_1.FormControl(test.id),
-            testName: new forms_1.FormControl(test.testName, [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
-            description: new forms_1.FormControl(test.description),
-            creationDate: new forms_1.FormControl(test.creationDate)
+            id: new forms_1.FormControl(slide.id),
+            slideName: new forms_1.FormControl(slide.slideName, [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
+            delay: new forms_1.FormControl(slide.delay, [forms_1.Validators.required])
         });
     };
-    SlideAdminComponent.prototype.editTestModal = function (test, modal) {
-        this.setEditForm(test);
-        console.log(test.testName);
-        this.test = test;
+    SlideAdminComponent.prototype.editSlideModal = function (slide, modal) {
+        this.setEditForm(slide);
+        console.log(slide.slideName);
+        this.slide = slide;
         modal.show();
     };
-    SlideAdminComponent.prototype.addNewTestModal = function (modal) {
-        var test = new test_1.Test();
-        this.test = test;
-        this.setEditForm(test);
+    SlideAdminComponent.prototype.addNewSlideModal = function (modal) {
+        var slide = new slide_1.Slide();
+        this.slide = slide;
+        this.setEditForm(slide);
         modal.show();
     };
-    SlideAdminComponent.prototype.deleteTestModal = function (test, modal) {
-        console.log(test.testName);
-        this.test = test;
+    SlideAdminComponent.prototype.deleteSlideModal = function (slide, modal) {
+        console.log(slide.slideName);
+        this.slide = slide;
         modal.show();
     };
-    SlideAdminComponent.prototype.addEditTest = function (test, isValid, modal) {
+    SlideAdminComponent.prototype.addEditSlide = function (test, isValid, modal) {
         var _this = this;
         this.submitted = true;
         console.log(test, isValid);
         modal.hide();
         var formData = new FormData();
-        formData.append('imageFile', this.imageFile);
+        formData.append('primingImageFile', this.primingImageFile);
+        formData.append('testImageFile', this.testImageFile);
         formData.append('test', new Blob([JSON.stringify(test)], { type: "application/json" }));
-        this.subscriptions = this.testService.uploadTest(formData)
+        this.subscriptions = this.testService.uploadSlide(formData)
             .subscribe(function (res) {
-            _this.getTests();
+            _this.getTest(test.id);
         }, function (err) {
         });
     };
-    SlideAdminComponent.prototype.deleteTest = function (test, modal) {
+    SlideAdminComponent.prototype.deleteSlide = function (slide, modal) {
         var _this = this;
-        console.log('Test deleted:' + test.testName);
+        console.log('Slide deleted:' + slide.slideName);
         modal.hide();
-        this.subscriptions = this.testService.deleteTest(test)
+        this.subscriptions = this.testService.deleteSlide(slide)
             .subscribe(function (res) {
-            _this.getTests();
+            _this.getTest(_this.test.id);
         }, function (err) {
         });
     };
     SlideAdminComponent.prototype.onChangeJavaFile = function (event) {
         if (event.target.files[0]) {
-            this.imageFile = event.target.files[0];
+            this.primingImageFile = event.target.files[0];
         }
     };
-    SlideAdminComponent.prototype.getTests = function () {
+    SlideAdminComponent.prototype.getTest = function (id) {
         var _this = this;
-        this.testService.getTests()
-            .subscribe(function (tests) { return _this.tests = tests; }, function (error) { return _this.errorMessage = error; });
+        this.testService.getTest(id)
+            .subscribe(function (test) { _this.test = test; _this.slides = test.slideList; }, function (error) { return _this.errorMessage = error; });
     };
     SlideAdminComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();

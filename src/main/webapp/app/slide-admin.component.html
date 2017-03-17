@@ -97,9 +97,9 @@
                     </div>
                     <div style="margin-top:20px;">
                         <label>Delay</label>
-                        <input type="text" formControlName="delay" class="form-control">
+                        <input type="number" formControlName="delay" class="form-control">
                         <small [hidden]="editForm.controls.delay.valid || (editForm.controls.delay.pristine && !submitted)" class="text-danger">
-                                Delay is required (minimum 5 characters).
+                                Enter delay in milliseconds!
                         </small>
                     </div>
                     <div style="margin-top:30px;">

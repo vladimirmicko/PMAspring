@@ -54,7 +54,7 @@ public class Test implements java.io.Serializable {
 	@OneToMany(mappedBy = "test")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@Fetch(FetchMode.SUBSELECT)
-	@Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.MERGE)
 	public List<Slide> slideList;
 	
 	

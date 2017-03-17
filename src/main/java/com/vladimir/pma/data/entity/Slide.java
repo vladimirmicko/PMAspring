@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -39,7 +42,7 @@ public class Slide implements java.io.Serializable {
 	private byte[] primingImage;
 	
 	@Lob
-	@Column(name = "TEST_IMAGE", unique = true, nullable = false)
+	@Column(name = "TEST_IMAGE", unique = true, nullable = true)
 	private byte[] testImage;
 		
 	@JsonIgnore

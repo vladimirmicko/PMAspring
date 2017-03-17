@@ -35,12 +35,12 @@ var TestService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
-    TestService.prototype.uploadSlide = function (formData) {
+    TestService.prototype.uploadSlide = function (formData, id) {
         this.headers = new http_1.Headers();
         this.headers.append('Accept', 'application/json');
         this.headers.append('Authorization', localStorage.getItem('currentUser'));
         this.options = new http_2.RequestOptions({ headers: this.headers });
-        return this.http.post('rest/tests/slides/upload', formData, this.options)
+        return this.http.post('rest/tests/slides/upload/' + id, formData, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };

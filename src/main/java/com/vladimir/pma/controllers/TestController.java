@@ -133,8 +133,8 @@ public class TestController {
 	}
 	
 	
-	@RequestMapping(value = "/slides/upload", method = RequestMethod.POST, consumes="multipart/form-data")
-	public ResponseEntity<Map<String, String>> uploadSlide(@RequestPart(required = false, name="primingImageFile") MultipartFile primingImageFile, @RequestPart(required = false, name="testImageFile") MultipartFile testImageFile, @RequestPart(name="slide") Slide receivedSlide) {
+	@RequestMapping(value = "/slides/upload/{id}", method = RequestMethod.POST, consumes="multipart/form-data")
+	public ResponseEntity<Map<String, String>> uploadSlide(@RequestPart(required = false, name="primingImageFile") MultipartFile primingImageFile, @RequestPart(required = false, name="testImageFile") MultipartFile testImageFile, @RequestPart(name="slide") Slide receivedSlide, @PathVariable(value = "id") int id) {
 		try {
 			if(primingImageFile !=null && !primingImageFile.isEmpty()){
 				receivedSlide.setPrimingImage(primingImageFile.getBytes());
@@ -145,7 +145,7 @@ public class TestController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		slideDao.merge(receivedSlide);
+		slideDao.merge(receivedSlide, id);
 		Map<String, String> response = new HashMap<String, String>();
 		response.put("Status", "OK");
 		return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);

@@ -22,6 +22,9 @@ public class SlideDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	@Autowired
+	private TestDao testDao;
+	
 
 	@Transactional(readOnly=true)
 	public Slide findById(Integer id) {
@@ -55,7 +58,7 @@ public class SlideDao {
 	
 	
 	@Transactional
-	public Slide merge(Slide receivedSlide) {
+	public void merge(Slide receivedSlide, int id) {
 		Slide slide;
 		if (receivedSlide.getId() != null){
 			slide = findById(receivedSlide.getId());
@@ -67,11 +70,20 @@ public class SlideDao {
 			if(receivedSlide.getTestImage()!=null && receivedSlide.getTestImage().length > 0){
 				slide.setTestImage(receivedSlide.getTestImage());
 			}
+			sessionFactory.getCurrentSession().merge(slide);
 		}
 		else{
-			slide=receivedSlide;
+			slide = new Slide();
+			slide.setDelay(receivedSlide.getDelay());
+			slide.setSlideName(receivedSlide.getSlideName());
+			slide.setPrimingImage(receivedSlide.getPrimingImage());
+			slide.setTestImage(receivedSlide.getTestImage());
+			Test test = testDao.findById(id);
+			test.getSlideList().add(slide);
+			slide.setTest(test);
+			sessionFactory.getCurrentSession().merge(test);
+//			sessionFactory.getCurrentSession().merge(slide);
 		}
-		return (Slide) sessionFactory.getCurrentSession().merge(slide);
 	}
 
 

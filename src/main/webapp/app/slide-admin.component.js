@@ -62,13 +62,15 @@ var SlideAdminComponent = (function () {
     SlideAdminComponent.prototype.addEditSlide = function (slide, isValid, modal) {
         var _this = this;
         this.submitted = true;
+        slide.test = this.test;
+        this.slide = slide;
         console.log(slide, isValid);
         modal.hide();
         var formData = new FormData();
         formData.append('primingImageFile', this.primingImageFile);
         formData.append('testImageFile', this.testImageFile);
         formData.append('slide', new Blob([JSON.stringify(slide)], { type: "application/json" }));
-        this.subscriptions = this.testService.uploadSlide(formData)
+        this.subscriptions = this.testService.uploadSlide(formData, this.id)
             .subscribe(function (res) {
             _this.getTest(_this.id);
         }, function (err) {
@@ -84,9 +86,14 @@ var SlideAdminComponent = (function () {
         }, function (err) {
         });
     };
-    SlideAdminComponent.prototype.onChangeJavaFile = function (event) {
+    SlideAdminComponent.prototype.onChangePrimingImageFile = function (event) {
         if (event.target.files[0]) {
             this.primingImageFile = event.target.files[0];
+        }
+    };
+    SlideAdminComponent.prototype.onChangeTestImageFile = function (event) {
+        if (event.target.files[0]) {
+            this.testImageFile = event.target.files[0];
         }
     };
     SlideAdminComponent.prototype.getTest = function (id) {

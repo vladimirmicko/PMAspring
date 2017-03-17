@@ -74,6 +74,8 @@ export class SlideAdminComponent implements OnInit, OnDestroy {
 
 public addEditSlide(slide: Slide, isValid: boolean, modal: ModalDirective) {
     this.submitted = true;
+    slide.test = this.test;
+    this.slide = slide;
     console.log(slide, isValid);
     modal.hide();
 
@@ -81,7 +83,7 @@ public addEditSlide(slide: Slide, isValid: boolean, modal: ModalDirective) {
     formData.append('primingImageFile', this.primingImageFile);
     formData.append('testImageFile', this.testImageFile);
     formData.append('slide', new Blob([JSON.stringify(slide)], {type: "application/json"}));
-    this.subscriptions = this.testService.uploadSlide(formData)
+    this.subscriptions = this.testService.uploadSlide(formData, this.id)
       .subscribe(
       (res: any) => {
         this.getTest(this.id);
@@ -105,9 +107,17 @@ public addEditSlide(slide: Slide, isValid: boolean, modal: ModalDirective) {
       })
   }
 
-  public onChangeJavaFile(event: any): void {
+
+  public onChangePrimingImageFile(event: any): void {
     if (event.target.files[0]) {
       this.primingImageFile = event.target.files[0];
+    }
+  }
+
+
+  public onChangeTestImageFile(event: any): void {
+    if (event.target.files[0]) {
+      this.testImageFile = event.target.files[0];
     }
   }
 

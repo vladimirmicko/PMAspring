@@ -102,7 +102,7 @@
                     </div>
                     <div style="margin-top:20px;">
                         <label class="btn btn-primary" for="primingImageFile">
-                            <input type="file" id="primingImageFile" #primingImageFile accept="." (change)="onChangeJavaFile($event)" style="display:none;">
+                            <input type="file" id="primingImageFile" #primingImageFile accept="." (change)="onChangePrimingImageFile($event)" style="display:none;">
                                 Browse file for upload
                         </label>
                         <span class='label label-info' id="upload-file-info">{{primingImageFile?.name}}</span>
@@ -115,7 +115,7 @@
                     </div>
                     <div style="margin-top:20px;">
                         <label class="btn btn-primary" for="testImageFile">
-                            <input type="file" id="testImageFile" #testImageFile accept="." (change)="onChangeJavaFile($event)" style="display:none;">
+                            <input type="file" id="testImageFile" #testImageFile accept="." (change)="onChangeTestImageFile($event)" style="display:none;">
                                 Browse file for upload
                         </label>
                         <span class='label label-info' id="upload-file-info">{{testImageFile?.name}}</span>

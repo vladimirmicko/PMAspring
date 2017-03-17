@@ -36,12 +36,12 @@ export class TestService {
           .catch(this.handleError);
   }
 
-  uploadSlide(formData: FormData): Observable<any> {
+  uploadSlide(formData: FormData, id:number): Observable<any> {
     this.headers = new Headers();
     this.headers.append('Accept', 'application/json');
     this.headers.append('Authorization', localStorage.getItem('currentUser'));
     this.options = new RequestOptions({ headers: this.headers });
-      return this.http.post('rest/tests/slides/upload', formData, this.options)
+      return this.http.post('rest/tests/slides/upload/'+id, formData, this.options)
           .map(this.extractData)
           .catch(this.handleError);
   }

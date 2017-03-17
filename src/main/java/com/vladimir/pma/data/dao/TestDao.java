@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vladimir.pma.data.entity.Slide;
 import com.vladimir.pma.data.entity.Test;
 
 @Repository
@@ -20,6 +21,9 @@ public class TestDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private SlideDao slideDao;
 	
 
 	@Transactional(readOnly=true)
@@ -36,8 +40,11 @@ public class TestDao {
 	
 	@Transactional
 	public void deleteById(Integer id) {
-		Test instance = this.findById(id);
-		sessionFactory.getCurrentSession().delete(instance);
+		Test test = this.findById(id);
+		for(Slide slide : test.getSlideList()){
+			slideDao.deleteById(slide.getId());
+		}
+		sessionFactory.getCurrentSession().delete(test);
 	}
 	
 	

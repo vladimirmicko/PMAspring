@@ -58,31 +58,14 @@ public class SlideDao {
 	
 	
 	@Transactional
-	public void merge(Slide receivedSlide, int id) {
-		Slide slide;
-		if (receivedSlide.getId() != null){
-			slide = findById(receivedSlide.getId());
-			slide.setDelay(receivedSlide.getDelay());
-			slide.setSlideName(receivedSlide.getSlideName());
-			if(receivedSlide.getPrimingImage()!=null && receivedSlide.getPrimingImage().length > 0){
-				slide.setPrimingImage(receivedSlide.getPrimingImage());
-			}
-			if(receivedSlide.getTestImage()!=null && receivedSlide.getTestImage().length > 0){
-				slide.setTestImage(receivedSlide.getTestImage());
-			}
+	public void merge(Slide slide, int id) {
+		Test test = testDao.findById(id);
+		slide.setTest(test);
+		if (slide.getId() != null){
 			sessionFactory.getCurrentSession().merge(slide);
 		}
 		else{
-			slide = new Slide();
-			slide.setDelay(receivedSlide.getDelay());
-			slide.setSlideName(receivedSlide.getSlideName());
-			slide.setPrimingImage(receivedSlide.getPrimingImage());
-			slide.setTestImage(receivedSlide.getTestImage());
-			Test test = testDao.findById(id);
-			test.getSlideList().add(slide);
-			slide.setTest(test);
-			sessionFactory.getCurrentSession().merge(test);
-//			sessionFactory.getCurrentSession().merge(slide);
+			sessionFactory.getCurrentSession().saveOrUpdate(slide);
 		}
 	}
 
@@ -92,10 +75,4 @@ public class SlideDao {
 		return sessionFactory.getCurrentSession().createCriteria(Slide.class).list();
 	}
 	
-	
-	@Transactional
-	public void update(Slide instance) {
-		sessionFactory.getCurrentSession().update(instance);
-	}
-
 }

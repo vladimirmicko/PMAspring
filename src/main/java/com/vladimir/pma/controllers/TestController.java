@@ -152,7 +152,6 @@ public class TestController {
 	}
 	
 	
-	
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, String>> persistTest(@RequestBody Test test) {
 		testDao.persist(test);
@@ -161,6 +160,7 @@ public class TestController {
 		response.put("Status", "OK");
 		return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);
 	}
+	
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, String>> deleteTest(@PathVariable(value = "id") int id) {

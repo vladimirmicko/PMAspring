@@ -48,17 +48,25 @@
                     <h4 class="modal-title">Confirm delte</h4>
                 </div>
                 <div class="modal-body">
-                    <div *ngIf="slide.primingImage">
-                        <img [src]="'data:image/jpeg;base64,' + slide.primingImage" height="128" width="128" />
+                    <div style="margin-top:5px;">
+                        <p><b>Slide name:</b> {{slide.slideName}}</p>
+                        <p><b>Delay:</b> {{slide.delay}}</p>
                     </div>
-                    <div *ngIf="slide.testImage">
-                        <img [src]="'data:image/jpeg;base64,' + slide.testImage" height="128" width="128" />
+                    <div style="margin-top:30px;">
+                        <div>
+                            <strong>Priming image:</strong>
+                        </div>
+                        <div *ngIf="slide.primingImage">
+                            <img [src]="'data:image/jpeg;base64,' + slide.primingImage" height="128" width="128" />
+                        </div>
                     </div>
-                    <div>
-                        <b>Slide name:</b> {{slide.slideName}}
-                    </div>
-                    <div>
-                        <b>Delay:</b> {{slide.delay}}
+                    <div style="margin-top:30px;">
+                        <div>
+                            <strong>Test image:</strong>
+                        </div>
+                        <div *ngIf="slide.testImage">
+                            <img [src]="'data:image/jpeg;base64,' + slide.testImage" height="128" width="128" />
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

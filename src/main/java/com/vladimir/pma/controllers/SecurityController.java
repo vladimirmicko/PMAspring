@@ -28,6 +28,7 @@ public class SecurityController {
 		else {
 			map.put("token", "");
 		}
+		
 		return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
 	}
 

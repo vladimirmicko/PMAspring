@@ -87,6 +87,7 @@ can be found in the LICENSE file at http://angular.io/license
 footer {
     margin-top: 100px;
     padding: 1em;
+    padding-top: 30px;
     color: white;
     background-color: dimgray;
     clear: left;

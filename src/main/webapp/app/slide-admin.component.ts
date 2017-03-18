@@ -16,18 +16,19 @@ import { ActivatedRoute } from '@angular/router';
 
 
 export class SlideAdminComponent implements OnInit, OnDestroy {
-  public editForm: FormGroup;
-  public submitted: boolean;
-  public events: any[] = [];
-  errorMessage: string;
-  test: Test = new Test();
-  slide: Slide = new Slide();
-  slides: Slide[] = [];
-  primingImageFile: any;
-  testImageFile: any;
-  subscriptions: Object;
-  id: number;
+  private editForm: FormGroup;
+  private submitted: boolean;
+  private events: any[] = [];
+  private errorMessage: string;
+  private test: Test = new Test();
+  private slide: Slide = new Slide();
+  private slides: Slide[] = [];
+  private subscriptions: Object;
+  private id: number;
   private sub: any;
+  private primingFile: string;
+  private testFile: string;
+
 
   constructor(private testService: TestService, private route: ActivatedRoute) { }
 
@@ -37,6 +38,8 @@ export class SlideAdminComponent implements OnInit, OnDestroy {
       console.log("This is the id: " + this.id);
       this.getTest(this.id);
       this.setEditForm();
+      this.primingFile = "";
+      this.testFile = "";
     });
   }
 
@@ -80,8 +83,8 @@ public addEditSlide(slide: Slide, isValid: boolean, modal: ModalDirective) {
     modal.hide();
 
     let formData = new FormData();
-    formData.append('primingImageFile', this.primingImageFile);
-    formData.append('testImageFile', this.testImageFile);
+    formData.append('primingImageFile', this.primingFile);
+    formData.append('testImageFile', this.testFile);
     formData.append('slide', new Blob([JSON.stringify(slide)], {type: "application/json"}));
     this.subscriptions = this.testService.uploadSlide(formData, this.id)
       .subscribe(
@@ -109,15 +112,15 @@ public addEditSlide(slide: Slide, isValid: boolean, modal: ModalDirective) {
 
 
   public onChangePrimingImageFile(event: any): void {
-    if (event.target.files[0]) {
-      this.primingImageFile = event.target.files[0];
+    if (event.target.files[0].name) {
+      this.primingFile=event.target.files[0];
     }
   }
 
 
   public onChangeTestImageFile(event: any): void {
-    if (event.target.files[0]) {
-      this.testImageFile = event.target.files[0];
+    if (event.target.files[0].name) {
+      this.testFile=event.target.files[0];
     }
   }
 

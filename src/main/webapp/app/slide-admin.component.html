@@ -113,7 +113,7 @@
                             <input type="file" id="primingImageFile" #primingImageFile accept="." (change)="onChangePrimingImageFile($event)" style="display:none;">
                                 Browse file for upload
                         </label>
-                        <span class='label label-info' id="upload-file-info">{{primingImageFile?.name}}</span>
+                        <span class='label label-info' id="upload-primingfile-info">{{primingFile.name}}</span>
                     </div>
                     <div style="margin-top:30px;">
                         <strong>Upload test image:</strong>
@@ -126,7 +126,7 @@
                             <input type="file" id="testImageFile" #testImageFile accept="." (change)="onChangeTestImageFile($event)" style="display:none;">
                                 Browse file for upload
                         </label>
-                        <span class='label label-info' id="upload-file-info">{{testImageFile?.name}}</span>
+                        <span class='label label-info' id="upload-testfile-info">{{testFile.name}}</span>
                     </div>
                 </form>
             </div>

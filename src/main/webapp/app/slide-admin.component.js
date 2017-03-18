@@ -30,6 +30,8 @@ var SlideAdminComponent = (function () {
             console.log("This is the id: " + _this.id);
             _this.getTest(_this.id);
             _this.setEditForm();
+            _this.primingFile = "";
+            _this.testFile = "";
         });
     };
     SlideAdminComponent.prototype.setEditForm = function (slide) {
@@ -67,8 +69,8 @@ var SlideAdminComponent = (function () {
         console.log(slide, isValid);
         modal.hide();
         var formData = new FormData();
-        formData.append('primingImageFile', this.primingImageFile);
-        formData.append('testImageFile', this.testImageFile);
+        formData.append('primingImageFile', this.primingFile);
+        formData.append('testImageFile', this.testFile);
         formData.append('slide', new Blob([JSON.stringify(slide)], { type: "application/json" }));
         this.subscriptions = this.testService.uploadSlide(formData, this.id)
             .subscribe(function (res) {
@@ -87,13 +89,13 @@ var SlideAdminComponent = (function () {
         });
     };
     SlideAdminComponent.prototype.onChangePrimingImageFile = function (event) {
-        if (event.target.files[0]) {
-            this.primingImageFile = event.target.files[0];
+        if (event.target.files[0].name) {
+            this.primingFile = event.target.files[0];
         }
     };
     SlideAdminComponent.prototype.onChangeTestImageFile = function (event) {
-        if (event.target.files[0]) {
-            this.testImageFile = event.target.files[0];
+        if (event.target.files[0].name) {
+            this.testFile = event.target.files[0];
         }
     };
     SlideAdminComponent.prototype.getTest = function (id) {

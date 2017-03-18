@@ -3,6 +3,8 @@ import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
+import 'rxjs/add/observable/throw';
 import { Test } from './test';
 import { Slide } from './slide';
 import {RequestOptions, Request, RequestMethod} from '@angular/http';
@@ -47,14 +49,14 @@ export class TestService {
   }
 
 
-  getTests (): Observable<Test[]> {
+  getTests (): Observable<any> {
     this.prepareHeaders();
     return this.http.get('rest/tests', this.options)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
-  getTest (id: number): Observable<Test> {
+  getTest (id: number): Observable<any> {
     this.prepareHeaders();
     return this.http.get('rest/tests/'+id, this.options)
                     .map(this.extractData)
@@ -77,6 +79,14 @@ export class TestService {
                     .catch(this.handleError);
   }
 
+
+    generateException (): Observable<any> {
+    this.prepareHeaders();
+    return this.http.get('rest/tests/generateException', this.options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body || { };
@@ -85,15 +95,17 @@ export class TestService {
 
   private handleError (error: Response | any) {
     let errMsg: string;
+    let body: any;
     if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
+      body = error.json() || '';
+      const err = body.message || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
     console.error(errMsg);
-    return Observable.throw(errMsg);
+    return Observable.throw(body);
+;
   }
 }
 

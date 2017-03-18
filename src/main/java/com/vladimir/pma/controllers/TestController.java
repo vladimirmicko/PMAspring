@@ -53,6 +53,15 @@ public class TestController {
 		return new ResponseEntity<List<Test>>(testList, HttpStatus.OK);
 	}
 	
+	
+	@RequestMapping(value = "/generateException", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> generateException() {
+		log.info("generateException(): /rest/tests/generateException --- before Exception");
+		throw new RuntimeException("Ovo je greska generisana na nivou kontrolera!");
+//		log.info("generateException(): /rest/tests/generateException --- after Exception");
+//		return new ResponseEntity<String>("generateException controller", HttpStatus.OK);
+	}
+	
 
 	@RequestMapping(value = "/slides/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Slide> getSlide(@PathVariable(value = "id") int id) {

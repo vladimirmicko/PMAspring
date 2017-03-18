@@ -13,6 +13,8 @@ var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
+require('rxjs/Rx');
+require('rxjs/add/observable/throw');
 var http_2 = require('@angular/http');
 var TestService = (function () {
     function TestService(http) {
@@ -68,22 +70,30 @@ var TestService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    TestService.prototype.generateException = function () {
+        this.prepareHeaders();
+        return this.http.get('rest/tests/generateException', this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     TestService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};
     };
     TestService.prototype.handleError = function (error) {
         var errMsg;
+        var body;
         if (error instanceof http_1.Response) {
-            var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
+            body = error.json() || '';
+            var err = body.message || JSON.stringify(body);
             errMsg = error.status + " - " + (error.statusText || '') + " " + err;
         }
         else {
             errMsg = error.message ? error.message : error.toString();
         }
         console.error(errMsg);
-        return Observable_1.Observable.throw(errMsg);
+        return Observable_1.Observable.throw(body);
+        ;
     };
     TestService = __decorate([
         core_1.Injectable(), 

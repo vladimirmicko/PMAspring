@@ -55,9 +55,10 @@ and is wrapped around the whole page content, except for the footer in this exam
                             protection in some foreign countries.</p>
                         <div class="w3-row">
                             <div class="w3-col m8 s12">
-                                <a href="https://en.wikipedia.org/wiki/Software_copyright">
-                                    <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
-                                </a>
+                                <p><button class="w3-button w3-padding-large w3-white w3-border" (click)="generateException();"><b>GENERATE EXCEPTION »</b></button></p>
+                            </div>
+                            <div class="bg-danger">
+                                {{exception}}
                             </div>
                         </div>
                     </div>

@@ -34,7 +34,7 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
 			HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;				
 			HttpHeaders headers = createHeader();
 			log.error("Exception message: "+ex);
-			RestResponseDto restResponseDto = new RestResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.toString(), ErrorConstants.ERROR_KEY_GENERAL);
+			RestResponseDto restResponseDto = new RestResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.toString(), ex.getMessage());
 			return new ResponseEntity<RestResponseDto>(restResponseDto, headers, httpStatus);
 	}
 	

@@ -9,9 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var test_service_1 = require('./test.service');
 var AboutComponent = (function () {
-    function AboutComponent() {
+    function AboutComponent(testService) {
+        this.testService = testService;
     }
+    AboutComponent.prototype.generateException = function () {
+        var _this = this;
+        console.log('Generate exception');
+        this.subscriptions = this.testService.generateException()
+            .subscribe(function (res) {
+            _this.exception = res.message;
+        }, function (err) {
+            _this.exception = err.message;
+        });
+    };
     AboutComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -19,7 +31,7 @@ var AboutComponent = (function () {
             templateUrl: './about.component.html',
             styleUrls: ['./about.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [test_service_1.TestService])
     ], AboutComponent);
     return AboutComponent;
 }());

@@ -1,7 +1,7 @@
 <div class="container">
     <h3>Test: {{test.testName}}</h3>
     <p-dataTable [value]="slides" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
-        <p-column field="id" header="Id" [style]="{'width':'5%'}"></p-column>
+        <p-column field="id" header="Id" sortable="true" [style]="{'width':'5%'}"></p-column>
         <p-column field="slideName" header="Test name" sortable="true" [style]="{'width':'45%'}"></p-column>
         <p-column field="delay" header="Delay" [style]="{'width':'10%'}"></p-column>
         <p-column field="primingImage" header="Priminig image" [style]="{'width':'15%'}">

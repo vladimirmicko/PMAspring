@@ -58,14 +58,24 @@ public class SlideDao {
 	
 	
 	@Transactional
-	public void merge(Slide slide, int id) {
+	public void merge(Slide receivedSlide, int id) {
+		Slide slide;
 		Test test = testDao.findById(id);
-		slide.setTest(test);
-		if (slide.getId() != null){
-			sessionFactory.getCurrentSession().merge(slide);
+		receivedSlide.setTest(test);
+		if (receivedSlide.getId() != null){
+			slide = findById(receivedSlide.getId());
+            slide.setDelay(receivedSlide.getDelay());
+            slide.setSlideName(receivedSlide.getSlideName());
+            if(receivedSlide.getPrimingImage()!=null && receivedSlide.getPrimingImage().length > 0){
+                slide.setPrimingImage(receivedSlide.getPrimingImage());
+            }
+            if(receivedSlide.getTestImage()!=null && receivedSlide.getTestImage().length > 0){
+                slide.setTestImage(receivedSlide.getTestImage());
+            }
+            sessionFactory.getCurrentSession().merge(slide);
 		}
 		else{
-			sessionFactory.getCurrentSession().saveOrUpdate(slide);
+			sessionFactory.getCurrentSession().saveOrUpdate(receivedSlide);
 		}
 	}
 

@@ -17,41 +17,45 @@
     <link rel="stylesheet" type="text/css" href="node_modules/jquery-ui-timepicker-addon/src/jquery-ui-timepicker-addon.css">
     <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="node_modules/dragula/dist/dragula.css">
+
     <link rel="stylesheet" type="text/css" href="libs/css.css" />
     <link rel="stylesheet" type="text/css" href="libs/w3.css" />
 
     <link href="main.css" rel="stylesheet" />
-
-
-    <!-- JS -->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/core-js/client/shim.min.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/file-saver/FileSaver.js"></script>
-
-
-    <!--Libs-->
-    <script src="libs/jquery-ui.min.js"></script>
-    <script src="node_modules/jquery-ui-timepicker-addon/src/jquery-ui-timepicker-addon.js"></script>
-    <script src="node_modules/jquery.inputmask/dist/jquery.inputmask.bundle.js"></script>
-
-    <!-- Polyfills -->
-    <script src="https://unpkg.com/core-js/client/shim.min.js"></script>
-    <script src="https://unpkg.com/zone.js@0.7.4?main=browser"></script>
-    <script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
-
-    <script src="systemjs.config.js"></script>
-    <script>
-        System.import('main.js').catch(function(err) {
-            console.error(err);
-        });
-    </script>
 </head>
 
 <body>
     <my-app>Loading...</my-app>
 </body>
+
+<!-- JS -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+<script src="node_modules/reflect-metadata/Reflect.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/file-saver/FileSaver.js"></script>
+
+
+<!-- Polyfills -->
+<script src="node_modules/systemjs/dist/system.src.js"></script>
+<script src="node_modules/core-js/client/shim.min.js"></script>
+<script src="node_modules/zone.js/dist/zone.min.js"></script>
+
+<!--Libs-->
+<script src="libs/jquery-ui.min.js"></script>
+<script src="node_modules/jquery-ui-timepicker-addon/src/jquery-ui-timepicker-addon.js"></script>
+<script src="node_modules/jquery.inputmask/dist/jquery.inputmask.bundle.js"></script>
+
+
+<!-- <script src="https://unpkg.com/core-js/client/shim.min.js"></script> -->
+<!-- <script src="https://unpkg.com/zone.js@0.7.4?main=browser"></script> -->
+<!-- <script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script> -->
+
+<script src="systemjs.config.js"></script>
+<script>
+    System.import('main.js').catch(function(err) {
+        console.error(err);
+    });
+</script>
 
 </html>

@@ -37,10 +37,13 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['/login']);
                 }}, 
                 err => {
-                    this.router.navigateByUrl('/login');
-                    if (err === 'Unauthorized') {
-                        this.router.navigateByUrl('/login');
-                    }
+                    this.error = 'Username or password is incorrect';
+                    this.loading = false;
+                    this.router.navigate(['/login']);
+                    //this.router.navigateByUrl('/login');
+                    // if (err === 'Unauthorized') {
+                    //     this.router.navigateByUrl('/login');
+                    // }
                 });
     }
 

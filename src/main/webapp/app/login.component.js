@@ -36,10 +36,13 @@ var LoginComponent = (function () {
                 _this.router.navigate(['/login']);
             }
         }, function (err) {
-            _this.router.navigateByUrl('/login');
-            if (err === 'Unauthorized') {
-                _this.router.navigateByUrl('/login');
-            }
+            _this.error = 'Username or password is incorrect';
+            _this.loading = false;
+            _this.router.navigate(['/login']);
+            //this.router.navigateByUrl('/login');
+            // if (err === 'Unauthorized') {
+            //     this.router.navigateByUrl('/login');
+            // }
         });
     };
     LoginComponent.prototype.logout = function () {

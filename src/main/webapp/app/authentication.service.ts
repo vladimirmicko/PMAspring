@@ -17,7 +17,6 @@ export class AuthenticationService {
   
   constructor(private http: Http) { 
     this.headers.append('Content-Type', 'application/json');
-    // this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
     this.options = new RequestOptions({ headers: this.headers });
   }
 
@@ -25,21 +24,13 @@ export class AuthenticationService {
   login(username: string, password: string): Observable<boolean> {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
-        // this.headers.append('Authorization', 'Basic ' + btoa(username + ':' + password));
-        this.headers.append('Authorization', 'Basic ' + btoa('v' + ':' + 'v'));
         this.options = new RequestOptions({ headers: this.headers });
         
         return this.http.post('rest/security/authenticate', JSON.stringify({ username: username, password: password }), this.options)
             .map((response: Response) => {
-                let token = response.json() && response.json().token;
-                if (token) {
-                    this.token = token;
-                    localStorage.setItem('currentUser',  ('Basic ' + btoa(username + ':' + password)));
                     return true;
-                } else {
-                    return false;
-                }})
-              .catch(this.handleError);
+                })
+            .catch(this.handleError);
     }
 
     logout(): void {
@@ -56,7 +47,6 @@ export class AuthenticationService {
   private handleError (error: Response | any) {
     let errMsg: string;
     if (error.status === 401) {
-       error.status = 200;
        return Observable.throw('Unauthorized');
     }
     if (error instanceof Response) {

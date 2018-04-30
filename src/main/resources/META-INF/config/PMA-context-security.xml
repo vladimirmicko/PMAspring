@@ -27,7 +27,7 @@
 					use-expressions="true"
 					auto-config="true"
 					disable-url-rewriting="true" 
-					create-session="stateless" 
+					create-session="always" 
 					entry-point-ref="unauthorizedEntryPoint"
 					authentication-manager-ref="authenticationManager">
 					

@@ -39,9 +39,10 @@
 		<security:csrf disabled="true"/>
 		
 		
-	    <security:logout 	logout-success-url="/rest/security/logout"  	
-	   						logout-url="/logout" 
+	    <security:logout 	logout-url="/rest/security/logout"
+	   						invalidate-session="true"
 	       					delete-cookies="JSESSIONID" />
+	       					
 	</security:http>
 	
 	 <!-- Security Beans -->

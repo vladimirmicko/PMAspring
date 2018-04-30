@@ -12,11 +12,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+
 import com.vladimir.pma.data.dto.UserLogin;
+import com.vladimir.pma.security.SecurityUtils;
 
 @RestController
 @RequestMapping("/rest/security")
@@ -26,22 +30,6 @@ public class SecurityController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-//	@RequestMapping(value = "/authenticate", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<Map<String, String>> authenticate(@RequestBody UserLogin login) {
-//		log.info("HTTP request-POST: /rest/security/authenticate");
-//		Map<String, String> map = new HashMap();
-//		if ("v".equals(login.getUsername()) && "v".equals(login.getPassword())) {
-//			map.put("token", "OK");
-//		}
-//		else {
-//			map.put("token", "");
-//		}
-//		
-//		return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
-//	}
-//	
-	
-
 	
 	/**
 	 * Method used for authenticate user
@@ -49,13 +37,12 @@ public class SecurityController {
 	 * @return
 	 */
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> createUser(@RequestBody UserLogin userLogin) {
+	public ResponseEntity<UserLogin> createUser(@RequestBody UserLogin userLogin) {
 		
 		Authentication authentication = null;
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
 				userLogin.getUsername(), userLogin.getPassword());
 
-		
 		HttpStatus returnStatus = HttpStatus.UNAUTHORIZED;
 		
 		try {
@@ -68,19 +55,10 @@ public class SecurityController {
 		}
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		//String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
+		String sessionId = SecurityUtils.getSessionIdFromRequestContext();
 		
-		
-//		log.info("HTTP request-POST: /rest/security/authenticate");
-//		Map<String, String> map = new HashMap();
-//		if ("v".equals(userLogin.getUsername()) && "v".equals(userLogin.getPassword())) {
-//			map.put("token", "OK");
-//		}
-//		else {
-//			map.put("token", "");
-//		}
-
-		
-		return new ResponseEntity<Object>(null, returnStatus);
+		return new ResponseEntity<UserLogin>(new UserLogin(null, null, sessionId), returnStatus);
 	}
 	
 	/**
@@ -89,7 +67,7 @@ public class SecurityController {
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> logout() {
-		
+		SecurityContextHolder.getContext().setAuthentication(null);
 		return new ResponseEntity<Object>(null, HttpStatus.OK);
 	}
 

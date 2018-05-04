@@ -33,10 +33,30 @@ export class AuthenticationService {
             .catch(this.handleError);
     }
 
-    logout(): void {
+    logout(): Observable<boolean> {
         this.token = null;
         localStorage.removeItem('currentUser');
+
+        let username = "";
+        let password = "";
+
+        this.headers = new Headers();
+        this.headers.append('Content-Type', 'application/json');
+        this.options = new RequestOptions({ headers: this.headers });
+
+        // this.http.get('rest/security/logout').map((response:Response) => {
+        //         console.log(response.json());
+        //         response.json();
+        //     }).subscribe();
+
+        
+        return this.http.get('rest/security/logout', this.options)
+            .map((response: Response) => {
+                    return true;
+                })
+            .catch(this.handleError);
     }
+
 
   private extractData(res: Response) {
     let body = res.json();

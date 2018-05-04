@@ -40,15 +40,24 @@ export class LoginComponent implements OnInit {
                     this.error = 'Username or password is incorrect';
                     this.loading = false;
                     this.router.navigate(['/login']);
-                    //this.router.navigateByUrl('/login');
-                    // if (err === 'Unauthorized') {
-                    //     this.router.navigateByUrl('/login');
-                    // }
                 });
     }
 
     logout(){
-        this.authenticationService.logout();
+        this.authenticationService.logout()            
+            .subscribe(result => {
+            if (result === true) {
+                this.router.navigate(['/login']);
+            } else {
+                this.error = 'Username or password is incorrect';
+                this.loading = false;
+                this.router.navigate(['/login']);
+            }}, 
+            err => {
+                this.error = 'Username or password is incorrect';
+                this.loading = false;
+                this.router.navigate(['/login']);
+            });
     }
 }
 

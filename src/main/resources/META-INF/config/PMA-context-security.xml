@@ -33,6 +33,7 @@
 					
 		<!-- Access Rights -->
 		<security:intercept-url pattern="/rest/security/authenticate" 		access="permitAll()" />
+		<security:intercept-url pattern="/rest/security/logout" 	 		access="permitAll()" />
 		<security:intercept-url pattern="/rest/**" 							access="hasAnyRole('ROLE_ADMIN')" />
 
 		<!-- CSRF -->

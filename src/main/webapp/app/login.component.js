@@ -39,14 +39,25 @@ var LoginComponent = (function () {
             _this.error = 'Username or password is incorrect';
             _this.loading = false;
             _this.router.navigate(['/login']);
-            //this.router.navigateByUrl('/login');
-            // if (err === 'Unauthorized') {
-            //     this.router.navigateByUrl('/login');
-            // }
         });
     };
     LoginComponent.prototype.logout = function () {
-        this.authenticationService.logout();
+        var _this = this;
+        this.authenticationService.logout()
+            .subscribe(function (result) {
+            if (result === true) {
+                _this.router.navigate(['/login']);
+            }
+            else {
+                _this.error = 'Username or password is incorrect';
+                _this.loading = false;
+                _this.router.navigate(['/login']);
+            }
+        }, function (err) {
+            _this.error = 'Username or password is incorrect';
+            _this.loading = false;
+            _this.router.navigate(['/login']);
+        });
     };
     LoginComponent = __decorate([
         core_1.Component({

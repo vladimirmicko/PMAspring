@@ -61,14 +61,4 @@ public class SecurityController {
 		return new ResponseEntity<UserLogin>(new UserLogin(null, null, sessionId), returnStatus);
 	}
 	
-	/**
-	 * Method used when logout is success
-	 * @return
-	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> logout() {
-		SecurityContextHolder.getContext().setAuthentication(null);
-		return new ResponseEntity<Object>(null, HttpStatus.OK);
-	}
-
 }

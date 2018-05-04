@@ -34,6 +34,20 @@ var AuthenticationService = (function () {
     AuthenticationService.prototype.logout = function () {
         this.token = null;
         localStorage.removeItem('currentUser');
+        var username = "";
+        var password = "";
+        this.headers = new http_1.Headers();
+        this.headers.append('Content-Type', 'application/json');
+        this.options = new http_2.RequestOptions({ headers: this.headers });
+        // this.http.get('rest/security/logout').map((response:Response) => {
+        //         console.log(response.json());
+        //         response.json();
+        //     }).subscribe();
+        return this.http.get('rest/security/logout', this.options)
+            .map(function (response) {
+            return true;
+        })
+            .catch(this.handleError);
     };
     AuthenticationService.prototype.extractData = function (res) {
         var body = res.json();

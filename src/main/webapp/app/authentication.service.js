@@ -38,7 +38,6 @@ var AuthenticationService = (function () {
         this.headers.append('Content-Type', 'application/json');
         this.options = new http_2.RequestOptions({ headers: this.headers });
         this.http.get('rest/security/logout').subscribe();
-        return Observable_1.Observable.of(true);
     };
     AuthenticationService.prototype.extractData = function (res) {
         var body = res.json();

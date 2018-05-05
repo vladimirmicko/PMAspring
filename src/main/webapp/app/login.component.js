@@ -42,11 +42,7 @@ var LoginComponent = (function () {
         });
     };
     LoginComponent.prototype.logout = function () {
-        var _this = this;
-        this.authenticationService.logout()
-            .subscribe(function (result) {
-            _this.router.navigate(['/login']);
-        });
+        this.authenticationService.logout();
     };
     LoginComponent = __decorate([
         core_1.Component({

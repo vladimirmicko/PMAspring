@@ -44,10 +44,7 @@ export class LoginComponent implements OnInit {
     }
 
     logout(){
-        this.authenticationService.logout()            
-            .subscribe(result => {
-                this.router.navigate(['/login']);
-            });
+        this.authenticationService.logout();
     }
 }
 

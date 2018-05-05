@@ -33,7 +33,7 @@ export class AuthenticationService {
             .catch(this.handleError);
     }
 
-    logout(): Observable<boolean> {
+    logout() {
         this.token = null;
         localStorage.removeItem('currentUser');
 
@@ -42,8 +42,6 @@ export class AuthenticationService {
         this.options = new RequestOptions({ headers: this.headers });
 
         this.http.get('rest/security/logout').subscribe();
-
-        return Observable.of(true);
     }
 
 

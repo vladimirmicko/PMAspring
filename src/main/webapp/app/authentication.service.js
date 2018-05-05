@@ -26,7 +26,9 @@ var AuthenticationService = (function () {
         this.headers.append('Content-Type', 'application/json');
         this.options = new http_2.RequestOptions({ headers: this.headers });
         return this.http.post('rest/security/authenticate', JSON.stringify({ username: username, password: password }), this.options)
-            .map(function (response) {
+            .map(function (res) {
+            var token = res.json().token;
+            localStorage.setItem('currentUser', token);
             return true;
         })
             .catch(this.handleError);

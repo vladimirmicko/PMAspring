@@ -27,8 +27,10 @@ export class AuthenticationService {
         this.options = new RequestOptions({ headers: this.headers });
         
         return this.http.post('rest/security/authenticate', JSON.stringify({ username: username, password: password }), this.options)
-            .map((response: Response) => {
-                    return true;
+            .map((res: Response) => {
+                  let token = res.json().token;
+                  localStorage.setItem('currentUser',  token);
+                  return true;
                 })
             .catch(this.handleError);
     }

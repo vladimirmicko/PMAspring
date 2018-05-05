@@ -45,17 +45,6 @@ var LoginComponent = (function () {
         var _this = this;
         this.authenticationService.logout()
             .subscribe(function (result) {
-            if (result === true) {
-                _this.router.navigate(['/login']);
-            }
-            else {
-                _this.error = 'Username or password is incorrect';
-                _this.loading = false;
-                _this.router.navigate(['/login']);
-            }
-        }, function (err) {
-            _this.error = 'Username or password is incorrect';
-            _this.loading = false;
             _this.router.navigate(['/login']);
         });
     };

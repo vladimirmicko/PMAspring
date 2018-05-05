@@ -33,7 +33,8 @@
 					
 		<!-- Access Rights -->
 		<security:intercept-url pattern="/rest/security/authenticate" 		access="permitAll()" />
-		<security:intercept-url pattern="/rest/security/logout" 	 		access="permitAll()" />
+		<security:intercept-url pattern="/rest/security/logout" 	 		access="isAnonymous()" />
+		<security:intercept-url pattern="/rest/security/logout-success" 	access="permitAll()" />
 		<security:intercept-url pattern="/rest/**" 							access="hasAnyRole('ROLE_ADMIN')" />
 
 		<!-- CSRF -->
@@ -41,6 +42,7 @@
 		
 		
 	    <security:logout 	logout-url="/rest/security/logout"
+	    					logout-success-url="/rest/security/logout-success"
 	   						invalidate-session="true"
 	       					delete-cookies="JSESSIONID" />
 	       					

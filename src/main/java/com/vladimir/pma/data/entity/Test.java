@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "TESTS")
 public class Test implements java.io.Serializable {
 
-	private static final long serialVersionUID = -8157686871210899678L;
+	private static final long serialVersionUID = -7831448675098855042L;
 
 	@Id
 	@SequenceGenerator(name = "test_gen", sequenceName = "SEQ_PMA_TESTS", allocationSize = 1, initialValue = 1)

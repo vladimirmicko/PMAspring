@@ -22,7 +22,9 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -46,7 +48,6 @@ public class Test implements java.io.Serializable {
 	@Lob
 	@Column(name = "TEST_PROMO_IMAGE", nullable = true)
 	private byte[] testPromoImage;
-	
 		
 	@Column(name = "CREATION_DATE", nullable = true)
 	private Date creationDate;
@@ -57,6 +58,11 @@ public class Test implements java.io.Serializable {
 	@Cascade(CascadeType.MERGE)
 	public List<Slide> slideList;
 	
+	@JsonManagedReference(value = "tests")
+	@OneToMany(mappedBy = "test")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<Result> resultList;
 	
 	public Test() {
 	}
@@ -101,9 +107,6 @@ public class Test implements java.io.Serializable {
 		this.creationDate = creationDate;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	public List<Slide> getSlideList() {
 		return slideList;
@@ -111,6 +114,14 @@ public class Test implements java.io.Serializable {
 
 	public void setSlideList(List<Slide> slideList) {
 		this.slideList = slideList;
+	}
+
+	public List<Result> getResultList() {
+		return resultList;
+	}
+
+	public void setResultList(List<Result> resultList) {
+		this.resultList = resultList;
 	}
 
 }

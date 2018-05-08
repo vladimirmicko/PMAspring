@@ -23,11 +23,12 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
 @Table(name = "USER_ACCOUNTS")
-public class UserAccounts implements java.io.Serializable {
+public class UserAccount implements java.io.Serializable {
 
 	private static final long serialVersionUID = -8157686871210899678L;
 
@@ -46,8 +47,14 @@ public class UserAccounts implements java.io.Serializable {
 	@Column(name = "PASSWORD", nullable = true)
 	private String password;
 	
+	@JsonManagedReference(value = "accounts")
+	@OneToMany(mappedBy = "userAccount")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<Result> resultList;
 	
-	public UserAccounts() {
+
+	public UserAccount() {
 	}
 
 
@@ -90,7 +97,14 @@ public class UserAccounts implements java.io.Serializable {
 		this.password = password;
 	}
 
-	
-	
+
+	public List<Result> getResultList() {
+		return resultList;
+	}
+
+
+	public void setResultList(List<Result> resultList) {
+		this.resultList = resultList;
+	}
 
 }

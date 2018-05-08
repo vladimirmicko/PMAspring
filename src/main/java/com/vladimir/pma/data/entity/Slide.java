@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -45,7 +46,7 @@ public class Slide implements java.io.Serializable {
 	@Column(name = "TEST_IMAGE", unique = true, nullable = true)
 	private byte[] testImage;
 		
-	@JsonIgnore
+	@JsonBackReference(value = "slides")
 	@ManyToOne
 	@JoinColumn(name = "TESTS", nullable = false)
 	private Test test;

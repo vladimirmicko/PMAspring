@@ -13,7 +13,7 @@
 		<spring.version>4.2.4.RELEASE</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<security.version>4.0.3.RELEASE</security.version>
-		<hibernate.version>5.1.0.Final</hibernate.version>
+		<hibernate.version>5.2.13.Final</hibernate.version>
 		<ojdbc.version>11.2.0</ojdbc.version>
 	</properties>
 
@@ -93,17 +93,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.jboss.logging</groupId>
-					<artifactId>jboss-logging</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.fasterxml</groupId>
-					<artifactId>classmate</artifactId>
-				</exclusion>
-			</exclusions>
+			<version>5.4.1.Final</version>
 		</dependency>
 
 		<dependency>

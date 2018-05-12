@@ -11,19 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vladimir.pma.data.entity.Answer;
 import com.vladimir.pma.data.entity.Slide;
 import com.vladimir.pma.data.entity.Test;
 
 @Repository
-public class SlideDao {
-	
-	private static final Log log = LogFactory.getLog(SlideDao.class);
+public class SlideDao extends BaseDao  {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Autowired
 	private TestDao testDao;
+	
+	public SlideDao() {
+		log = LogFactory.getLog(ResultsDao.class);
+		entityClass=Slide.class;
+	}
 	
 
 	@Transactional(readOnly=true)

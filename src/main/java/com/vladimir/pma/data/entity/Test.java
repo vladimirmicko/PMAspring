@@ -59,7 +59,8 @@ public class Test implements java.io.Serializable {
 	@Cascade(CascadeType.MERGE)
 	public List<Slide> slideList;
 	
-	@JsonManagedReference(value = "tests")
+//	@JsonManagedReference(value = "tests")
+	@JsonIgnore
 	@OneToMany(mappedBy = "test")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@Fetch(FetchMode.SUBSELECT)

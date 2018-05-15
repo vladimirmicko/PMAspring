@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,12 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vladimir.pma.data.dao.SlideDao;
 import com.vladimir.pma.data.dao.TestDao;
+import com.vladimir.pma.data.dto.StimulusResult;
 import com.vladimir.pma.data.dto.TestScore;
 import com.vladimir.pma.data.entity.Slide;
 import com.vladimir.pma.data.entity.Test;
@@ -70,6 +76,7 @@ public class TestController {
 		return new ResponseEntity<Slide>(slide, HttpStatus.OK);
 	}
 
+	
 	@RequestMapping(value = "/{id}/slides", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Slide>> getSlidesByTest(@PathVariable(value = "id") int id) {
 		log.info("getSlide(): /rest/tests/slides ");
@@ -78,6 +85,7 @@ public class TestController {
 		return new ResponseEntity<List<Slide>>(slideList, HttpStatus.OK);
 	}
 
+	
 	@RequestMapping(value = "/slides", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Slide>> getAllSlides() {
 		log.info("getAllSlides(): /rest/tests ");
@@ -89,18 +97,34 @@ public class TestController {
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody TestScore testScore) {
 		log.info("saveResults(): /rest/tests/results ");
-		Test test = testDao.findById(id);
+		
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		try {
+//			TestScore testScore = objectMapper.readValue(json, TestScore.class);
+//		} catch (JsonParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (JsonMappingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}  
+		
+		
+//		Test test = testDao.findById(id);
 
 		StringBuilder results = new StringBuilder();
-		Integer counter = 1;
-		for (Slide slide : test.getSlideList()) {
-			results.append(counter.toString()).append(". ").append(slide.getSlideName()).append(" = ").append(
-					(testScore.getScoreList().get(counter - 1) == null ? 0 : testScore.getScoreList().get(counter - 1))
-							+ "\n");
-			counter++;
-		}
+//		Integer counter = 1;
+//		for (Slide slide : test.getSlideList()) {
+//			results.append(counter.toString()).append(". ").append(slide.getSlideName()).append(" = ").append(
+//					(testScore.getScoreList().get(counter - 1) == null ? 0 : testScore.getScoreList().get(counter - 1))
+//							+ "\n");
+//			counter++;
+//		}
 
-		log.info("RESULTS: "+"\n"+results.toString());
+//		log.info("RESULTS: "+"\n"+results.toString());
 		return new ResponseEntity<String>(results.toString(), HttpStatus.OK);
 	}
 	
@@ -116,8 +140,8 @@ public class TestController {
 			results.append(counter.toString())
 					.append(". ")
 					.append(slide.getSlideName()).append(" = ")
-					.append((testScore.getScoreList().get(counter - 1) == null ? 
-							0 : (testScore.getScoreList().get(counter - 1).equals("0") ? "You are below average!" : "Great achievement!")) + "\n");
+					.append((testScore.getStimulusResultList().get(counter - 1) == null ? 
+							0 : (testScore.getStimulusResultList().get(counter - 1).equals("0") ? "You are below average!" : "Great achievement!")) + "\n");
 			counter++;
 		}
 

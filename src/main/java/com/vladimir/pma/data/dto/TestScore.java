@@ -1,44 +1,52 @@
 package com.vladimir.pma.data.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TestScore {
 
-	private List<StimulusResult> scoreList;
-	private int testStartTime;
+public class TestScore implements Serializable {
 
-	public TestScore() {
-		this.scoreList = new ArrayList<StimulusResult>();
-	}
+	private static final long serialVersionUID = -830415288783418966L;
+	
+    private List<StimulusResult> stimulusResultList;
+    private long testStartTime;
 
-	public TestScore(List<StimulusResult> scoreList) {
-		this.scoreList = scoreList;
-	}
 
-	public void addStimulusResult(StimulusResult stimulusResult) {
-		this.scoreList.add(stimulusResult);
-	}
+    public TestScore() {
+        this.stimulusResultList = new ArrayList();
+    }
 
-	public void removeStimulusResult(StimulusResult stimulusResult) {
-		this.scoreList.remove(stimulusResult);
-	}
+    public TestScore(List<StimulusResult> stimulusResultList) {
+        this.stimulusResultList = stimulusResultList;
+    }
 
-	public List<StimulusResult> getScoreList() {
-		return scoreList;
-	}
+    public void addStimulusResult(StimulusResult stimulusResult){
+        this.stimulusResultList.add(stimulusResult);
+    }
 
-	public void setScoreList(List<StimulusResult> scoreList) {
-		this.scoreList = scoreList;
-	}
+    public void removeStimulusResult(StimulusResult stimulusResult){
+        this.stimulusResultList.remove(stimulusResult);
+    }
 
-	public int getTestStartTime() {
-		return testStartTime;
-	}
+    public List<StimulusResult> getStimulusResultList() {
+        return stimulusResultList;
+    }
 
-	public void setTestStartTime(int testStartTime) {
-		this.testStartTime = testStartTime;
-	}
+    public void setStimulusResultList(List<StimulusResult> stimulusResultList) {
+        this.stimulusResultList = stimulusResultList;
+    }
+
+    public long getTestStartTime() {
+        return testStartTime;
+    }
+
+    public void setTestStartTime(long testStartTime) {
+        this.testStartTime = testStartTime;
+    }
+
+
 
 }

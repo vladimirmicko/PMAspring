@@ -26,10 +26,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vladimir.pma.data.dao.ResultsDao;
 import com.vladimir.pma.data.dao.SlideDao;
 import com.vladimir.pma.data.dao.TestDao;
 import com.vladimir.pma.data.dto.StimulusResult;
 import com.vladimir.pma.data.dto.TestScore;
+import com.vladimir.pma.data.entity.Result;
 import com.vladimir.pma.data.entity.Slide;
 import com.vladimir.pma.data.entity.Test;
 
@@ -40,6 +42,9 @@ public class TestController {
 
 	@Autowired
 	private TestDao testDao;
+	
+	@Autowired
+	private ResultsDao resultsDao;
 
 	@Autowired
 	private SlideDao slideDao;
@@ -95,12 +100,12 @@ public class TestController {
 
 	
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody TestScore testScore) {
+	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody Result result) {
 		log.info("saveResults(): /rest/tests/results ");
 		
 //		ObjectMapper objectMapper = new ObjectMapper();
 //		try {
-//			TestScore testScore = objectMapper.readValue(json, TestScore.class);
+//			Result result = objectMapper.readValue(json, Result.class);
 //		} catch (JsonParseException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();

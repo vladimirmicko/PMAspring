@@ -43,8 +43,14 @@ public class Answer implements java.io.Serializable {
 	@Column(name = "ANSWER_NUMBER", nullable = false)
 	private Integer answerNumber;
 	
-	@Column(name = "ANSWER_DELAY", nullable = false)
-	private Integer answerDelay;
+	@Column(name = "ANSWER_TIME", nullable = false)
+	private long answerTime;
+	
+	@Column(name = "PRIME_STIM_SHOW_TIME", nullable = false)
+    private long primeStimShowTime;
+	
+	@Column(name = "TEST_STIM_SHOW_TIME", nullable = false)
+    private long testStimShowTime;
 	
 	@Column(name = "ANSWER_VALUE", nullable = false)
 	private Integer answerValue;
@@ -64,28 +70,23 @@ public class Answer implements java.io.Serializable {
 	}
 
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-
 	public Integer getAnswerNumber() {
 		return answerNumber;
 	}
 
 
-	public void setAnswerNumber(Integer answerNumber) {
-		this.answerNumber = answerNumber;
+	public long getAnswerTime() {
+		return answerTime;
 	}
 
 
-	public Integer getAnswerDelay() {
-		return answerDelay;
+	public long getPrimeStimShowTime() {
+		return primeStimShowTime;
 	}
 
 
-	public void setAnswerDelay(Integer answerDelay) {
-		this.answerDelay = answerDelay;
+	public long getTestStimShowTime() {
+		return testStimShowTime;
 	}
 
 
@@ -94,21 +95,43 @@ public class Answer implements java.io.Serializable {
 	}
 
 
-	public void setAnswerValue(Integer answerValue) {
-		this.answerValue = answerValue;
+	public Result getResult() {
+		return result;
 	}
 
 
-	public Result getResult() {
-		return result;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	public void setAnswerNumber(Integer answerNumber) {
+		this.answerNumber = answerNumber;
+	}
+
+
+	public void setAnswerTime(long answerTime) {
+		this.answerTime = answerTime;
+	}
+
+
+	public void setPrimeStimShowTime(long primeStimShowTime) {
+		this.primeStimShowTime = primeStimShowTime;
+	}
+
+
+	public void setTestStimShowTime(long testStimShowTime) {
+		this.testStimShowTime = testStimShowTime;
+	}
+
+
+	public void setAnswerValue(Integer answerValue) {
+		this.answerValue = answerValue;
 	}
 
 
 	public void setResult(Result result) {
 		this.result = result;
 	}
-
-
-
 
 }

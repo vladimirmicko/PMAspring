@@ -44,11 +44,17 @@ public class Result implements java.io.Serializable {
 	@Column(name = "TEST_TAKEN", nullable = false)
 	private Date testTaken;
 	
+	@Column(name = "TEST_START_TIME", nullable = false)
+	private long testStartTime;
+	
 	@Column(name = "SUPERVISED_VALUE", nullable = true)
 	private Integer supervisedValue;
 	
 	@Column(name = "EVALUATION", nullable = true)
 	private Integer evaluation;
+	
+	@Transient
+    private int testId;
 	
 	@JsonBackReference(value = "tests")
 	@ManyToOne
@@ -120,4 +126,46 @@ public class Result implements java.io.Serializable {
 		this.answerList = answerList;
 	}
 
+
+	public long getTestStartTime() {
+		return testStartTime;
+	}
+
+
+	public Integer getSupervisedValue() {
+		return supervisedValue;
+	}
+
+
+	public Integer getEvaluation() {
+		return evaluation;
+	}
+
+
+	public int getTestId() {
+		return testId;
+	}
+
+
+	public void setTestStartTime(long testStartTime) {
+		this.testStartTime = testStartTime;
+	}
+
+
+	public void setSupervisedValue(Integer supervisedValue) {
+		this.supervisedValue = supervisedValue;
+	}
+
+
+	public void setEvaluation(Integer evaluation) {
+		this.evaluation = evaluation;
+	}
+
+
+	public void setTestId(int testId) {
+		this.testId = testId;
+	}
+
+	
+	
 }

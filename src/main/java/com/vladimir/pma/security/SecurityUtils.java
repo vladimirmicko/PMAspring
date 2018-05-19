@@ -6,27 +6,23 @@ import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import com.vladimir.pma.data.dto.UserLogin;
+import com.vladimir.pma.data.entity.UserAccount;
 
 
 public class SecurityUtils {
 	
-	public static UserLogin getUserFromContext() {
+	public static UserAccount getUserFromContext() {
 
 		SecurityContext securityContext = SecurityContextHolder.getContext();
-		Object details = null;
+		UserAccount userAccount = null;
 
 		try {
-			details = securityContext.getAuthentication().getPrincipal();
+			userAccount = (UserAccount) securityContext.getAuthentication().getPrincipal();
 		} catch (NullPointerException e) {
-			details = null;
+			userAccount = null;
 		}
 
-		UserLogin user = null;
-		if (details != null && details instanceof UserLogin) {
-			user = (UserLogin) details;
-		}
-
-		return user;
+		return userAccount;
 	}
 	
 	public static String getSessionIdFromSecurityContext(){

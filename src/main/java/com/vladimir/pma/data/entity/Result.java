@@ -68,6 +68,7 @@ public class Result implements java.io.Serializable {
 	
 	@JsonManagedReference(value = "results")
 	@OneToMany(mappedBy = "result")
+	@Cascade({ CascadeType.ALL })
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Answer> answerList;

@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -30,11 +31,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vladimir.pma.data.dao.ResultDao;
 import com.vladimir.pma.data.dao.SlideDao;
 import com.vladimir.pma.data.dao.TestDao;
+import com.vladimir.pma.data.dao.UserAccountDao;
 import com.vladimir.pma.data.dto.StimulusResult;
 import com.vladimir.pma.data.dto.TestScore;
 import com.vladimir.pma.data.entity.Result;
 import com.vladimir.pma.data.entity.Slide;
 import com.vladimir.pma.data.entity.Test;
+import com.vladimir.pma.data.entity.UserAccount;
+import com.vladimir.pma.security.SecurityUtils;
 
 @RestController
 @RequestMapping("/rest/tests")
@@ -49,6 +53,10 @@ public class TestController {
 
 	@Autowired
 	private SlideDao slideDao;
+	
+	@Autowired
+	private UserAccountDao userAccountDao;
+	
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Test> getTest(@PathVariable(value = "id") int id, @RequestHeader HttpHeaders headers, @RequestHeader("Authorization") String encoding) {
@@ -107,9 +115,11 @@ public class TestController {
 		Test test = testDao.findById(result.getTestId());
 		result.setTest(test);
 		result.setTestTaken(new Date());
+		UserAccount userAccount = SecurityUtils.getUserFromContext();
 		result.setUserAccount(userAccount);
+		resultDao.persist(result);	
+
 		
-		resultDao.persist(result);
 		
 //		ObjectMapper objectMapper = new ObjectMapper();
 //		try {
@@ -125,41 +135,15 @@ public class TestController {
 //			e.printStackTrace();
 //		}  
 		
-		
-//		Test test = testDao.findById(id);
-
-		StringBuilder results = new StringBuilder();
-//		Integer counter = 1;
-//		for (Slide slide : test.getSlideList()) {
-//			results.append(counter.toString()).append(". ").append(slide.getSlideName()).append(" = ").append(
-//					(testScore.getScoreList().get(counter - 1) == null ? 0 : testScore.getScoreList().get(counter - 1))
-//							+ "\n");
-//			counter++;
-//		}
-
-//		log.info("RESULTS: "+"\n"+results.toString());
-		return new ResponseEntity<String>(results.toString(), HttpStatus.OK);
+		return new ResponseEntity<String>("OK", HttpStatus.OK);
 	}
 	
 	
 	@RequestMapping(value = "/statistics/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getStatistics(@PathVariable(value = "id") int id, @RequestBody TestScore testScore) {
 		log.info("getStatistics(): /rest/tests/statistics ");
-		Test test = testDao.findById(id);
 
-		StringBuilder results = new StringBuilder();
-		Integer counter = 1;
-		for (Slide slide : test.getSlideList()) {
-			results.append(counter.toString())
-					.append(". ")
-					.append(slide.getSlideName()).append(" = ")
-					.append((testScore.getStimulusResultList().get(counter - 1) == null ? 
-							0 : (testScore.getStimulusResultList().get(counter - 1).equals("0") ? "You are below average!" : "Great achievement!")) + "\n");
-			counter++;
-		}
-
-		log.info("STATISTICS: "+"\n"+results.toString());
-		return new ResponseEntity<String>(results.toString(), HttpStatus.OK);
+		return new ResponseEntity<String>("OK", HttpStatus.OK);
 	}
 	
 	

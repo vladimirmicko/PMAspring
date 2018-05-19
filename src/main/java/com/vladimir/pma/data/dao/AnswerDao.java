@@ -20,7 +20,7 @@ import com.vladimir.pma.data.entity.Test;
 public class AnswerDao extends BaseDao  {
 	
 	public AnswerDao() {
-		log = LogFactory.getLog(ResultsDao.class);
+		log = LogFactory.getLog(ResultDao.class);
 		entityClass=Answer.class;
 	}
 	

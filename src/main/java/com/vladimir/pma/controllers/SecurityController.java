@@ -30,7 +30,7 @@ public class SecurityController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	
+		
 	/**
 	 * Method used for authenticate user
 	 * @param userAccount

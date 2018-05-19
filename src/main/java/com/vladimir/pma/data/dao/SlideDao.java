@@ -25,7 +25,7 @@ public class SlideDao extends BaseDao  {
 	private TestDao testDao;
 	
 	public SlideDao() {
-		log = LogFactory.getLog(ResultsDao.class);
+		log = LogFactory.getLog(ResultDao.class);
 		entityClass=Slide.class;
 	}
 	

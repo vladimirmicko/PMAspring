@@ -1,7 +1,9 @@
 package com.vladimir.pma.data.entity;
 // Generated 21-Oct-2016 11:22:09 by Hibernate Tools 4.3.1.Final
 
-import java.util.Date;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,26 +11,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
 @Table(name = "USER_ACCOUNTS")
-public class UserAccount implements java.io.Serializable {
+public class UserAccount implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = -8157686871210899678L;
 
@@ -37,9 +36,6 @@ public class UserAccount implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
 	@Column(name = "ID", unique = true, nullable = false, precision = 10, scale = 0)
 	private Integer id;
-	
-	@Column(name = "EMAIL", nullable = false)
-	private String email;
 	
 	@Column(name = "USERNAME", nullable = true)
 	private String username;
@@ -65,16 +61,6 @@ public class UserAccount implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 
@@ -105,6 +91,46 @@ public class UserAccount implements java.io.Serializable {
 
 	public void setResultList(List<Result> resultList) {
 		this.resultList = resultList;
+	}
+
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		GrantedAuthority grantedAuthority = new GrantedAuthority(){
+			@Override
+			public String getAuthority() {
+				return "ROLE_ADMIN";
+			}
+		};
+		
+		Collection authorities = new ArrayList();
+		authorities.add(grantedAuthority);
+		return authorities;
+	}
+
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 }

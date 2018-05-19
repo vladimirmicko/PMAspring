@@ -8,47 +8,56 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-4.2.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
- 	<!-- Authentication manager -->
+	<!-- Authentication manager -->
 	<security:authentication-manager id="authenticationManager">
-		<security:authentication-provider>
-		     <security:user-service>
-        		<security:user name="v" password="v" authorities="ROLE_ADMIN" />
-        		<security:user name="m" password="m" authorities="ROLE_USER" />
-      		</security:user-service>
-      	</security:authentication-provider>
+		<security:authentication-provider
+			user-service-ref="userAccountDao">
+		</security:authentication-provider>
+<!--    <security:authentication-provider>
+             <security:user-service>
+                <security:user name="v" password="v" authorities="ROLE_ADMIN" />
+                <security:user name="m" password="m" authorities="ROLE_USER" />
+              </security:user-service>
+          </security:authentication-provider> -->
 	</security:authentication-manager>
-		
-	<!-- Disable security -->	
-	<security:http security="none" pattern="/app/**"/>
-    <security:http security="none" pattern="/node_modules/**"/>
-    
+
+	<!-- Disable security -->
+	<security:http security="none" pattern="/app/**" />
+	<security:http security="none" pattern="/node_modules/**" />
+
 	<!-- HTTP settings -->
 	<security:http 	realm="Protected API" 
 					use-expressions="true"
-					auto-config="true"
+					auto-config="true" 
 					disable-url-rewriting="true" 
-					create-session="always" 
-					entry-point-ref="unauthorizedEntryPoint"
+					create-session="always"
+					entry-point-ref="unauthorizedEntryPoint" 
 					authentication-manager-ref="authenticationManager">
-					
+
 		<!-- Access Rights -->
-		<security:intercept-url pattern="/rest/security/authenticate" 		access="permitAll()" />
-		<security:intercept-url pattern="/rest/security/logout" 	 		access="isAnonymous()" />
-		<security:intercept-url pattern="/rest/security/logout-success" 	access="permitAll()" />
-		<security:intercept-url pattern="/rest/**" 							access="hasAnyRole('ROLE_ADMIN')" />
+		<!-- ===================================================================================================================================== -->
+		<security:intercept-url pattern="/rest/security/authenticate"		access="permitAll()" />
+		<security:intercept-url pattern="/rest/security/logout"  			access="isAnonymous()" />
+		<security:intercept-url pattern="/rest/security/logout-success"		access="permitAll()" />
+		<security:intercept-url pattern="/rest/**"							access="hasAnyRole('ROLE_ADMIN')" />
+		<!-- ===================================================================================================================================== -->
+
+		<!-- Access denied handler -->
+		<security:access-denied-handler ref="accessDeniedHandler" />
 
 		<!-- CSRF -->
-		<security:csrf disabled="true"/>
-		
-		
-	    <security:logout 	logout-url="/rest/security/logout"
-	    					logout-success-url="/rest/security/logout-success"
-	   						invalidate-session="true"
-	       					delete-cookies="JSESSIONID" />
-	       					
+		<security:csrf disabled="true" />
+
+
+		<security:logout 	logout-url="/rest/security/logout"
+							logout-success-url="/rest/security/logout-success"
+							invalidate-session="true" 
+							delete-cookies="JSESSIONID" />
+
 	</security:http>
-	
-	 <!-- Security Beans -->
-	<bean id="unauthorizedEntryPoint" class="com.vladimir.pma.security.UnauthorizedEntryPoint" />
-	<bean id="accessDeniedHandler"  class="com.vladimir.pma.security.AccessDeniedExceptionHandler"/>
+
+	<!-- Security Beans -->
+	<bean id="unauthorizedEntryPoint" 	class="com.vladimir.pma.security.UnauthorizedEntryPoint" />
+	<bean id="accessDeniedHandler" 		class="com.vladimir.pma.security.AccessDeniedExceptionHandler" />
+	<bean id="userAccountDao" 			class="com.vladimir.pma.data.dao.UserAccountDao" />
 </beans>	

@@ -13,10 +13,10 @@ import com.vladimir.pma.data.entity.Result;
 import com.vladimir.pma.data.entity.Test;
 
 @Repository
-public class ResultsDao extends BaseDao {
+public class ResultDao extends BaseDao {
 	
-	public ResultsDao() {
-		log = LogFactory.getLog(ResultsDao.class);
+	public ResultDao() {
+		log = LogFactory.getLog(ResultDao.class);
 		entityClass=Result.class;
 	}
 	

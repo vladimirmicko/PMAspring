@@ -1,6 +1,7 @@
 package com.vladimir.pma.controllers;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vladimir.pma.data.dao.ResultsDao;
+import com.vladimir.pma.data.dao.ResultDao;
 import com.vladimir.pma.data.dao.SlideDao;
 import com.vladimir.pma.data.dao.TestDao;
 import com.vladimir.pma.data.dto.StimulusResult;
@@ -44,7 +45,7 @@ public class TestController {
 	private TestDao testDao;
 	
 	@Autowired
-	private ResultsDao resultsDao;
+	private ResultDao resultDao;
 
 	@Autowired
 	private SlideDao slideDao;
@@ -102,6 +103,13 @@ public class TestController {
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody Result result) {
 		log.info("saveResults(): /rest/tests/results ");
+		
+		Test test = testDao.findById(result.getTestId());
+		result.setTest(test);
+		result.setTestTaken(new Date());
+		result.setUserAccount(userAccount);
+		
+		resultDao.persist(result);
 		
 //		ObjectMapper objectMapper = new ObjectMapper();
 //		try {

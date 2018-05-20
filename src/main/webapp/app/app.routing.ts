@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard }            from './auth-guard.service';
 
 import { TestAdminComponent }   from './test-admin.component';
-import { SlideAdminComponent }   from './slide-admin.component';
+import { ResultAdminComponent } from './result-admin.component';
+import { SlideAdminComponent }  from './slide-admin.component';
 import { AboutComponent }       from './about.component';
 import { LoginComponent }       from './login.component';
 
@@ -18,6 +19,16 @@ const routes: Routes = [
   {
     path: 'tests/:id',
     component: SlideAdminComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'results',
+    component: ResultAdminComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'results/:id',
+    component: ResultAdminComponent,
     canActivate: [AuthGuard]
   },
   {

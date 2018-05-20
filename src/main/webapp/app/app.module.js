@@ -18,6 +18,7 @@ var common_1 = require('@angular/common');
 var app_routing_1 = require('./app.routing');
 var app_component_1 = require('./app.component');
 var test_admin_component_1 = require('./test-admin.component');
+var result_admin_component_1 = require('./result-admin.component');
 var slide_admin_component_1 = require('./slide-admin.component');
 var about_component_1 = require('./about.component');
 var login_component_1 = require('./login.component');
@@ -43,6 +44,7 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 login_component_1.LoginComponent,
                 test_admin_component_1.TestAdminComponent,
+                result_admin_component_1.ResultAdminComponent,
                 slide_admin_component_1.SlideAdminComponent,
                 about_component_1.AboutComponent
             ],

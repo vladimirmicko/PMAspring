@@ -1,0 +1,124 @@
+<div class="container">
+    <h3>List of Results</h3>
+    <p-dataTable [value]="tests" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
+        <p-column field="id" header="Id" sortable="true" [style]="{'width':'5%'}"></p-column>
+        <p-column field="testName" header="Test name" sortable="true" [style]="{'width':'15%'}"></p-column>
+        <p-column field="description" header="Description" [style]="{'width':'40%'}"></p-column>
+        <p-column field="creationDate" header="Creation date" sortable="true" [style]="{'width':'10%'}">
+            <template let-col let-test="rowData" pTemplate="body">
+                {{test[col.field]|date }}
+            </template>
+        </p-column>
+        <p-column field="testPromoImage" header="Test logo" [style]="{'width':'15%'}">
+            <template let-object="rowData" pTemplate="body">
+                <div *ngIf="object.testPromoImage">
+                    <img [src]="'data:image/jpeg;base64,' + object.testPromoImage"  height="128" width="128"/>
+                </div>
+            </template>
+        </p-column>
+        <p-column field="Actions" [style]="{'width':'15%'}">
+            <template pTemplate="header">
+					<span>
+						<button class="btn btn-success" (click)="addNewTestModal(editModal)">
+							<span class="glyphicon glyphicon-plus-sign"></span>
+						</button>
+					</span>
+			</template>
+            <template let-object="rowData" pTemplate="body">
+            		<button class="btn btn-primary edit-button" (click)="redirectToTest(object, editModal)">
+						<span class="glyphicon glyphicon glyphicon-film"></span>
+					</button>
+					<button class="btn btn-warning edit-button" (click)="editTestModal(object, editModal)">
+						<span class="glyphicon glyphicon-edit"></span>
+					</button>
+					<button class="btn btn-danger delete-button" (click)="deleteTestModal(object, deleteModal)">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+			</template>
+        </p-column>
+    </p-dataTable>
+
+
+    <div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div *ngIf="test" class="modal-dialog modal-md modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="deleteModal.hide()">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+                    <h4 class="modal-title">Confirm delte</h4>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="test.testPromoImage">
+                        <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" height="128" width="128" />
+                    </div>
+                    <div>
+                        <b>Test name:</b> {{test.testName}}
+                    </div>
+                    <div>
+                        <b>Test description:</b> {{test.description}}
+                    </div>
+                    <div>
+                        <b>Creation date:</b> {{test.creationDate | date}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default modal-cancel" (click)="deleteModal.hide();$event.stopPropagation()">Cancel</button>
+                    <button class="btn btn-primary modal-delete" (click)="deleteTest(test, deleteModal);$event.stopPropagation()">Confirm delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-content modal-dialog modal-md modal-dialog-center">
+            <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="editModal.hide()">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+                <h4 class="modal-title">Edit test modal title</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editForm" #editForma="ngForm" id="ngForm" novalidate (ngSubmit)="addEditTest(editForm.value, editForm.valid, editModal)">
+                    <div>
+                        <label>Name</label>
+                        <input type="text" formControlName="testName" class="form-control">
+                        <small [hidden]="editForm.controls.testName.valid || (editForm.controls.testName.pristine && !submitted)" class="text-danger">
+                                Name is required (minimum 5 characters).
+                        </small>
+                    </div>
+                    <div style="margin-top:20px;">
+                        <label>Description</label>
+                        <!--<textarea [(ngModel)]="testDescription" [ngModelOptions]="{standalone: true}" rows="4" cols="50" class="form-control"></textarea>-->
+                        <textarea formControlName="description" rows="4" cols="50" class="form-control"></textarea>
+                        <small [hidden]="editForm.controls.description.valid || (editForm.controls.description.pristine && !submitted)" class="text-danger">
+                                Description is required (minimum 5 characters).
+                        </small>
+                    </div>
+                    <!--<div style="margin-top:20px;">
+                        <label>Creation date</label>
+                        <input type="date" formControlName="creationDate" class="form-control">
+                    </div>-->
+                    <div style="margin-top:30px;">
+                        <strong>Upload test promo image:</strong>
+                    </div>
+                    <div *ngIf="test.testPromoImage" style="margin-top:20px;">
+                        <img [src]="'data:image/jpeg;base64,' + test.testPromoImage" height="128" width="128" />
+                    </div>
+                    <div style="margin-top:20px;">
+                        <label class="btn btn-primary" for="javaFileInput">
+                        <input type="file" id="javaFileInput" #javaFileInput accept="." (change)="onChangeJavaFile($event)" style="display:none;">
+                            Browse file for upload
+                    </label>
+                        <span class='label label-info' id="upload-file-info">{{imageFile?.name}}</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="editModal.hide();$event.stopPropagation;">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="editForma.ngSubmit.emit()" [disabled]="!editForm.valid">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

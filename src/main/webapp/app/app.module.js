@@ -23,6 +23,7 @@ var slide_admin_component_1 = require('./slide-admin.component');
 var about_component_1 = require('./about.component');
 var login_component_1 = require('./login.component');
 var test_service_1 = require('./test.service');
+var result_service_1 = require('./result.service');
 var auth_guard_service_1 = require('./auth-guard.service');
 var authentication_service_1 = require('./authentication.service');
 var AppModule = (function () {
@@ -50,6 +51,7 @@ var AppModule = (function () {
             ],
             providers: [
                 test_service_1.TestService,
+                result_service_1.ResultService,
                 authentication_service_1.AuthenticationService,
                 auth_guard_service_1.AuthGuard,
                 {

@@ -10,14 +10,15 @@ import { routing }              from './app.routing';
 
 import { AppComponent }         from './app.component';
 import { TestAdminComponent }   from './test-admin.component';
-import { ResultAdminComponent }   from './result-admin.component';
-import { SlideAdminComponent }   from './slide-admin.component';
+import { ResultAdminComponent } from './result-admin.component';
+import { SlideAdminComponent }  from './slide-admin.component';
 import { AboutComponent }       from './about.component';
 import { LoginComponent }       from './login.component';
 
 import { TestService }          from './test.service';
+import { ResultService }        from './result.service';
 import { AuthGuard }            from './auth-guard.service';
-import { AuthenticationService }      from './authentication.service';
+import { AuthenticationService } from './authentication.service';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { AuthenticationService }      from './authentication.service';
   ],
   providers: [ 
     TestService, 
+    ResultService,
     AuthenticationService ,
     AuthGuard,
     {

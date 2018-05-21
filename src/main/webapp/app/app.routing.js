@@ -24,11 +24,6 @@ var routes = [
         canActivate: [auth_guard_service_1.AuthGuard]
     },
     {
-        path: 'results/:id',
-        component: result_admin_component_1.ResultAdminComponent,
-        canActivate: [auth_guard_service_1.AuthGuard]
-    },
-    {
         path: 'about',
         component: about_component_1.AboutComponent,
         canActivate: [auth_guard_service_1.AuthGuard]

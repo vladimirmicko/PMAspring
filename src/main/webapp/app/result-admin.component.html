@@ -1,6 +1,6 @@
 <div class="container">
     <h3>List of Results</h3>
-    <!-- <p-dataTable [value]="results" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
+    <p-dataTable [value]="results" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
         <p-column field="id" header="Id" sortable="true" [style]="{'width':'10%'}"></p-column>
         <p-column field="testId" header="Test Id" sortable="true" [style]="{'width':'10%'}"></p-column>
         <p-column field="testName" header="Test name" sortable="true" [style]="{'width':'50%'}"></p-column>
@@ -10,11 +10,11 @@
             </template>
         </p-column>
         <p-column field="supervisedValue" header="Supervised Value" [style]="{'width':'10%'}">
-            <template let-result="rowData" pTemplate="body">
+            <!-- <template let-result="rowData" pTemplate="body">
                 <p-checkbox binary="true" [(ngModel)]="result.supervisedValue" (onChange)="toggleSupervised(result)"></p-checkbox>
-            </template>
+            </template> -->
         </p-column>
 
         <p-column field="userId" header="User Id" [style]="{'width':'10%'}"></p-column>
-    </p-dataTable> -->
+    </p-dataTable>
 </div>

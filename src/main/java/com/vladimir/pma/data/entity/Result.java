@@ -53,9 +53,6 @@ public class Result implements java.io.Serializable {
 	@Column(name = "EVALUATION", nullable = true)
 	private Integer evaluation;
 	
-	@Transient
-    private int testId;
-	
 	@JsonBackReference(value = "tests")
 	@ManyToOne
 	@JoinColumn(name = "TEST", nullable = false)
@@ -143,11 +140,6 @@ public class Result implements java.io.Serializable {
 	}
 
 
-	public int getTestId() {
-		return testId;
-	}
-
-
 	public void setTestStartTime(long testStartTime) {
 		this.testStartTime = testStartTime;
 	}
@@ -162,11 +154,18 @@ public class Result implements java.io.Serializable {
 		this.evaluation = evaluation;
 	}
 
-
-	public void setTestId(int testId) {
-		this.testId = testId;
+	public String getTestName() {
+		return test.getTestName();
 	}
 
+	public int getTestId() {
+		return test.getId();
+	}
 	
+	public int getUserId() {
+		return userAccount.getId();
+	}
+
+
 	
 }

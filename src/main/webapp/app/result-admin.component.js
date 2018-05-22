@@ -9,14 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var result_1 = require('./result');
 var result_service_1 = require('./result.service');
 var router_1 = require('@angular/router');
 var ResultAdminComponent = (function () {
     function ResultAdminComponent(resultService, router) {
         this.resultService = resultService;
         this.router = router;
+        this.results = [];
+        this.result = new result_1.Result();
     }
     ResultAdminComponent.prototype.ngOnInit = function () {
+        this.getResults();
+    };
+    ResultAdminComponent.prototype.deleteResult = function (result) {
+        var _this = this;
+        console.log('Result deleted:' + result.testName);
+        this.subscriptions = this.resultService.deleteResult(result)
+            .subscribe(function (res) {
+            _this.getResults();
+        }, function (err) {
+        });
+    };
+    ResultAdminComponent.prototype.getResults = function () {
+        var _this = this;
+        this.resultService.getResults()
+            .subscribe(function (results) { return _this.results = results; }, function (error) { return _this.errorMessage = error; });
+    };
+    ResultAdminComponent.prototype.redirectToTest = function (result, modal) {
+        this.router.navigate(['results/' + result.id]);
     };
     ResultAdminComponent = __decorate([
         core_1.Component({

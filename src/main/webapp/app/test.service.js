@@ -25,13 +25,11 @@ var TestService = (function () {
     TestService.prototype.prepareHeaders = function () {
         this.headers = new http_1.Headers();
         this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Authorization', localStorage.getItem('currentUser'));
         this.options = new http_2.RequestOptions({ headers: this.headers });
     };
     TestService.prototype.uploadTest = function (formData) {
         this.headers = new http_1.Headers();
         this.headers.append('Accept', 'application/json');
-        this.headers.append('Authorization', localStorage.getItem('currentUser'));
         this.options = new http_2.RequestOptions({ headers: this.headers });
         return this.http.post('rest/tests/upload', formData, this.options)
             .map(this.extractData)
@@ -40,7 +38,6 @@ var TestService = (function () {
     TestService.prototype.uploadSlide = function (formData, id) {
         this.headers = new http_1.Headers();
         this.headers.append('Accept', 'application/json');
-        this.headers.append('Authorization', localStorage.getItem('currentUser'));
         this.options = new http_2.RequestOptions({ headers: this.headers });
         return this.http.post('rest/tests/slides/upload/' + id, formData, this.options)
             .map(this.extractData)

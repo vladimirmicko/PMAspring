@@ -59,7 +59,7 @@ public class ResultController {
 	
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Result> getResult(@PathVariable(value = "id") int id, @RequestHeader HttpHeaders headers, @RequestHeader("Authorization") String encoding) {
+	public ResponseEntity<Result> getResult(@PathVariable(value = "id") int id) {
 		log.info("getResult(): /rest/results ");
 		Result result = resultDao.findById(id);
 		return new ResponseEntity<Result>(result, HttpStatus.OK);
@@ -74,6 +74,18 @@ public class ResultController {
 	}
 	
 
-
+	@RequestMapping(value = "/toggleSupervised/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Result> toggleSupervised(@PathVariable(value = "id") int id) {
+		log.info("toggleSupervised(): /rest/results ");
+		Result result = resultDao.findById(id);
+		if(result.getSupervisedValue()>0){
+			resultDao.setSupervised(id, 0);
+		}
+		else{
+			resultDao.setSupervised(id, 1);
+		}
+		result = resultDao.findById(id);
+		return new ResponseEntity<Result>(result, HttpStatus.OK);
+	}
 
 }

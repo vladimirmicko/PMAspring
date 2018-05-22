@@ -24,14 +24,12 @@ export class TestService {
   prepareHeaders(){
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Authorization', localStorage.getItem('currentUser'));
     this.options = new RequestOptions({ headers: this.headers });
   }
 
   uploadTest(formData: FormData): Observable<any> {
     this.headers = new Headers();
     this.headers.append('Accept', 'application/json');
-    this.headers.append('Authorization', localStorage.getItem('currentUser'));
     this.options = new RequestOptions({ headers: this.headers });
       return this.http.post('rest/tests/upload', formData, this.options)
           .map(this.extractData)
@@ -41,7 +39,6 @@ export class TestService {
   uploadSlide(formData: FormData, id:number): Observable<any> {
     this.headers = new Headers();
     this.headers.append('Accept', 'application/json');
-    this.headers.append('Authorization', localStorage.getItem('currentUser'));
     this.options = new RequestOptions({ headers: this.headers });
       return this.http.post('rest/tests/slides/upload/'+id, formData, this.options)
           .map(this.extractData)

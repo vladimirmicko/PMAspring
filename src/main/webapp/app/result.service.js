@@ -25,54 +25,29 @@ var ResultService = (function () {
     ResultService.prototype.prepareHeaders = function () {
         this.headers = new http_1.Headers();
         this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Authorization', localStorage.getItem('currentUser'));
         this.options = new http_2.RequestOptions({ headers: this.headers });
     };
-    ResultService.prototype.uploadTest = function (formData) {
-        this.headers = new http_1.Headers();
-        this.headers.append('Accept', 'application/json');
-        this.headers.append('Authorization', localStorage.getItem('currentUser'));
-        this.options = new http_2.RequestOptions({ headers: this.headers });
-        return this.http.post('rest/tests/upload', formData, this.options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    ResultService.prototype.uploadSlide = function (formData, id) {
-        this.headers = new http_1.Headers();
-        this.headers.append('Accept', 'application/json');
-        this.headers.append('Authorization', localStorage.getItem('currentUser'));
-        this.options = new http_2.RequestOptions({ headers: this.headers });
-        return this.http.post('rest/tests/slides/upload/' + id, formData, this.options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    ResultService.prototype.getTests = function () {
+    ResultService.prototype.getResults = function () {
         this.prepareHeaders();
-        return this.http.get('rest/tests', this.options)
+        return this.http.get('rest/results', this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    ResultService.prototype.getTest = function (id) {
+    ResultService.prototype.getResult = function (id) {
         this.prepareHeaders();
-        return this.http.get('rest/tests/' + id, this.options)
+        return this.http.get('rest/results/' + id, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    ResultService.prototype.deleteTest = function (test) {
+    ResultService.prototype.toggleSupervised = function (id) {
         this.prepareHeaders();
-        return this.http.delete('rest/tests/' + test.id, this.options)
+        return this.http.get('rest/results/toggleSupervised/' + id, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    ResultService.prototype.deleteSlide = function (slide) {
+    ResultService.prototype.deleteResult = function (result) {
         this.prepareHeaders();
-        return this.http.delete('rest/tests/slides/' + slide.id, this.options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    ResultService.prototype.generateException = function () {
-        this.prepareHeaders();
-        return this.http.get('rest/tests/generateException', this.options)
+        return this.http.delete('rest/results/' + result.id, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     };

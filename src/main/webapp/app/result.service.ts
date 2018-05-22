@@ -5,8 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import 'rxjs/add/observable/throw';
-import { Test } from './test';
-import { Slide } from './slide';
+import { Result } from './result';
 import {RequestOptions, Request, RequestMethod} from '@angular/http';
 
 
@@ -24,69 +23,40 @@ export class ResultService {
   prepareHeaders(){
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Authorization', localStorage.getItem('currentUser'));
     this.options = new RequestOptions({ headers: this.headers });
   }
 
-  uploadTest(formData: FormData): Observable<any> {
-    this.headers = new Headers();
-    this.headers.append('Accept', 'application/json');
-    this.headers.append('Authorization', localStorage.getItem('currentUser'));
-    this.options = new RequestOptions({ headers: this.headers });
-      return this.http.post('rest/tests/upload', formData, this.options)
-          .map(this.extractData)
-          .catch(this.handleError);
-  }
-
-  uploadSlide(formData: FormData, id:number): Observable<any> {
-    this.headers = new Headers();
-    this.headers.append('Accept', 'application/json');
-    this.headers.append('Authorization', localStorage.getItem('currentUser'));
-    this.options = new RequestOptions({ headers: this.headers });
-      return this.http.post('rest/tests/slides/upload/'+id, formData, this.options)
-          .map(this.extractData)
-          .catch(this.handleError);
-  }
-
-
-  getTests (): Observable<any> {
+ 
+  getResults (): Observable<any> {
     this.prepareHeaders();
-    return this.http.get('rest/tests', this.options)
+    return this.http.get('rest/results', this.options)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
-  getTest (id: number): Observable<any> {
+  getResult (id: number): Observable<any> {
     this.prepareHeaders();
-    return this.http.get('rest/tests/'+id, this.options)
+    return this.http.get('rest/results/'+id, this.options)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
 
-  deleteTest (test: Test): Observable<any> {
+  toggleSupervised (id: number): Observable<any> {
     this.prepareHeaders();
-    return this.http.delete('rest/tests/'+test.id, this.options)
+    return this.http.get('rest/results/toggleSupervised/'+id, this.options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  deleteResult (result: Result): Observable<any> {
+    this.prepareHeaders();
+    return this.http.delete('rest/results/'+result.id, this.options)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
    
-  deleteSlide (slide: Slide): Observable<any> {
-    this.prepareHeaders();
-    return this.http.delete('rest/tests/slides/'+slide.id, this.options)
-                    .map(this.extractData)
-                    .catch(this.handleError);
-  }
-
-
-    generateException (): Observable<any> {
-    this.prepareHeaders();
-    return this.http.get('rest/tests/generateException', this.options)
-                    .map(this.extractData)
-                    .catch(this.handleError);
-  }
-
   private extractData(res: Response) {
     let body = res.json();
     return body || { };

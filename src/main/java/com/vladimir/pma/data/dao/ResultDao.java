@@ -60,5 +60,11 @@ public class ResultDao extends BaseDao {
 		return (Test) sessionFactory.getCurrentSession().merge(test);
 	}
 	
+	
+	@Transactional
+	public void setSupervised(Integer id, Integer value) {
+		Result result = this.findById(id);
+		result.setSupervisedValue(value);
+	}
 
 }

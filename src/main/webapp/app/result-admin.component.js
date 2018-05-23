@@ -33,12 +33,16 @@ var ResultAdminComponent = (function () {
             .subscribe(function (res) {
             _this.getResults();
         }, function (err) {
+            _this.router.navigateByUrl('login/');
         });
     };
     ResultAdminComponent.prototype.getResults = function () {
         var _this = this;
         this.resultService.getResults()
-            .subscribe(function (results) { return _this.results = results; }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (results) { return _this.results = results; }, function (error) {
+            _this.errorMessage = error;
+            _this.router.navigateByUrl('login/');
+        });
     };
     ResultAdminComponent.prototype.redirectToTest = function (result, modal) {
         this.router.navigate(['results/' + result.id]);

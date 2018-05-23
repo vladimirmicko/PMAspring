@@ -108,7 +108,10 @@ public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
     this.testService.getTests()
       .subscribe(
       tests => this.tests = tests,
-      error => this.errorMessage = <any>error);
+      error => {
+        this.errorMessage = <any>error;
+        this.router.navigateByUrl('login/');
+      });
   }
 
 

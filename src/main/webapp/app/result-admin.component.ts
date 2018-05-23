@@ -45,7 +45,7 @@ export class ResultAdminComponent implements OnInit {
         this.getResults();
       },
       (err: any) => {
-
+        this.router.navigateByUrl('login/');
       })
   }
 
@@ -55,7 +55,10 @@ export class ResultAdminComponent implements OnInit {
     this.resultService.getResults()
       .subscribe(
       results => this.results = results,
-      error => this.errorMessage = <any>error);
+      error => {
+        this.errorMessage = <any>error;
+        this.router.navigateByUrl('login/');
+      });
   }
 
 

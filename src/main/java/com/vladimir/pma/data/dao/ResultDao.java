@@ -62,7 +62,7 @@ public class ResultDao extends BaseDao {
 	
 	
 	@Transactional
-	public void setSupervised(Integer id, Integer value) {
+	public void setSupervised(Integer id, Boolean value) {
 		Result result = this.findById(id);
 		result.setSupervisedValue(value);
 	}

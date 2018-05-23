@@ -48,7 +48,7 @@ public class Result implements java.io.Serializable {
 	private long testStartTime;
 	
 	@Column(name = "SUPERVISED_VALUE", nullable = true)
-	private Integer supervisedValue;
+	private Boolean supervisedValue;
 	
 	@Column(name = "EVALUATION", nullable = true)
 	private Integer evaluation;
@@ -130,7 +130,7 @@ public class Result implements java.io.Serializable {
 	}
 
 
-	public Integer getSupervisedValue() {
+	public Boolean getSupervisedValue() {
 		return supervisedValue;
 	}
 
@@ -145,7 +145,7 @@ public class Result implements java.io.Serializable {
 	}
 
 
-	public void setSupervisedValue(Integer supervisedValue) {
+	public void setSupervisedValue(Boolean supervisedValue) {
 		this.supervisedValue = supervisedValue;
 	}
 

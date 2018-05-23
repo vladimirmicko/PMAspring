@@ -30,7 +30,6 @@ export class ResultAdminComponent implements OnInit {
 
 
   public toggleSupervised(result: Result){
-    // this.result.supervisedValue=!result.supervisedValue;
     this.resultService.toggleSupervised(result.id).subscribe(
         result => this.result = result,
         error => this.errorMessage = <any>error);

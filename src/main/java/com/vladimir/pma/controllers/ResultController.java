@@ -46,11 +46,11 @@ public class ResultController {
 	public ResponseEntity<Result> toggleSupervised(@PathVariable(value = "id") int id) {
 		log.info("toggleSupervised(): /rest/results ");
 		Result result = resultDao.findById(id);
-		if(result.getSupervisedValue()>0){
-			resultDao.setSupervised(id, 0);
+		if(result.getSupervisedValue()){
+			resultDao.setSupervised(id, false);
 		}
 		else{
-			resultDao.setSupervised(id, 1);
+			resultDao.setSupervised(id, true);
 		}
 		result = resultDao.findById(id);
 		return new ResponseEntity<Result>(result, HttpStatus.OK);

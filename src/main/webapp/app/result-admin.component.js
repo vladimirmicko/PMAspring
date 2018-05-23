@@ -24,7 +24,6 @@ var ResultAdminComponent = (function () {
     };
     ResultAdminComponent.prototype.toggleSupervised = function (result) {
         var _this = this;
-        // this.result.supervisedValue=!result.supervisedValue;
         this.resultService.toggleSupervised(result.id).subscribe(function (result) { return _this.result = result; }, function (error) { return _this.errorMessage = error; });
     };
     ResultAdminComponent.prototype.deleteResult = function (result) {

@@ -33,6 +33,7 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 primeng_1.DataTableModule,
+                primeng_1.CheckboxModule,
                 primeng_1.SharedModule,
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,

@@ -5,7 +5,7 @@ export class Result {
   testName: string;
   testTaken: Date;
   testStartTime: string;
-  supervisedValue: number;
+  supervisedValue: boolean;
   evaluation: number;
   userId: number;
 }

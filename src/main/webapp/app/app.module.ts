@@ -2,7 +2,7 @@ import { NgModule }             from '@angular/core';
 import { BrowserModule }        from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule }           from '@angular/http';
-import { DataTableModule, SharedModule } from 'primeng/primeng';
+import { DataTableModule, SharedModule, CheckboxModule } from 'primeng/primeng';
 import { ModalModule }          from 'ng2-bootstrap';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
@@ -24,6 +24,7 @@ import { AuthenticationService } from './authentication.service';
 @NgModule({
   imports: [
     DataTableModule,
+    CheckboxModule,
     SharedModule,
     BrowserModule,
     FormsModule,

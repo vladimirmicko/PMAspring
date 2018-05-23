@@ -22,6 +22,10 @@ var ResultAdminComponent = (function () {
     ResultAdminComponent.prototype.ngOnInit = function () {
         this.getResults();
     };
+    ResultAdminComponent.prototype.toggleSupervised = function (result) {
+        var _this = this;
+        this.resultService.toggleSupervised(result.id).subscribe(function (results) { return _this.results = results; }, function (error) { return _this.errorMessage = error; });
+    };
     ResultAdminComponent.prototype.deleteResult = function (result) {
         var _this = this;
         console.log('Result deleted:' + result.testName);

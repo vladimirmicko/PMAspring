@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Result } from './result';
 import { ResultService } from './result.service';
-import { DataTableModule, SharedModule } from 'primeng/primeng';
+import { DataTableModule, SharedModule, CheckboxModule } from 'primeng/primeng';
 import { ModalDirective } from 'ng2-bootstrap';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -25,6 +25,14 @@ export class ResultAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getResults();
+  }
+
+
+
+  public toggleSupervised(result: Result){
+    this.resultService.toggleSupervised(result.id).subscribe(
+        results => this.results = results,
+        error => this.errorMessage = <any>error);
   }
 
 

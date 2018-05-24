@@ -1,3 +1,4 @@
+import { Answer }  from './answer.js';
 
 export class Result {
   id: number;
@@ -8,5 +9,6 @@ export class Result {
   supervisedValue: boolean;
   evaluation: number;
   userId: number;
+  answerList: Answer[];
 }
 

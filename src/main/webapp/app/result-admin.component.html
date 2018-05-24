@@ -15,7 +15,7 @@
             </template>
         </p-column>
         <p-column field="userId" header="User Id" [style]="{'width':'10%'}"></p-column>
-        <p-column field="Actions" [style]="{'width':'15%'}">
+        <p-column field="Actions" [style]="{'width':'7%'}">
             <template let-object="rowData" pTemplate="body">
 					<button class="btn btn-warning edit-button" (click)="viewModal(object,viewAnswersModal)">
 						<span class="glyphicon glyphicon-film"></span>
@@ -23,7 +23,6 @@
 			</template>
         </p-column>
     </p-dataTable>
-
     <div bsModal #viewAnswersModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-content modal-dialog modal-md modal-dialog-center">
             <div class="modal-header">
@@ -33,9 +32,15 @@
                 <h4 class="modal-title">View Answers Modal</h4>
             </div>
             <div class="modal-body">
-               
+                <p-dataTable [value]="answers" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
+                    <p-column field="id" header="Id" sortable="true" [style]="{'width':'10%'}"></p-column>
+                    <p-column field="answerNumber" header="Slide number" sortable="true" [style]="{'width':'10%'}"></p-column>
+                    <p-column field="answerTime" header="Answer time" sortable="true" [style]="{'width':'10%'}"></p-column>
+                    <p-column field="primeStimShowTime" header="Prime time" sortable="true" [style]="{'width':'10%'}"></p-column>
+                    <p-column field="testStimShowTime" header="Test time" sortable="true" [style]="{'width':'10%'}"></p-column>
+                    <p-column field="answerValue" header="Answer value" sortable="true" [style]="{'width':'10%'}"></p-column>
+                </p-dataTable>
             </div>
-
         </div>
     </div>
 </div>

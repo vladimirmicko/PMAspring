@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Result } from './result';
+import { Answer } from './answer';
 import { ResultService } from './result.service';
 import { DataTableModule, SharedModule, CheckboxModule } from 'primeng/primeng';
 import { ModalDirective } from 'ng2-bootstrap';
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
 
 export class ResultAdminComponent implements OnInit {
   results: Result[] = [];
+  answers: Answer[] = [];
   errorMessage: string;
   result: Result = new Result();
   subscriptions: Object;
@@ -50,6 +52,7 @@ export class ResultAdminComponent implements OnInit {
   }
 
   public viewModal(result: Result, modal: ModalDirective): void {
+    this.answers=result.answerList;
     modal.show();
   }
 

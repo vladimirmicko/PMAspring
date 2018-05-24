@@ -59,7 +59,7 @@ public class TestController {
 	
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Test> getTest(@PathVariable(value = "id") int id, @RequestHeader HttpHeaders headers, @RequestHeader("Authorization") String encoding) {
+	public ResponseEntity<Test> getTest(@PathVariable(value = "id") int id, @RequestHeader HttpHeaders headers) {
 		log.info("getTest(): /rest/tests ");
 		Test test = testDao.findById(id);
 		return new ResponseEntity<Test>(test, HttpStatus.OK);

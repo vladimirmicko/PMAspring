@@ -17,6 +17,7 @@ var ResultAdminComponent = (function () {
         this.resultService = resultService;
         this.router = router;
         this.results = [];
+        this.answers = [];
         this.result = new result_1.Result();
     }
     ResultAdminComponent.prototype.ngOnInit = function () {
@@ -37,6 +38,7 @@ var ResultAdminComponent = (function () {
         });
     };
     ResultAdminComponent.prototype.viewModal = function (result, modal) {
+        this.answers = result.answerList;
         modal.show();
     };
     ResultAdminComponent.prototype.getResults = function () {

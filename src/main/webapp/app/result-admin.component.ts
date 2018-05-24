@@ -49,7 +49,9 @@ export class ResultAdminComponent implements OnInit {
       })
   }
 
-
+  public viewModal(result: Result, modal: ModalDirective): void {
+    modal.show();
+  }
 
   public getResults() {
     this.resultService.getResults()

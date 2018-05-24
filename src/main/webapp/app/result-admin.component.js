@@ -36,6 +36,9 @@ var ResultAdminComponent = (function () {
             _this.router.navigateByUrl('login/');
         });
     };
+    ResultAdminComponent.prototype.viewModal = function (result, modal) {
+        modal.show();
+    };
     ResultAdminComponent.prototype.getResults = function () {
         var _this = this;
         this.resultService.getResults()

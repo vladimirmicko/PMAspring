@@ -72,6 +72,8 @@ public class TestDao extends BaseDao  {
 			test.setCreationDate(receivedTest.getCreationDate());
 			test.setDescription(receivedTest.getDescription());
 			test.setTestName(receivedTest.getTestName());
+			test.setResultYesDescription(receivedTest.getResultYesDescription());
+			test.setResultNoDescription(receivedTest.getResultNoDescription());
 			if(receivedTest.getTestPromoImage()!=null && receivedTest.getTestPromoImage().length > 0){
 				test.setTestPromoImage(receivedTest.getTestPromoImage());
 			}

@@ -96,6 +96,13 @@
                                 Description is required (minimum 5 characters).
                         </small>
                     </div>
+                    <div style="margin-top:20px;">
+                        <label>Description of YES result</label>
+                        <textarea formControlName="resultYesDescription" rows="4" cols="50" class="form-control"></textarea>
+                        <small [hidden]="editForm.controls.description.valid || (editForm.controls.description.pristine && !submitted)" class="text-danger">
+                                Description is required (minimum 5 characters).
+                        </small>
+                    </div>
                     <!--<div style="margin-top:20px;">
                         <label>Creation date</label>
                         <input type="date" formControlName="creationDate" class="form-control">

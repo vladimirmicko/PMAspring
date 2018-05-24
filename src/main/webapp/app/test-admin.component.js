@@ -33,7 +33,9 @@ var TestAdminComponent = (function () {
             id: new forms_1.FormControl(test.id),
             testName: new forms_1.FormControl(test.testName, [forms_1.Validators.required, forms_1.Validators.minLength(5)]),
             description: new forms_1.FormControl(test.description),
-            creationDate: new forms_1.FormControl(test.creationDate)
+            creationDate: new forms_1.FormControl(test.creationDate),
+            resultYesDescription: new forms_1.FormControl(test.resultYesDescription),
+            resultNoDescription: new forms_1.FormControl(test.resultYesDescription)
         });
     };
     TestAdminComponent.prototype.editTestModal = function (test, modal) {

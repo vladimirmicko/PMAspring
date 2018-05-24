@@ -40,7 +40,9 @@ export class TestAdminComponent implements OnInit {
       id: new FormControl(test.id),
       testName: new FormControl(test.testName, [<any>Validators.required, <any>Validators.minLength(5)]),
       description: new FormControl(test.description),
-      creationDate: new FormControl(test.creationDate)
+      creationDate: new FormControl(test.creationDate),
+      resultYesDescription: new FormControl(test.resultYesDescription),
+      resultNoDescription: new FormControl(test.resultYesDescription)
     });
   }
 

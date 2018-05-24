@@ -52,6 +52,13 @@ public class Test implements java.io.Serializable {
 	@Column(name = "CREATION_DATE", nullable = true)
 	private Date creationDate;
 	
+	@Column(name = "RESULT_YES_DESCRIPTION", nullable = true)
+	private String resultYesDescription;
+	
+	@Column(name = "RESULT_NO_DESCRIPTION", nullable = true)
+	private String resultNoDescription;
+	
+	
 	@JsonManagedReference(value = "slides")
 	@OneToMany(mappedBy = "test")
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -126,4 +133,22 @@ public class Test implements java.io.Serializable {
 		this.resultList = resultList;
 	}
 
+	public String getResultYesDescription() {
+		return resultYesDescription;
+	}
+
+	public void setResultYesDescription(String resultYesDescription) {
+		this.resultYesDescription = resultYesDescription;
+	}
+
+	public String getResultNoDescription() {
+		return resultNoDescription;
+	}
+
+	public void setResultNoDescription(String resultNoDescription) {
+		this.resultNoDescription = resultNoDescription;
+	}
+
+	
+	
 }

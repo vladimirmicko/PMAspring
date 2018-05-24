@@ -14,10 +14,12 @@ var slide_1 = require('./slide');
 var test_service_1 = require('./test.service');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
+var router_2 = require('@angular/router');
 var SlideAdminComponent = (function () {
-    function SlideAdminComponent(testService, route) {
+    function SlideAdminComponent(testService, route, router) {
         this.testService = testService;
         this.route = route;
+        this.router = router;
         this.events = [];
         this.test = new test_1.Test();
         this.slide = new slide_1.Slide();
@@ -76,6 +78,7 @@ var SlideAdminComponent = (function () {
             .subscribe(function (res) {
             _this.getTest(_this.id);
         }, function (err) {
+            _this.router.navigateByUrl('login/');
         });
     };
     SlideAdminComponent.prototype.deleteSlide = function (slide, modal) {
@@ -86,6 +89,7 @@ var SlideAdminComponent = (function () {
             .subscribe(function (res) {
             _this.getTest(_this.test.id);
         }, function (err) {
+            _this.router.navigateByUrl('login/');
         });
     };
     SlideAdminComponent.prototype.onChangePrimingImageFile = function (event) {
@@ -101,7 +105,10 @@ var SlideAdminComponent = (function () {
     SlideAdminComponent.prototype.getTest = function (id) {
         var _this = this;
         this.testService.getTest(id)
-            .subscribe(function (test) { _this.test = test; _this.slides = test.slideList; }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (test) { _this.test = test; _this.slides = test.slideList; }, function (error) {
+            _this.errorMessage = error;
+            _this.router.navigateByUrl('login/');
+        });
     };
     SlideAdminComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
@@ -113,7 +120,7 @@ var SlideAdminComponent = (function () {
             templateUrl: './slide-admin.component.html',
             styleUrls: ['./slide-admin.component.css']
         }), 
-        __metadata('design:paramtypes', [test_service_1.TestService, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [test_service_1.TestService, router_1.ActivatedRoute, router_2.Router])
     ], SlideAdminComponent);
     return SlideAdminComponent;
 }());

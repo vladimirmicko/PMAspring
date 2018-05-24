@@ -9,5 +9,7 @@ export class Answer {
   testStimShowTime: number;
   answerValue: number;
   result: Result;
+  answerDuration: number;
+  primeStimDuration: number;
 }
 

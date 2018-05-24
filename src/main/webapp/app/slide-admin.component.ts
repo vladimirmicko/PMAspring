@@ -6,6 +6,7 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ModalDirective } from 'ng2-bootstrap';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -30,7 +31,7 @@ export class SlideAdminComponent implements OnInit, OnDestroy {
   private testFile: string;
 
 
-  constructor(private testService: TestService, private route: ActivatedRoute) { }
+  constructor(private testService: TestService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
@@ -92,7 +93,7 @@ public addEditSlide(slide: Slide, isValid: boolean, modal: ModalDirective) {
         this.getTest(this.id);
       },
       (err: any) => {
-
+        this.router.navigateByUrl('login/');
       })
   }
 
@@ -106,7 +107,7 @@ public addEditSlide(slide: Slide, isValid: boolean, modal: ModalDirective) {
         this.getTest(this.test.id);
       },
       (err: any) => {
-
+        this.router.navigateByUrl('login/');
       })
   }
 
@@ -129,7 +130,10 @@ public addEditSlide(slide: Slide, isValid: boolean, modal: ModalDirective) {
     this.testService.getTest(id)
       .subscribe(
       test => {this.test = test; this.slides = test.slideList},
-      error => this.errorMessage = <any>error);
+      error => {
+        this.errorMessage = <any>error
+        this.router.navigateByUrl('login/');
+      });
   }
 
   ngOnDestroy() {

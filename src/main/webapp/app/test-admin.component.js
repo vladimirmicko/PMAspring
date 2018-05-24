@@ -67,6 +67,7 @@ var TestAdminComponent = (function () {
             .subscribe(function (res) {
             _this.getTests();
         }, function (err) {
+            _this.router.navigateByUrl('login/');
         });
     };
     TestAdminComponent.prototype.deleteTest = function (test, modal) {
@@ -77,6 +78,7 @@ var TestAdminComponent = (function () {
             .subscribe(function (res) {
             _this.getTests();
         }, function (err) {
+            _this.router.navigateByUrl('login/');
         });
     };
     TestAdminComponent.prototype.onChangeJavaFile = function (event) {

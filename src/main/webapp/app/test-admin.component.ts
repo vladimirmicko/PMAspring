@@ -81,7 +81,7 @@ public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
         this.getTests();
       },
       (err: any) => {
-
+        this.router.navigateByUrl('login/');
       })
   }
 
@@ -95,7 +95,7 @@ public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
         this.getTests();
       },
       (err: any) => {
-
+        this.router.navigateByUrl('login/');
       })
   }
 

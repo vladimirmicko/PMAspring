@@ -64,7 +64,18 @@ public class Answer implements java.io.Serializable {
 	public Answer() {
 	}
 
+	
+	public Long getAnswerDuration(){
+		return answerTime-testStimShowTime;
+	}
+	
 
+	public Long getPrimeTestDuration(){
+		return testStimShowTime-primeStimShowTime;
+	}
+
+	
+	
 	public Integer getId() {
 		return id;
 	}

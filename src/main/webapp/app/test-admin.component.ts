@@ -42,7 +42,7 @@ export class TestAdminComponent implements OnInit {
       description: new FormControl(test.description),
       creationDate: new FormControl(test.creationDate),
       resultYesDescription: new FormControl(test.resultYesDescription),
-      resultNoDescription: new FormControl(test.resultYesDescription)
+      resultNoDescription: new FormControl(test.resultNoDescription)
     });
   }
 

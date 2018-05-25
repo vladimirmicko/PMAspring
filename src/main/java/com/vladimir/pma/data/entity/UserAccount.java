@@ -4,6 +4,7 @@ package com.vladimir.pma.data.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -42,6 +43,12 @@ public class UserAccount implements UserDetails, Serializable {
 	
 	@Column(name = "PASSWORD", nullable = true)
 	private String password;
+	
+	@Column(name = "SEX", nullable = true)
+	private String sex;
+	
+	@Column(name = "BIRTHDATE", nullable = true)
+	private Date birthdate;
 	
 	@JsonManagedReference(value = "accounts")
 	@OneToMany(mappedBy = "userAccount")

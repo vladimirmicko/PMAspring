@@ -105,13 +105,15 @@ public class UserAccount implements UserDetails, Serializable {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
 		GrantedAuthority grantedAuthority = new GrantedAuthority(){
+			private static final long serialVersionUID = 326003282737477973L;
+
 			@Override
 			public String getAuthority() {
 				return "ROLE_ADMIN";
 			}
 		};
 		
-		Collection authorities = new ArrayList();
+		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(grantedAuthority);
 		return authorities;
 	}

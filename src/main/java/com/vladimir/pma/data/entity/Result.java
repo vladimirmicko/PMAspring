@@ -166,6 +166,16 @@ public class Result implements java.io.Serializable {
 		return userAccount.getId();
 	}
 
+	public void setTestName(String testName) {
+		test.setTestName(testName);
+	}
 
+	public void setTestId(Integer testId) {
+		test.setId(testId);
+	}
+	
+	public void setUserId(Integer userId) {
+		userAccount.setId(userId);
+	}
 	
 }

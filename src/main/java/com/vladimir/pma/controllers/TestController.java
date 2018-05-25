@@ -112,7 +112,7 @@ public class TestController {
 	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody Result result) {
 		log.info("saveResults(): /rest/tests/results ");
 		
-		Test test = testDao.findById(result.getTestId());
+		Test test = testDao.findById(id);
 		result.setTest(test);
 		result.setTestTaken(new Date());
 		UserAccount userAccount = SecurityUtils.getUserFromContext();

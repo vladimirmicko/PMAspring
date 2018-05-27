@@ -62,6 +62,21 @@ public class SecurityController {
 		return new ResponseEntity<UserAccount>(userAccount, returnStatus);
 	}
 	
+	
+	/**
+	 * Method used for authenticate user
+	 * @param userAccount
+	 * @return
+	 */
+	@RequestMapping(value = "/myProfile", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserAccount> changeMyProfile(@RequestBody UserAccount userAccountReceived) {
+		
+		UserAccount userAccount = (UserAccount) userAccountDao.merge(userAccountReceived);
+		HttpStatus returnStatus = HttpStatus.OK;
+		
+		return new ResponseEntity<UserAccount>(userAccount, returnStatus);
+	}
+	
     /**
      * Method used when logout is success
      * @return

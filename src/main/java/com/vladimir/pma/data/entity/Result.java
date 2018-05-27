@@ -58,7 +58,7 @@ public class Result implements java.io.Serializable {
 	@JoinColumn(name = "TEST", nullable = false)
 	private Test test;
 	
-	@JsonBackReference(value = "accounts")
+//	@JsonBackReference(value = "accounts")
 	@ManyToOne
 	@JoinColumn(name = "USER_ACCOUNT", nullable = false)
 	private UserAccount userAccount;

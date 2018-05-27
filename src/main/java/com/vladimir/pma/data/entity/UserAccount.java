@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -23,6 +24,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -50,12 +52,16 @@ public class UserAccount implements UserDetails, Serializable {
 	@Column(name = "BIRTHDATE", nullable = true)
 	private Date birthdate;
 	
-	@JsonManagedReference(value = "accounts")
+//	@JsonManagedReference(value = "accounts")
+	@JsonIgnore
 	@OneToMany(mappedBy = "userAccount")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Result> resultList;
 	
+	
+	@Transient
+	private String sessionId;
 
 	public UserAccount() {
 	}
@@ -101,6 +107,36 @@ public class UserAccount implements UserDetails, Serializable {
 	}
 
 
+	public String getSex() {
+		return sex;
+	}
+
+
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+
+	@JsonIgnore
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
@@ -119,27 +155,29 @@ public class UserAccount implements UserDetails, Serializable {
 	}
 
 
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
-
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
-
+	@JsonIgnore
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
-
+	@JsonIgnore
 	@Override
 	public boolean isEnabled() {
 		return true;
 	}
+	
 
 }

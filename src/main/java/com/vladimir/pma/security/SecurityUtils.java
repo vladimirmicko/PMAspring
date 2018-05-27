@@ -5,7 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.context.request.RequestContextHolder;
 
-import com.vladimir.pma.data.dto.UserLogin;
 import com.vladimir.pma.data.entity.UserAccount;
 
 

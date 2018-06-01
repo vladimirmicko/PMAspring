@@ -7,6 +7,8 @@ public class Statistics implements Serializable {
 
 	private static final long serialVersionUID = -2402059452731399119L;
 	
+	private int totalNumberOfResultsForTest;
+	
 	private int testId;
     private int numberOfMenPositive;
     private int numberOfMenNegative;
@@ -339,24 +341,41 @@ public class Statistics implements Serializable {
 		this.maxResponseTimeWomen = maxResponseTimeWomen;
 	}
 
+	
+	public int getTotalNumberOfResultsForTest() {
+		return totalNumberOfResultsForTest;
+	}
+
+
+	public void setTotalNumberOfResultsForTest(int totalNumberOfResultsForTest) {
+		this.totalNumberOfResultsForTest = totalNumberOfResultsForTest;
+	}
+
 
 	public double getPercentMenPositive(){
-		return numberOfMenPositive/(numberOfMenPositive+numberOfMenNegative);
+		double percentMenPositive=0;
+		if (numberOfMenPositive+numberOfMenNegative>0){
+			percentMenPositive=numberOfMenPositive/(numberOfMenPositive+numberOfMenNegative);
+		}
+		else{
+			percentMenPositive=0;
+		}
+		return percentMenPositive;
 	}
     
 	
-	public double getPercentMenNegative(){
-		return numberOfMenNegative/(numberOfMenPositive+numberOfMenNegative);
-	}
-	
-	public double getPercentWomenPositive(){
-		return numberOfWomenPositive/(numberOfWomenPositive+numberOfWomenNegative);
-	}
-    
-	
-	public double getPercentWomenNegative(){
-		return numberOfWomenNegative/(numberOfWomenPositive+numberOfWomenNegative);
-	}
+//	public double getPercentMenNegative(){
+//		return numberOfMenNegative/(numberOfMenPositive+numberOfMenNegative);
+//	}
+//	
+//	public double getPercentWomenPositive(){
+//		return numberOfWomenPositive/(numberOfWomenPositive+numberOfWomenNegative);
+//	}
+//    
+//	
+//	public double getPercentWomenNegative(){
+//		return numberOfWomenNegative/(numberOfWomenPositive+numberOfWomenNegative);
+//	}
 
 	
 

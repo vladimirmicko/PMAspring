@@ -13,9 +13,9 @@ import com.vladimir.pma.data.entity.Result;
 import com.vladimir.pma.data.entity.Test;
 
 @Repository
-public class ResultDao extends BaseDao {
+public class StatisticsDao extends BaseDao {
 	
-	public ResultDao() {
+	public StatisticsDao() {
 		log = LogFactory.getLog(StatisticsDao.class);
 		entityClass=Result.class;
 	}

@@ -7,44 +7,47 @@ public class Statistics implements Serializable {
 
 	private static final long serialVersionUID = -2402059452731399119L;
 	
-	private int totalNumberOfResultsForTest;
-	
 	private int testId;
-    private int numberOfMenPositive;
-    private int numberOfMenNegative;
-    private int numberOfWomenPositive;
-    private int numberOfWomenNegative;
+	private int totalNumberOfResultsForTest=0;
+	
+	private int numberOfMen=0;
+	private int numberOfWomen=0;
+	private int numberOfMen_30=0;
+	private int numberOfMen31_50=0;
+	private int numberOfMen51_=0;    
+	private int numberOfWomen_30=0;
+	private int numberOfWomen31_50=0;
+	private int numberOfWomen51_=0;
+	
+    private int numberOfMenPositive=0;
+    private int numberOfMenNegative=0;
+    private int numberOfWomenPositive=0;
+    private int numberOfWomenNegative=0;
 
-    private int numberOfMenPositive_30;
-    private int numberOfMenNegative_30;
-    private int numberOfMenPositive31_50;
-    private int numberOfMenNegative31_50;
-    private int numberOfMenPositive51_;
-    private int numberOfMenNegative51_;
+    private int numberOfMenPositive_30=0;
+    private int numberOfMenNegative_30=0;
+    private int numberOfMenPositive31_50=0;
+    private int numberOfMenNegative31_50=0;
+    private int numberOfMenPositive51_=0;
+    private int numberOfMenNegative51_=0;
     
+    private int numberOfWomenPositive_30=0;
+    private int numberOfWomenNegative_30=0;
+    private int numberOfWomenPositive31_50=0;
+    private int numberOfWomenNegative31_50=0;
+    private int numberOfWomenPositive51_=0;
+    private int numberOfWomenNegative51_=0;
     
-    private double averageResponseTime;
-    private double averageResponseTimeMen;
-    private double averageResponseTimeWomen;
+    private double averageResponseTime=0;
+    private double averageResponseTimeMen=0;
+    private double averageResponseTimeWomen=0;
     
-    private double sdResponseTime;
-    private double sdResponseTimeMen;
-    private double sdResponseTimeWomen;
-
-    private double minResponseTime;
-    private double minResponseTimeMen;
-    private double minResponseTimeWomen;
-    
-    private double maxResponseTime;
-    private double maxResponseTimeMen;
-    private double maxResponseTimeWomen;
-    
-    private double averageResponseTimeMen_30;
-    private double averageResponseTimeMen31_50;
-    private double averageResponseTimeMen51_;    
-    private double averageResponseTimeWomen_30;
-    private double averageResponseTimeWomen31_50;
-    private double averageResponseTimeWomen51_;
+    private double averageResponseTimeMen_30=0;
+    private double averageResponseTimeMen31_50=0;
+    private double averageResponseTimeMen51_=0;    
+    private double averageResponseTimeWomen_30=0;
+    private double averageResponseTimeWomen31_50=0;
+    private double averageResponseTimeWomen51_=0;
     
 
     
@@ -59,6 +62,87 @@ public class Statistics implements Serializable {
 
 	public void setTestId(int testId) {
 		this.testId = testId;
+	}
+
+
+	
+	public int getNumberOfMen() {
+		return numberOfMen;
+	}
+
+
+	public void setNumberOfMen(int numberOfMen) {
+		this.numberOfMen = numberOfMen;
+	}
+
+
+	public int getNumberOfWomen() {
+		return numberOfWomen;
+	}
+
+
+	public void setNumberOfWomen(int numberOfWomen) {
+		this.numberOfWomen = numberOfWomen;
+	}
+
+
+	public int getNumberOfMen_30() {
+		return numberOfMen_30;
+	}
+
+
+	public void setNumberOfMen_30(int numberOfMen_30) {
+		this.numberOfMen_30 = numberOfMen_30;
+	}
+
+
+	public int getNumberOfMen31_50() {
+		return numberOfMen31_50;
+	}
+
+
+	public void setNumberOfMen31_50(int numberOfMen31_50) {
+		this.numberOfMen31_50 = numberOfMen31_50;
+	}
+
+
+	public int getNumberOfMen51_() {
+		return numberOfMen51_;
+	}
+
+
+	public void setNumberOfMen51_(int numberOfMen51_) {
+		this.numberOfMen51_ = numberOfMen51_;
+	}
+
+
+	public int getNumberOfWomen_30() {
+		return numberOfWomen_30;
+	}
+
+
+	public void setNumberOfWomen_30(int numberOfWomen_30) {
+		this.numberOfWomen_30 = numberOfWomen_30;
+	}
+
+
+	public int getNumberOfWomen31_50() {
+		return numberOfWomen31_50;
+	}
+
+
+	public void setNumberOfWomen31_50(int numberOfWomen31_50) {
+		this.numberOfWomen31_50 = numberOfWomen31_50;
+	}
+
+
+	public int getNumberOfWomen51_() {
+		return numberOfWomen51_;
+	}
+
+
+	public void setNumberOfWomen51_(int numberOfWomen51_) {
+		this.numberOfWomen51_ = numberOfWomen51_;
 	}
 
 
@@ -160,6 +244,67 @@ public class Statistics implements Serializable {
 	public void setNumberOfMenNegative51_(int numberOfMenNegative51_) {
 		this.numberOfMenNegative51_ = numberOfMenNegative51_;
 	}
+	
+	
+
+	public int getNumberOfWomenPositive_30() {
+		return numberOfWomenPositive_30;
+	}
+
+
+	public void setNumberOfWomenPositive_30(int numberOfWomenPositive_30) {
+		this.numberOfWomenPositive_30 = numberOfWomenPositive_30;
+	}
+
+
+	public int getNumberOfWomenNegative_30() {
+		return numberOfWomenNegative_30;
+	}
+
+
+	public void setNumberOfWomenNegative_30(int numberOfWomenNegative_30) {
+		this.numberOfWomenNegative_30 = numberOfWomenNegative_30;
+	}
+
+
+	public int getNumberOfWomenPositive31_50() {
+		return numberOfWomenPositive31_50;
+	}
+
+
+	public void setNumberOfWomenPositive31_50(int numberOfWomenPositive31_50) {
+		this.numberOfWomenPositive31_50 = numberOfWomenPositive31_50;
+	}
+
+
+	public int getNumberOfWomenNegative31_50() {
+		return numberOfWomenNegative31_50;
+	}
+
+
+	public void setNumberOfWomenNegative31_50(int numberOfWomenNegative31_50) {
+		this.numberOfWomenNegative31_50 = numberOfWomenNegative31_50;
+	}
+
+
+	public int getNumberOfWomenPositive51_() {
+		return numberOfWomenPositive51_;
+	}
+
+
+	public void setNumberOfWomenPositive51_(int numberOfWomenPositive51_) {
+		this.numberOfWomenPositive51_ = numberOfWomenPositive51_;
+	}
+
+
+	public int getNumberOfWomenNegative51_() {
+		return numberOfWomenNegative51_;
+	}
+
+
+	public void setNumberOfWomenNegative51_(int numberOfWomenNegative51_) {
+		this.numberOfWomenNegative51_ = numberOfWomenNegative51_;
+	}
 
 
 	public double getAverageResponseTime() {
@@ -252,96 +397,6 @@ public class Statistics implements Serializable {
 	}    
 		
 	
-	public double getSdResponseTime() {
-		return sdResponseTime;
-	}
-
-
-	public void setSdResponseTime(double sdResponseTime) {
-		this.sdResponseTime = sdResponseTime;
-	}
-
-
-	public double getSdResponseTimeMen() {
-		return sdResponseTimeMen;
-	}
-
-
-	public void setSdResponseTimeMen(double sdResponseTimeMen) {
-		this.sdResponseTimeMen = sdResponseTimeMen;
-	}
-
-
-	public double getSdResponseTimeWomen() {
-		return sdResponseTimeWomen;
-	}
-
-
-	public void setSdResponseTimeWomen(double sdResponseTimeWomen) {
-		this.sdResponseTimeWomen = sdResponseTimeWomen;
-	}
-
-
-	public double getMinResponseTime() {
-		return minResponseTime;
-	}
-
-
-	public void setMinResponseTime(double minResponseTime) {
-		this.minResponseTime = minResponseTime;
-	}
-
-
-	public double getMinResponseTimeMen() {
-		return minResponseTimeMen;
-	}
-
-
-	public void setMinResponseTimeMen(double minResponseTimeMen) {
-		this.minResponseTimeMen = minResponseTimeMen;
-	}
-
-
-	public double getMinResponseTimeWomen() {
-		return minResponseTimeWomen;
-	}
-
-
-	public void setMinResponseTimeWomen(double minResponseTimeWomen) {
-		this.minResponseTimeWomen = minResponseTimeWomen;
-	}
-
-
-	public double getMaxResponseTime() {
-		return maxResponseTime;
-	}
-
-
-	public void setMaxResponseTime(double maxResponseTime) {
-		this.maxResponseTime = maxResponseTime;
-	}
-
-
-	public double getMaxResponseTimeMen() {
-		return maxResponseTimeMen;
-	}
-
-
-	public void setMaxResponseTimeMen(double maxResponseTimeMen) {
-		this.maxResponseTimeMen = maxResponseTimeMen;
-	}
-
-
-	public double getMaxResponseTimeWomen() {
-		return maxResponseTimeWomen;
-	}
-
-
-	public void setMaxResponseTimeWomen(double maxResponseTimeWomen) {
-		this.maxResponseTimeWomen = maxResponseTimeWomen;
-	}
-
-	
 	public int getTotalNumberOfResultsForTest() {
 		return totalNumberOfResultsForTest;
 	}
@@ -364,20 +419,38 @@ public class Statistics implements Serializable {
 	}
     
 	
-//	public double getPercentMenNegative(){
-//		return numberOfMenNegative/(numberOfMenPositive+numberOfMenNegative);
-//	}
-//	
-//	public double getPercentWomenPositive(){
-//		return numberOfWomenPositive/(numberOfWomenPositive+numberOfWomenNegative);
-//	}
-//    
-//	
-//	public double getPercentWomenNegative(){
-//		return numberOfWomenNegative/(numberOfWomenPositive+numberOfWomenNegative);
-//	}
-
+	public double getPercentMenNegative(){
+		double percentMenNegative=0;
+		if (numberOfMenPositive+numberOfMenNegative>0){
+			percentMenNegative=numberOfMenNegative/(numberOfMenPositive+numberOfMenNegative);
+		}
+		else{
+			percentMenNegative=0;
+		}
+		return percentMenNegative;
+	}
 	
-
+	public double getPercentWomenPositive(){
+		double percentWomenPositive=0;
+		if (numberOfWomenPositive+numberOfWomenNegative>0){
+			percentWomenPositive=numberOfWomenPositive/(numberOfWomenPositive+numberOfWomenNegative);
+		}
+		else{
+			percentWomenPositive=0;
+		}
+		return percentWomenPositive;
+	}
+    
+	
+	public double getPercentWomenNegative(){
+		double percentWomenNegative=0;
+		if (numberOfWomenPositive+numberOfWomenNegative>0){
+			percentWomenNegative=numberOfWomenNegative/(numberOfWomenPositive+numberOfWomenNegative);
+		}
+		else{
+			percentWomenNegative=0;
+		}
+		return percentWomenNegative;
+	}
 }
 

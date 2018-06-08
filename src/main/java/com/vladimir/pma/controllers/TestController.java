@@ -107,46 +107,7 @@ public class TestController {
 		return new ResponseEntity<List<Slide>>(testList, HttpStatus.OK);
 	}
 
-	
-	@RequestMapping(value = "/{id}/results", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody Result result) {
-		log.info("saveResults(): /rest/tests/results ");
-		
-		Test test = testDao.findById(id);
-		result.setTest(test);
-		result.setTestTaken(new Date());
-		UserAccount userAccount = SecurityUtils.getUserFromContext();
-		result.setUserAccount(userAccount);
-		resultDao.persist(result);	
 
-		
-		
-//		ObjectMapper objectMapper = new ObjectMapper();
-//		try {
-//			Result result = objectMapper.readValue(json, Result.class);
-//		} catch (JsonParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (JsonMappingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}  
-		
-		return new ResponseEntity<String>("OK", HttpStatus.OK);
-	}
-	
-	
-	@RequestMapping(value = "/statistics/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> getStatistics(@PathVariable(value = "id") int id, @RequestBody TestScore testScore) {
-		log.info("getStatistics(): /rest/tests/statistics ");
-
-		return new ResponseEntity<String>("OK", HttpStatus.OK);
-	}
-	
-	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes="multipart/form-data")
 	public ResponseEntity<Map<String, String>> uploadTest(@RequestPart(required = false, name="imageFile") MultipartFile imageFile, @RequestPart(name="test") Test receivedTest) {
 		try {

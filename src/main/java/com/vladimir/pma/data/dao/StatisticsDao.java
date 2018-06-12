@@ -23,9 +23,5 @@ public class StatisticsDao extends BaseDao {
 	private SessionFactory sessionFactory;
 
 
-	@Transactional(readOnly = true)
-	public List<Result> getAllResultsForTest(Test test) {
-		return (List<Result>) sessionFactory.getCurrentSession().createCriteria(Result.class).add(Restrictions.eq("test", test)).list();
-	}
 
 }

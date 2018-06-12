@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,6 +66,11 @@ public class ResultDao extends BaseDao {
 	public void setSupervised(Integer id, Boolean value) {
 		Result result = this.findById(id);
 		result.setSupervisedValue(value);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Result> getAllResultsForTest(Test test) {
+		return (List<Result>) sessionFactory.getCurrentSession().createCriteria(Result.class).add(Restrictions.eq("test", test)).list();
 	}
 
 }

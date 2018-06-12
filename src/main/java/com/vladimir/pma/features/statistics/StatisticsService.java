@@ -20,9 +20,7 @@ import com.vladimir.pma.data.entity.Test;
 
 @Service
 public class StatisticsService {
-	
-	private static final Log log = LogFactory.getLog(StatisticsService.class);
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -37,7 +35,7 @@ public class StatisticsService {
 
 	public Statistics getStatistics(int testId){
 		Test test = testDao.findById(testId);
-		List<Result> resultList = statisticsDao.getAllResultsForTest(test);
+		List<Result> resultList = resultDao.getAllResultsForTest(test);
 		Statistics statistics = new Statistics();
 		statistics.setTotalNumberOfResultsForTest(resultList.size());
 		

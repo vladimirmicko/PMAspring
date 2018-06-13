@@ -38,47 +38,49 @@ public class AIService {
 	@Autowired
 	private StatisticsDao statisticsDao;
 
-
-	public void getTrainingInstancesForTest(int testId) {
+	public Instances getTrainingInstancesForTest(int testId) {
 		Test test = testDao.findById(testId);
 		List<Result> resultList = resultDao.getAllResultsForTest(test);
 
-		Attribute a0=null;
-		
+		Attribute a0 = null;
+
 		// Declare the class attribute along with its values
 		List classVal = new ArrayList();
-		classVal.add("true");
-		classVal.add("false");
-		Attribute classAttribute = new Attribute("Class", classVal);
+		Attribute classAttribute = new Attribute("Class");
 		Instances trainingSet = null;
-		
+
 		// Declare the feature vector
 		List fvAnswers = new ArrayList();
-		
+
 		if (resultList.size() > 0) {
 			fvAnswers = new ArrayList();
 			for (Answer answer : resultList.get(0).getAnswerList()) {
-				a0 = new Attribute("Answer-Q"+String.valueOf(answer.getAnswerNumber()));
+				a0 = new Attribute("Answer-" + String.valueOf(answer.getAnswerNumber()));
 				fvAnswers.add(a0);
 			}
 			fvAnswers.add(classAttribute);
 			trainingSet = new Instances("Answers", (ArrayList<Attribute>) fvAnswers, 10000);
-			trainingSet.setClassIndex(fvAnswers.size()-1);
-			
+			trainingSet.setClassIndex(fvAnswers.size() - 1);
+
 			for (Result result : resultList) {
-				Instance iAnswer = new DenseInstance(fvAnswers.size());
-				int index=0;
-				for (Answer answer : result.getAnswerList()) {
-					// Create the instance
-					iAnswer.setValue(index, answer.getAnswerValue());
-					index++;
+				if (result.getSupervisedValue() != null) {
+					Instance iAnswer = new DenseInstance(fvAnswers.size()+1);
+					int index = 0;
+					for (Answer answer : result.getAnswerList()) {
+						// Create the instance
+						iAnswer.setValue(index, answer.getAnswerValue());
+						index++;
+					}
+					int supervisedValue = ((result.getSupervisedValue()) ? 1 : 0);
+					iAnswer.setValue(index, supervisedValue);
+					trainingSet.add(iAnswer);
 				}
-				trainingSet.add(iAnswer);
 			}
+			return trainingSet;
 		}
+		return null;
 	}
-	
-	
+
 	public void getInstancesFromDB() {
 
 		// Declare two numeric attributes

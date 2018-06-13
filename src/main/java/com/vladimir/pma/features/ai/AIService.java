@@ -64,7 +64,7 @@ public class AIService {
 
 			for (Result result : resultList) {
 				if (result.getSupervisedValue() != null) {
-					Instance iAnswer = new DenseInstance(fvAnswers.size()+1);
+					Instance iAnswer = new DenseInstance(fvAnswers.size() + 1);
 					int index = 0;
 					for (Answer answer : result.getAnswerList()) {
 						// Create the instance
@@ -79,6 +79,41 @@ public class AIService {
 			return trainingSet;
 		}
 		return null;
+	}
+
+	public Classifier createClassifier(Class classifierClass, Instances trainingSet) {
+
+		Classifier classifier = null;
+		try {
+			classifier = (Classifier) classifierClass.newInstance();
+		} catch (InstantiationException | IllegalAccessException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			classifier.buildClassifier(trainingSet);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return classifier;
+	}
+
+	public String evaluateClassifier(Classifier classifier, Instances trainingSet, Instances testingSet) {
+
+		Evaluation evaluation = null;
+		try {
+			evaluation = new Evaluation(trainingSet);
+			evaluation.evaluateModel(classifier, testingSet);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String summary = evaluation.toSummaryString();
+		double[][] confusionMatrix = evaluation.confusionMatrix();
+		
+		System.out.println(summary);
+		System.out.println(confusionMatrix);
+		
+		return summary;
 	}
 
 	public void getInstancesFromDB() {

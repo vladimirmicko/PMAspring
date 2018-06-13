@@ -59,6 +59,7 @@ public class AIController {
 	public ResponseEntity<String> train() {
 		log.info("train(): /rest/ai ");
 		aiService.getInstancesFromDB();
+		aiService.getTrainingInstancesForTest(1);
 		
 		return new ResponseEntity<String>("OK", HttpStatus.OK);
 	}

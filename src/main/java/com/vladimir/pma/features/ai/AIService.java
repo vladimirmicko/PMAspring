@@ -38,6 +38,47 @@ public class AIService {
 	@Autowired
 	private StatisticsDao statisticsDao;
 
+
+	public void getTrainingInstancesForTest(int testId) {
+		Test test = testDao.findById(testId);
+		List<Result> resultList = resultDao.getAllResultsForTest(test);
+
+		Attribute a0=null;
+		
+		// Declare the class attribute along with its values
+		List classVal = new ArrayList();
+		classVal.add("true");
+		classVal.add("false");
+		Attribute classAttribute = new Attribute("Class", classVal);
+		Instances trainingSet = null;
+		
+		// Declare the feature vector
+		List fvAnswers = new ArrayList();
+		
+		if (resultList.size() > 0) {
+			fvAnswers = new ArrayList();
+			for (Answer answer : resultList.get(0).getAnswerList()) {
+				a0 = new Attribute("Answer-Q"+String.valueOf(answer.getAnswerNumber()));
+				fvAnswers.add(a0);
+			}
+			fvAnswers.add(classAttribute);
+			trainingSet = new Instances("Answers", (ArrayList<Attribute>) fvAnswers, 10000);
+			trainingSet.setClassIndex(fvAnswers.size()-1);
+			
+			for (Result result : resultList) {
+				Instance iAnswer = new DenseInstance(fvAnswers.size());
+				int index=0;
+				for (Answer answer : result.getAnswerList()) {
+					// Create the instance
+					iAnswer.setValue(index, answer.getAnswerValue());
+					index++;
+				}
+				trainingSet.add(iAnswer);
+			}
+		}
+	}
+	
+	
 	public void getInstancesFromDB() {
 
 		// Declare two numeric attributes
@@ -116,56 +157,4 @@ public class AIService {
 		double[][] cmMatrix = eTest.confusionMatrix();
 	}
 
-	public void getTrainingInstancesForTest(int testId) {
-		Test test = testDao.findById(testId);
-		List<Result> resultList = resultDao.getAllResultsForTest(test);
-
-		Attribute a0, a1, a2, a3, a4, a5, a6;
-		
-		// Declare the class attribute along with its values
-		List classVal = new ArrayList();
-		classVal.add("positive");
-		classVal.add("negative");
-		Attribute classAttribute = new Attribute("Class", classVal);
-		
-		// Declare the feature vector
-		List fvAnswers = new ArrayList();
-		
-
-		
-		if (resultList.size() > 0) {
-			fvAnswers = new ArrayList();
-			for (Answer answer : resultList.get(0).getAnswerList()) {
-				a0 = new Attribute("Answer-Q"+String.valueOf(answer.getAnswerNumber()));
-				a1 = new Attribute("ResponseTime_300-Q"+String.valueOf(answer.getAnswerNumber());
-				a2 = new Attribute("ResponseTime300_750-Q"+String.valueOf(answer.getAnswerNumber());
-				a3 = new Attribute("ResponseTime750_1500-Q"+String.valueOf(answer.getAnswerNumber());
-				a4 = new Attribute("ResponseTime1500_3000-Q"+String.valueOf(answer.getAnswerNumber());
-				a5 = new Attribute("ResponseTime3000_-Q"+String.valueOf(answer.getAnswerNumber());
-				
-				fvAnswers.add(a0);
-				fvAnswers.add(a1);
-				fvAnswers.add(a2);
-				fvAnswers.add(a3);
-				fvAnswers.add(a4);
-				fvAnswers.add(a5);
-			}
-			for (Result result : resultList) {
-				Instance iAnswer = new DenseInstance(6*);
-				for (Answer answer : result.getAnswerList()) {
-					// Create the instance
-					
-					iAnswer.setValue(fvAnswers.get(0), 1.0);
-
-					
-					// Create an empty training set
-					Instances trainingSet = new Instances("Answers", (ArrayList<Attribute>) fvAnswers, 10000);
-					trainingSet.setClassIndex(6);
-					trainingSet.add(iAnswer);
-
-				}
-				fvAnswers.add(classAttribute);
-			}
-		}
-	}
 }

@@ -29,6 +29,10 @@ import com.vladimir.pma.features.ai.AIService;
 import com.vladimir.pma.features.statistics.StatisticsService;
 import com.vladimir.pma.security.SecurityUtils;
 
+import weka.classifiers.Classifier;
+import weka.classifiers.functions.MultilayerPerceptron;
+import weka.core.Instances;
+
 @RestController
 @RequestMapping("/rest/ai")
 public class AIController {
@@ -58,10 +62,12 @@ public class AIController {
 	@RequestMapping(value = "/train", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> train() {
 		log.info("train(): /rest/ai ");
-		aiService.getInstancesFromDB();
-		aiService.getTrainingInstancesForTest(1);
+		Instances trainingSet = aiService.getInstancesForTest(1, true);
+		Instances testingSet  = aiService.getInstancesForTest(1, false);
+		Classifier classifier = aiService.createClassifier(MultilayerPerceptron.class, trainingSet);
+		String evaluation = aiService.evaluateClassifier(classifier, trainingSet, testingSet);
 		
-		return new ResponseEntity<String>("OK", HttpStatus.OK);
+		return new ResponseEntity<String>(evaluation, HttpStatus.OK);
 	}
 
 

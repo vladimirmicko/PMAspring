@@ -62,8 +62,8 @@ public class AIController {
 	@RequestMapping(value = "/train", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> train() {
 		log.info("train(): /rest/ai ");
-		Instances trainingSet = aiService.getInstancesForTest(1, true);
-		Instances testingSet  = aiService.getInstancesForTest(1, false);
+		Instances trainingSet = aiService.getTrainingDataset(1);
+		Instances testingSet  = aiService.getTestingDataset(1);
 		Classifier classifier = aiService.createClassifier(MultilayerPerceptron.class, trainingSet);
 		String evaluation = aiService.evaluateClassifier(classifier, trainingSet, testingSet);
 		

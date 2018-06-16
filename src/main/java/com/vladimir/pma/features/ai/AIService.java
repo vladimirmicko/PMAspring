@@ -38,7 +38,7 @@ public class AIService {
 	@Autowired
 	private StatisticsDao statisticsDao;
 
-	public Instances getInstancesForTest(int testId, Boolean trainingOrTesting) {
+	public Instances getTrainingDataset(int testId) {
 		Test test = testDao.findById(testId);
 		List<Result> resultList = resultDao.getAllResultsForTest(test);
 
@@ -47,7 +47,7 @@ public class AIService {
 		// Declare the class attribute along with its values
 		List classVal = new ArrayList();
 		Attribute classAttribute = new Attribute("Class");
-		Instances trainingSet = null;
+		Instances dataSet = null;
 
 		// Declare the feature vector
 		List fvAnswers = new ArrayList();
@@ -58,16 +58,118 @@ public class AIService {
 				a0 = new Attribute("Answer-" + String.valueOf(answer.getAnswerNumber()));
 				fvAnswers.add(a0);
 			}
-			fvAnswers.add(classAttribute);
-			trainingSet = new Instances("Answers", (ArrayList<Attribute>) fvAnswers, 10000);
-			trainingSet.setClassIndex(fvAnswers.size() - 1);
 
+			fvAnswers.add(classAttribute);
+			dataSet = new Instances("Answers", (ArrayList<Attribute>) fvAnswers, resultList.size());
+			dataSet.setClassIndex(fvAnswers.size() - 1);
+
+			Instance iAnswer=null;
 			for (Result result : resultList) {
-				if ((result.getSupervisedValue() != null && trainingOrTesting) || (result.getSupervisedValue() == null && !trainingOrTesting)) {
-					Instance iAnswer = new DenseInstance(fvAnswers.size() + 1);
+				if (result.getSupervisedValue() != null) {
+					iAnswer = new DenseInstance(fvAnswers.size());
 					int index = 0;
 					for (Answer answer : result.getAnswerList()) {
-						// Create the instance
+						iAnswer.setValue(index, answer.getAnswerValue());
+						index++;
+					}
+					int supervisedValue = ((result.getSupervisedValue()) ? 1 : 0);
+					iAnswer.setValue(index, supervisedValue);
+					dataSet.add(iAnswer);
+				}
+			}
+			return dataSet;
+		}
+		return null;
+	}
+
+	public Instances getTestingDataset(int testId) {
+		Test test = testDao.findById(testId);
+		List<Result> resultList = resultDao.getAllResultsForTest(test);
+
+		Attribute a0 = null;
+
+		// Declare the class attribute along with its values
+		List classVal = new ArrayList();
+		Attribute classAttribute = new Attribute("Class");
+		Instances dataSet = null;
+
+		// Declare the feature vector
+		List fvAnswers = new ArrayList();
+
+		if (resultList.size() > 0) {
+			fvAnswers = new ArrayList();
+			for (Answer answer : resultList.get(0).getAnswerList()) {
+				a0 = new Attribute("Answer-" + String.valueOf(answer.getAnswerNumber()));
+				fvAnswers.add(a0);
+			}
+
+			fvAnswers.add(classAttribute);
+			dataSet = new Instances("Answers", (ArrayList<Attribute>) fvAnswers, resultList.size());
+			dataSet.setClassIndex(fvAnswers.size() - 1);
+
+			Instance iAnswer=null;
+			for (Result result : resultList) {
+				if (result.getEvaluation() != null) {
+					iAnswer = new DenseInstance(fvAnswers.size());
+					int index = 0;
+					for (Answer answer : result.getAnswerList()) {
+						iAnswer.setValue(index, answer.getAnswerValue());
+						index++;
+					}
+					int evaluation = result.getEvaluation();
+					iAnswer.setValue(index, evaluation);
+					dataSet.add(iAnswer);
+				}
+			}
+			return dataSet;
+		}
+		return null;
+	}
+
+
+	
+	
+	
+	public Instances getInstancesForTest(int testId, Boolean trainingOrTesting) {
+		Test test = testDao.findById(testId);
+		List<Result> resultList = resultDao.getAllResultsForTest(test);
+
+		Attribute a0 = null;
+
+		// Declare the class attribute along with its values
+		List classVal = new ArrayList();
+		Attribute classAttribute = new Attribute("Class");
+		Instances dataSet = null;
+
+		// Declare the feature vector
+		List fvAnswers = new ArrayList();
+
+		if (resultList.size() > 0) {
+			fvAnswers = new ArrayList();
+			for (Answer answer : resultList.get(0).getAnswerList()) {
+				a0 = new Attribute("Answer-" + String.valueOf(answer.getAnswerNumber()));
+				fvAnswers.add(a0);
+			}
+			if(trainingOrTesting){
+				fvAnswers.add(classAttribute);
+				dataSet = new Instances("Answers", (ArrayList<Attribute>) fvAnswers, resultList.size());
+				dataSet.setClassIndex(fvAnswers.size() - 1);
+			}
+			else{
+				dataSet = new Instances("Answers", (ArrayList<Attribute>) fvAnswers, resultList.size());
+			}
+
+			Instance iAnswer=null;
+			for (Result result : resultList) {
+				if ((result.getSupervisedValue() != null && trainingOrTesting) || (result.getSupervisedValue() == null && !trainingOrTesting)) {
+					if(result.getSupervisedValue()==null){
+						iAnswer = new DenseInstance(fvAnswers.size()-1);
+					}
+					else{
+						iAnswer = new DenseInstance(fvAnswers.size());
+					}
+					int index = 0;
+					for (Answer answer : result.getAnswerList()) {
 						iAnswer.setValue(index, answer.getAnswerValue());
 						index++;
 					}
@@ -75,10 +177,10 @@ public class AIService {
 						int supervisedValue = ((result.getSupervisedValue()) ? 1 : 0);
 						iAnswer.setValue(index, supervisedValue);
 					}
-					trainingSet.add(iAnswer);
+					dataSet.add(iAnswer);
 				}
 			}
-			return trainingSet;
+			return dataSet;
 		}
 		return null;
 	}

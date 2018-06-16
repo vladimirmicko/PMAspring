@@ -74,8 +74,8 @@ public class AIService {
 					if(result.getSupervisedValue()!=null){
 						int supervisedValue = ((result.getSupervisedValue()) ? 1 : 0);
 						iAnswer.setValue(index, supervisedValue);
-						trainingSet.add(iAnswer);
 					}
+					trainingSet.add(iAnswer);
 				}
 			}
 			return trainingSet;

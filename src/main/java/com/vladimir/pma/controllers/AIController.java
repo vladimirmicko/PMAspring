@@ -1,5 +1,6 @@
 package com.vladimir.pma.controllers;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,8 @@ import com.vladimir.pma.security.SecurityUtils;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.functions.MultilayerPerceptron;
+import weka.core.DenseInstance;
+import weka.core.Instance;
 import weka.core.Instances;
 
 @RestController
@@ -62,10 +65,35 @@ public class AIController {
 	@RequestMapping(value = "/train", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> train() {
 		log.info("train(): /rest/ai ");
-		Instances trainingSet = aiService.getTrainingDataset(1);
-		Instances testingSet  = aiService.getTestingDataset(1);
+		Instances trainingSet = aiService.getTrainingDataset(3);
+		Instances testingSet  = aiService.getTestingDataset(3);
 		Classifier classifier = aiService.createClassifier(MultilayerPerceptron.class, trainingSet);
-		String evaluation = aiService.evaluateClassifier(classifier, trainingSet, testingSet);
+		
+//		Instance iAnswer = new DenseInstance(5);
+//		iAnswer.setValue(0, 0);
+//		iAnswer.setValue(1, 0);
+//		iAnswer.setValue(2, 1);
+//		iAnswer.setValue(3, 1);
+//		iAnswer.setValue(4, 1);
+//		System.out.println("------------------ "+aiService.classifiy(classifier, iAnswer));
+
+		Classifier classifierFromString=null;
+		String model=null;
+		try {
+			model = Utility.toString(classifier);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			classifierFromString = (Classifier)Utility.fromString(model);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		String evaluation = aiService.evaluateClassifier(classifierFromString, trainingSet, testingSet);
 		
 		return new ResponseEntity<String>(evaluation, HttpStatus.OK);
 	}

@@ -18,10 +18,13 @@ import com.vladimir.pma.data.entity.Test;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
+import weka.classifiers.functions.MultilayerPerceptron;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.SerializationHelper;
+import weka.core.logging.Logger.Level;
 
 @Service
 public class AIService {
@@ -125,65 +128,7 @@ public class AIService {
 		}
 		return null;
 	}
-
-
 	
-	
-	
-	public Instances getInstancesForTest(int testId, Boolean trainingOrTesting) {
-		Test test = testDao.findById(testId);
-		List<Result> resultList = resultDao.getAllResultsForTest(test);
-
-		Attribute a0 = null;
-
-		// Declare the class attribute along with its values
-		List classVal = new ArrayList();
-		Attribute classAttribute = new Attribute("Class");
-		Instances dataSet = null;
-
-		// Declare the feature vector
-		List fvAnswers = new ArrayList();
-
-		if (resultList.size() > 0) {
-			fvAnswers = new ArrayList();
-			for (Answer answer : resultList.get(0).getAnswerList()) {
-				a0 = new Attribute("Answer-" + String.valueOf(answer.getAnswerNumber()));
-				fvAnswers.add(a0);
-			}
-			if(trainingOrTesting){
-				fvAnswers.add(classAttribute);
-				dataSet = new Instances("Answers", (ArrayList<Attribute>) fvAnswers, resultList.size());
-				dataSet.setClassIndex(fvAnswers.size() - 1);
-			}
-			else{
-				dataSet = new Instances("Answers", (ArrayList<Attribute>) fvAnswers, resultList.size());
-			}
-
-			Instance iAnswer=null;
-			for (Result result : resultList) {
-				if ((result.getSupervisedValue() != null && trainingOrTesting) || (result.getSupervisedValue() == null && !trainingOrTesting)) {
-					if(result.getSupervisedValue()==null){
-						iAnswer = new DenseInstance(fvAnswers.size()-1);
-					}
-					else{
-						iAnswer = new DenseInstance(fvAnswers.size());
-					}
-					int index = 0;
-					for (Answer answer : result.getAnswerList()) {
-						iAnswer.setValue(index, answer.getAnswerValue());
-						index++;
-					}
-					if(result.getSupervisedValue()!=null){
-						int supervisedValue = ((result.getSupervisedValue()) ? 1 : 0);
-						iAnswer.setValue(index, supervisedValue);
-					}
-					dataSet.add(iAnswer);
-				}
-			}
-			return dataSet;
-		}
-		return null;
-	}
 
 	public Classifier createClassifier(Class classifierClass, Instances trainingSet) {
 
@@ -200,6 +145,28 @@ public class AIService {
 		}
 		return classifier;
 	}
+	
+	
+    public void saveModel(Classifier model, String modelpath) {
+
+        try {
+            SerializationHelper.write(modelpath, model);
+        } catch (Exception ex) {
+        	ex.printStackTrace();
+        }
+    }
+	
+    
+    public double classifiy(Classifier classifier, Instance instance) {
+    	double prediction = 0;
+		try {
+			prediction = classifier.classifyInstance(instance);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return prediction;
+    }
 
 	public String evaluateClassifier(Classifier classifier, Instances trainingSet, Instances testingSet) {
 

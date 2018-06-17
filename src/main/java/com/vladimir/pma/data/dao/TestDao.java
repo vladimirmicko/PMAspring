@@ -50,6 +50,13 @@ public class TestDao extends BaseDao  {
 		sessionFactory.getCurrentSession().delete(test);
 	}
 	
+	@Transactional
+	public Test changeClassifier(int id, String classifier) {
+		Test test = this.findById(id);
+		test.setClassifier(classifier);
+		return test;
+	}
+	
 	
 	@Transactional
 	public void persist(Test transientInstance) {

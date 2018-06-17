@@ -85,6 +85,8 @@ public class AIController {
 			e.printStackTrace();
 		}
 		
+		
+		
 		try {
 			classifierFromString = (Classifier)Utility.fromString(model);
 		} catch (ClassNotFoundException e) {
@@ -95,6 +97,36 @@ public class AIController {
 		
 		String evaluation = aiService.evaluateClassifier(classifierFromString, trainingSet, testingSet);
 		
+		return new ResponseEntity<String>(evaluation, HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value = "/classifier/{testId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> createClassifierForTest(@PathVariable(value = "testId") int testId) {
+		log.info("createClassifierForTest(): /rest/ai/toggleSupervised/{testId}");
+		Instances trainingSet = aiService.getTrainingDataset(testId);
+		Instances testingSet  = aiService.getTestingDataset(testId);
+		Classifier classifier = aiService.createClassifier(MultilayerPerceptron.class, trainingSet);
+		
+		Classifier classifierFromString=null;
+		String stringClassifier=null;
+		try {
+			stringClassifier = Utility.toString(classifier);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Test test = testDao.changeClassifier(testId, stringClassifier);
+		
+		try {
+			classifierFromString = (Classifier)Utility.fromString(test.getClassifier());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		String evaluation = aiService.evaluateClassifier(classifierFromString, trainingSet, testingSet);
 		return new ResponseEntity<String>(evaluation, HttpStatus.OK);
 	}
 

@@ -30,7 +30,14 @@ public class Utility {
 		return numberOfYears;
 	}
 
-	/** Read the object from Base64 string. */
+
+	/**
+	 * Read the object from Base64 string.
+	 * @param s
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public static Object fromString(String s) throws IOException, ClassNotFoundException {
 		byte[] data = Base64.getDecoder().decode(s);
 		ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
@@ -39,7 +46,13 @@ public class Utility {
 		return o;
 	}
 
-	/** Write the object to a Base64 string. */
+	
+	/**
+	 * Write the object to a Base64 string.
+	 * @param o Instead of Object type, Serializable should be used, but since Classifier does not implement serializable Object type is used
+	 * @return
+	 * @throws IOException
+	 */
 	public static String toString(Object o) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream(baos);

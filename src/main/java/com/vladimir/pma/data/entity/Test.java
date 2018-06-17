@@ -58,6 +58,10 @@ public class Test implements java.io.Serializable {
 	@Column(name = "RESULT_NO_DESCRIPTION", nullable = true)
 	private String resultNoDescription;
 	
+	@Lob
+	@Column(name = "CLASSIFIER", nullable = true)
+	private String classifier;
+	
 	
 	@JsonManagedReference(value = "slides")
 	@OneToMany(mappedBy = "test")
@@ -149,6 +153,12 @@ public class Test implements java.io.Serializable {
 		this.resultNoDescription = resultNoDescription;
 	}
 
-	
-	
+	public String getClassifier() {
+		return classifier;
+	}
+
+	public void setClassifier(String classifier) {
+		this.classifier = classifier;
+	}
+
 }

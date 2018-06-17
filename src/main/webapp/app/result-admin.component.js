@@ -29,7 +29,7 @@ var ResultAdminComponent = (function () {
     };
     ResultAdminComponent.prototype.deleteResult = function (result) {
         var _this = this;
-        console.log('Result deleted:' + result.testName);
+        console.log('Result deleted: ' + result.testName);
         this.subscriptions = this.resultService.deleteResult(result)
             .subscribe(function (res) {
             _this.getResults();

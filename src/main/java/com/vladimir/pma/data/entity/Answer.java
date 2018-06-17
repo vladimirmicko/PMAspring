@@ -60,6 +60,10 @@ public class Answer implements java.io.Serializable {
 	@JoinColumn(name = "RESULT", nullable = false)
 	private Result result;
 	
+	@Transient
+	private String slideName;
+	
+	
 	
 	public Answer() {
 	}
@@ -144,5 +148,17 @@ public class Answer implements java.io.Serializable {
 	public void setResult(Result result) {
 		this.result = result;
 	}
+
+
+	public String getSlideName() {
+		return slideName;
+	}
+
+
+	public void setSlideName(String slideName) {
+		this.slideName = slideName;
+	}
+	
+	
 
 }

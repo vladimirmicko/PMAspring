@@ -29,11 +29,12 @@
                 <button type="button" class="close" aria-label="Close" (click)="viewAnswersModal.hide()">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 				</button>
-                <h4 class="modal-title">View Answers</h4>
+                <h4 class="modal-title">View Answer</h4>
             </div>
             <div class="modal-body">
                 <p-dataTable [value]="answers" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
                     <p-column field="answerNumber" header="Slide number" [style]="{'width':'10%'}"></p-column>
+                    <p-column field="slideName" header="Slide Name" [style]="{'width':'20%'}"></p-column>
                     <p-column field="answerDuration" header="Answer duration [ms]" [style]="{'width':'10%'}"></p-column>
                     <!-- <p-column field="primeTestDuration" header="Prime-Stim duration [ms]" [style]="{'width':'10%'}"></p-column> -->
                     <p-column field="answerValue" header="Answer value" [style]="{'width':'10%'}"></p-column>

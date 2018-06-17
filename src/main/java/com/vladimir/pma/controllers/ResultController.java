@@ -127,6 +127,12 @@ public class ResultController {
 	public ResponseEntity<List<Result>> getAllResults() {
 		log.info("getAllResults(): /rest/results ");
 		List<Result> resultList = resultDao.findAll();
+		List<Test> testList = testDao.findAll();
+		for(Result result : resultList){
+			for(Answer answer : result.getAnswerList()){
+				answer.setSlideName(answer.getResult().getTest().getSlideList().get(answer.getAnswerNumber()-1).getSlideName());
+			}
+		}
 		return new ResponseEntity<List<Result>>(resultList, HttpStatus.OK);
 	}
 	

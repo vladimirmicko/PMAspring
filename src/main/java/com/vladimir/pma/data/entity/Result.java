@@ -177,5 +177,4 @@ public class Result implements java.io.Serializable {
 	public void setUserId(Integer userId) {
 		userAccount.setId(userId);
 	}
-	
 }

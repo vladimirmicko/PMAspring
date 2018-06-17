@@ -40,7 +40,7 @@ export class ResultAdminComponent implements OnInit {
 
 
   public deleteResult(result: Result) {
-    console.log('Result deleted:' + result.testName);
+    console.log('Result deleted: ' + result.testName);
     this.subscriptions = this.resultService.deleteResult(result)
       .subscribe(
       (res: any) => {
@@ -51,10 +51,12 @@ export class ResultAdminComponent implements OnInit {
       })
   }
 
+
   public viewModal(result: Result, modal: ModalDirective): void {
     this.answers=result.answerList;
     modal.show();
   }
+
 
   public getResults() {
     this.resultService.getResults()

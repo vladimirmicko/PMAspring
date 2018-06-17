@@ -58,6 +58,7 @@ public class Test implements java.io.Serializable {
 	@Column(name = "RESULT_NO_DESCRIPTION", nullable = true)
 	private String resultNoDescription;
 	
+	@JsonIgnore
 	@Lob
 	@Column(name = "CLASSIFIER", nullable = true)
 	private String classifier;

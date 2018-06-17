@@ -1,5 +1,6 @@
 package com.vladimir.pma.controllers;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +26,13 @@ import com.vladimir.pma.data.entity.Answer;
 import com.vladimir.pma.data.entity.Result;
 import com.vladimir.pma.data.entity.Test;
 import com.vladimir.pma.data.entity.UserAccount;
+import com.vladimir.pma.features.ai.AIService;
 import com.vladimir.pma.features.statistics.StatisticsService;
 import com.vladimir.pma.security.SecurityUtils;
+
+import weka.classifiers.Classifier;
+import weka.core.DenseInstance;
+import weka.core.Instance;
 
 @RestController
 @RequestMapping("/rest/results")
@@ -48,20 +54,14 @@ public class ResultController {
 	
 	@Autowired
 	private StatisticsService statisticsService;
+	
+	@Autowired
+	private AIService aiService;
 
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody Result result) {
+	public ResponseEntity<Double> saveResults(@PathVariable(value = "id") int id, @RequestBody Result result) {
 		log.info("saveResults(): /rest/tests/results ");
-		
-		Test test = testDao.findById(id);
-		result.setTest(test);
-		result.setTestTaken(new Date());
-		UserAccount userAccount = SecurityUtils.getUserFromContext();
-		result.setUserAccount(userAccount);
-		resultDao.persist(result);	
-
-		
 		
 //		ObjectMapper objectMapper = new ObjectMapper();
 //		try {
@@ -75,9 +75,42 @@ public class ResultController {
 //		} catch (IOException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
-//		}  
+//		}
 		
-		return new ResponseEntity<String>("OK", HttpStatus.OK);
+		Classifier classifier = null;
+		Test test = testDao.findById(id);
+		result.setTest(test);
+		result.setTestTaken(new Date());
+		UserAccount userAccount = SecurityUtils.getUserFromContext();
+		result.setUserAccount(userAccount);
+		resultDao.persist(result);	
+
+		if(test.getClassifier()!=null){
+			try {
+				classifier = (Classifier)Utility.fromString(test.getClassifier());
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		Instance instance=null;
+		instance = new DenseInstance(result.getAnswerList().size()+1);
+		int index = 0;
+		for (Answer answer : result.getAnswerList()) {
+			instance.setValue(index, answer.getAnswerValue());
+			index++;
+		}
+		instance.setValue(index, 0);
+
+		Double prediction=null;
+		try {
+			prediction = classifier.classifyInstance(instance);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+		return new ResponseEntity<Double>(prediction, HttpStatus.OK);
 	}
 	
 	

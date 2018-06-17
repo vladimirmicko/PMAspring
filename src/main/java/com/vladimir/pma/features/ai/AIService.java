@@ -110,18 +110,18 @@ public class AIService {
 			dataSet = new Instances("Answers", (ArrayList<Attribute>) fvAnswers, resultList.size());
 			dataSet.setClassIndex(fvAnswers.size() - 1);
 
-			Instance iAnswer=null;
+			Instance instance=null;
 			for (Result result : resultList) {
 				if (result.getEvaluation() != null) {
-					iAnswer = new DenseInstance(fvAnswers.size());
+					instance = new DenseInstance(fvAnswers.size());
 					int index = 0;
 					for (Answer answer : result.getAnswerList()) {
-						iAnswer.setValue(index, answer.getAnswerValue());
+						instance.setValue(index, answer.getAnswerValue());
 						index++;
 					}
 					int evaluation = result.getEvaluation();
-					iAnswer.setValue(index, evaluation);
-					dataSet.add(iAnswer);
+					instance.setValue(index, evaluation);
+					dataSet.add(instance);
 				}
 			}
 			return dataSet;
@@ -162,7 +162,6 @@ public class AIService {
 		try {
 			prediction = classifier.classifyInstance(instance);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return prediction;

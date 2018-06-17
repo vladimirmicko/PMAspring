@@ -67,6 +67,12 @@ var TestService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    TestService.prototype.trainClassifier = function (test) {
+        this.prepareHeaders();
+        return this.http.put('rest/ai/classifier/' + test.id, this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     TestService.prototype.generateException = function () {
         this.prepareHeaders();
         return this.http.get('rest/tests/generateException', this.options)

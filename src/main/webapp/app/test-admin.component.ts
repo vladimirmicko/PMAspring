@@ -66,6 +66,19 @@ export class TestAdminComponent implements OnInit {
     modal.show();
   }
 
+  public trainClassifier(test: Test): void {
+    console.log(test.testName);
+    this.test = test;
+    this.subscriptions = this.testService.trainClassifier(test)
+      .subscribe(
+      (res: any) => {
+        // this.getTests();
+      },
+      (err: any) => {
+        this.router.navigateByUrl('login/');
+      })
+  }
+
 
 public addEditTest(test: Test, isValid: boolean, modal: ModalDirective) {
     this.submitted = true;

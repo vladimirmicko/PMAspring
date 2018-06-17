@@ -77,6 +77,13 @@ export class TestService {
   }
 
 
+  trainClassifier (test: Test): Observable<any> {
+    this.prepareHeaders();
+    return this.http.put('rest/ai/classifier/'+test.id, this.options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
     generateException (): Observable<any> {
     this.prepareHeaders();
     return this.http.get('rest/tests/generateException', this.options)

@@ -55,6 +55,17 @@ var TestAdminComponent = (function () {
         this.test = test;
         modal.show();
     };
+    TestAdminComponent.prototype.trainClassifier = function (test) {
+        var _this = this;
+        console.log(test.testName);
+        this.test = test;
+        this.subscriptions = this.testService.trainClassifier(test)
+            .subscribe(function (res) {
+            // this.getTests();
+        }, function (err) {
+            _this.router.navigateByUrl('login/');
+        });
+    };
     TestAdminComponent.prototype.addEditTest = function (test, isValid, modal) {
         var _this = this;
         this.submitted = true;

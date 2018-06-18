@@ -19,13 +19,17 @@ export class TestAdminComponent implements OnInit {
   public submitted: boolean;
   public events: any[] = [];
   tests: Test[] = [];
+  classifier: string;
   errorMessage: string;
   test: Test = new Test();
   imageFile: any;
   subscriptions: Object;
+  @ViewChild('classifierModal') classifierModal: any;
 
 
-  constructor(private testService: TestService,  private router: Router) { }
+  constructor(private testService: TestService,  private router: Router) { 
+    this.classifier = "";
+  }
 
   ngOnInit(): void {
     this.getTests();
@@ -72,6 +76,8 @@ export class TestAdminComponent implements OnInit {
     this.subscriptions = this.testService.trainClassifier(test)
       .subscribe(
       (res: any) => {
+        this.classifier = res.message;
+        this.classifierModal.show();
         // this.getTests();
       },
       (err: any) => {

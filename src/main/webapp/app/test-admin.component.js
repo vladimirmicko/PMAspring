@@ -20,6 +20,7 @@ var TestAdminComponent = (function () {
         this.events = [];
         this.tests = [];
         this.test = new test_1.Test();
+        this.classifier = "";
     }
     TestAdminComponent.prototype.ngOnInit = function () {
         this.getTests();
@@ -61,6 +62,8 @@ var TestAdminComponent = (function () {
         this.test = test;
         this.subscriptions = this.testService.trainClassifier(test)
             .subscribe(function (res) {
+            _this.classifier = res.message;
+            _this.classifierModal.show();
             // this.getTests();
         }, function (err) {
             _this.router.navigateByUrl('login/');
@@ -108,6 +111,10 @@ var TestAdminComponent = (function () {
     TestAdminComponent.prototype.redirectToTest = function (test, modal) {
         this.router.navigate(['tests/' + test.id]);
     };
+    __decorate([
+        core_1.ViewChild('classifierModal'), 
+        __metadata('design:type', Object)
+    ], TestAdminComponent.prototype, "classifierModal", void 0);
     TestAdminComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

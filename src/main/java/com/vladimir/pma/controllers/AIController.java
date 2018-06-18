@@ -21,6 +21,7 @@ import com.vladimir.pma.common.utility.Utility;
 import com.vladimir.pma.data.dao.ResultDao;
 import com.vladimir.pma.data.dao.StatisticsDao;
 import com.vladimir.pma.data.dao.TestDao;
+import com.vladimir.pma.data.dto.RestResponseDto;
 import com.vladimir.pma.data.dto.Statistics;
 import com.vladimir.pma.data.entity.Answer;
 import com.vladimir.pma.data.entity.Result;
@@ -102,7 +103,7 @@ public class AIController {
 	
 	
 	@RequestMapping(value = "/classifier/{testId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> createClassifierForTest(@PathVariable(value = "testId") int testId) {
+	public ResponseEntity<RestResponseDto> createClassifierForTest(@PathVariable(value = "testId") int testId) {
 		log.info("createClassifierForTest(): /rest/ai/toggleSupervised/{testId}");
 		Instances trainingSet = aiService.getTrainingDataset(testId);
 		Instances testingSet  = aiService.getTestingDataset(testId);
@@ -127,7 +128,9 @@ public class AIController {
 		}
 		
 		String evaluation = aiService.evaluateClassifier(classifierFromString, trainingSet, testingSet);
-		return new ResponseEntity<String>(evaluation, HttpStatus.OK);
+		RestResponseDto restResponseDto = new RestResponseDto(200, evaluation);
+		
+		return new ResponseEntity<RestResponseDto>(restResponseDto, HttpStatus.OK);
 	}
 
 

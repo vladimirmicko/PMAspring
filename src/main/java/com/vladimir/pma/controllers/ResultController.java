@@ -83,7 +83,7 @@ public class ResultController {
 		result.setTestTaken(new Date());
 		UserAccount userAccount = SecurityUtils.getUserFromContext();
 		result.setUserAccount(userAccount);
-		resultDao.persist(result);	
+
 
 		if(test.getClassifier()!=null){
 			try {
@@ -106,10 +106,10 @@ public class ResultController {
 		try {
 			prediction = classifier.classifyInstance(instance);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-		
+		result.setEvaluation((int)Math.round(prediction));
+		resultDao.persist(result);	
 		return new ResponseEntity<Double>(prediction, HttpStatus.OK);
 	}
 	

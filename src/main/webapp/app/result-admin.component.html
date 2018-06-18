@@ -9,6 +9,11 @@
                 {{result[col.field]|date }}
             </template>
         </p-column>
+        <p-column field="evaluation" header="Evaluation" [style]="{'width':'10%'}">
+            <template let-result="rowData" pTemplate="body">
+                <span>{{result.evaluation === 0 ? '0' : '1'}}</span>
+            </template>
+        </p-column>
         <p-column field="supervisedValue" header="Supervised Value" [style]="{'width':'10%'}">
             <template let-result="rowData" pTemplate="body">
                 <p-checkbox binary="true" [(ngModel)]="result.supervisedValue" (onChange)="toggleSupervised(result)"></p-checkbox>

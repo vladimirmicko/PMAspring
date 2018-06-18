@@ -61,47 +61,7 @@ public class AIController {
 	@Autowired
 	private AIService aiService;
 	
-	
-	
-	@RequestMapping(value = "/train", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> train() {
-		log.info("train(): /rest/ai ");
-		Instances trainingSet = aiService.getTrainingDataset(3);
-		Instances testingSet  = aiService.getTestingDataset(3);
-		Classifier classifier = aiService.createClassifier(MultilayerPerceptron.class, trainingSet);
-		
-//		Instance iAnswer = new DenseInstance(5);
-//		iAnswer.setValue(0, 0);
-//		iAnswer.setValue(1, 0);
-//		iAnswer.setValue(2, 1);
-//		iAnswer.setValue(3, 1);
-//		iAnswer.setValue(4, 1);
-//		System.out.println("------------------ "+aiService.classifiy(classifier, iAnswer));
 
-		Classifier classifierFromString=null;
-		String model=null;
-		try {
-			model = Utility.toString(classifier);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		
-		
-		try {
-			classifierFromString = (Classifier)Utility.fromString(model);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		String evaluation = aiService.evaluateClassifier(classifierFromString, trainingSet, testingSet);
-		
-		return new ResponseEntity<String>(evaluation, HttpStatus.OK);
-	}
-	
-	
 	@RequestMapping(value = "/classifier/{testId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> createClassifierForTest(@PathVariable(value = "testId") int testId) {
 		log.info("createClassifierForTest(): /rest/ai/toggleSupervised/{testId}");

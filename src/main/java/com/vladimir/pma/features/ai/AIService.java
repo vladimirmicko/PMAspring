@@ -147,7 +147,7 @@ public class AIService {
 	}
 	
 	
-    public void saveModel(Classifier model, String modelpath) {
+    public void saveModelToFile(Classifier model, String modelpath) {
 
         try {
             SerializationHelper.write(modelpath, model);

@@ -60,7 +60,7 @@ public class ResultController {
 
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Double> saveResults(@PathVariable(value = "id") int id, @RequestBody Result result) {
+	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody Result result) {
 		log.info("saveResults(): /rest/tests/results ");
 		
 //		ObjectMapper objectMapper = new ObjectMapper();
@@ -110,7 +110,22 @@ public class ResultController {
 		}	
 		result.setEvaluation((int)Math.round(prediction));
 		resultDao.persist(result);	
-		return new ResponseEntity<Double>(prediction, HttpStatus.OK);
+		
+		StringBuilder response = new StringBuilder();
+		if (Math.round(prediction) == 0){
+			response
+			.append("Evaluation: FALSE")
+			.append("/n/n")
+			.append(test.getResultNoDescription());
+		}
+		else{
+			response
+			.append("Evaluation: TRUE")
+			.append("\n\n")
+			.append(test.getResultYesDescription());
+		}
+		
+		return new ResponseEntity<String>(response.toString(), HttpStatus.OK);
 	}
 	
 	

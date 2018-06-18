@@ -83,7 +83,7 @@ public class ResultController {
 		result.setTestTaken(new Date());
 		UserAccount userAccount = SecurityUtils.getUserFromContext();
 		result.setUserAccount(userAccount);
-
+		Double prediction=null;
 
 		if(test.getClassifier()!=null){
 			try {
@@ -91,38 +91,49 @@ public class ResultController {
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
 			}
+			
+			Instance instance=null;
+			instance = new DenseInstance(result.getAnswerList().size()+1);
+			int index = 0;
+			for (Answer answer : result.getAnswerList()) {
+				instance.setValue(index, answer.getAnswerValue());
+				index++;
+			}
+			instance.setValue(index, 0);
+	
+			try {
+				prediction = classifier.classifyInstance(instance);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			result.setEvaluation((int)Math.round(prediction));
 		}
 		
-		Instance instance=null;
-		instance = new DenseInstance(result.getAnswerList().size()+1);
-		int index = 0;
-		for (Answer answer : result.getAnswerList()) {
-			instance.setValue(index, answer.getAnswerValue());
-			index++;
-		}
-		instance.setValue(index, 0);
-
-		Double prediction=null;
-		try {
-			prediction = classifier.classifyInstance(instance);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
-		result.setEvaluation((int)Math.round(prediction));
 		resultDao.persist(result);	
-		
 		StringBuilder response = new StringBuilder();
-		if (Math.round(prediction) == 0){
+
+		if(prediction != null){
 			response
-			.append("Evaluation: FALSE")
-			.append("/n/n")
-			.append(test.getResultNoDescription());
+			.append("Test: ")
+			.append(test.getTestName())
+			.append("\n");
+			if (Math.round(prediction) == 0){
+				response
+				.append("Evaluation: FALSE, p=")
+				.append(prediction)
+				.append("\n\n")
+				.append(test.getResultNoDescription());
+			}
+			else{
+				response
+				.append("Evaluation: TRUE, p=")
+				.append(prediction)
+				.append("\n\n")
+				.append(test.getResultYesDescription());
+			}
 		}
 		else{
-			response
-			.append("Evaluation: TRUE")
-			.append("\n\n")
-			.append(test.getResultYesDescription());
+			response.append("No results available!");
 		}
 		
 		return new ResponseEntity<String>(response.toString(), HttpStatus.OK);

@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vladimir.pma.common.utility.Utility;
 import com.vladimir.pma.data.dao.ResultDao;
 import com.vladimir.pma.data.dao.StatisticsDao;
@@ -61,11 +64,13 @@ public class ResultController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody Result result) {
+//	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody String json) {		
 		log.info("saveResults(): /rest/tests/results ");
 		
+//		Result result=null;
 //		ObjectMapper objectMapper = new ObjectMapper();
 //		try {
-//			Result result = objectMapper.readValue(json, Result.class);
+//			result = objectMapper.readValue(json, Result.class);
 //		} catch (JsonParseException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -76,7 +81,7 @@ public class ResultController {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
+//		
 		Classifier classifier = null;
 		Test test = testDao.findById(id);
 		result.setTest(test);
@@ -136,6 +141,7 @@ public class ResultController {
 			response.append("No results available!");
 		}
 		
+//		return new ResponseEntity<String>("OK", HttpStatus.OK);
 		return new ResponseEntity<String>(response.toString(), HttpStatus.OK);
 	}
 	

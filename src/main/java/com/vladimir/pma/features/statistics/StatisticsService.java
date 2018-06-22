@@ -38,6 +38,7 @@ public class StatisticsService {
 		List<Result> resultList = resultDao.getAllResultsForTest(test);
 		Statistics statistics = new Statistics();
 		statistics.setTotalNumberOfResultsForTest(resultList.size());
+		statistics.setTestId(testId);
 		
 		for(Result result : resultList){
 			if (result!=null && result.getEvaluation()!=null && result.getUserAccount()!=null && result.getUserAccount().getSex()!=null){
@@ -70,6 +71,14 @@ public class StatisticsService {
 					statistics.setNumberOfMenNegative51_(statistics.getNumberOfMenNegative51_()+1);
 				}
 	
+				
+				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("F")){
+					statistics.setNumberOfWomenPositive(statistics.getNumberOfWomenPositive()+1);
+				}
+				
+				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("F")){
+					statistics.setNumberOfWomenNegative(statistics.getNumberOfWomenNegative()+1);
+				}
 	
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("F") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
 					statistics.setNumberOfWomenPositive_30(statistics.getNumberOfWomenPositive_30()+1);
@@ -135,20 +144,20 @@ public class StatisticsService {
 					}
 				}
 			}
-			
-			statistics.setAverageResponseTime(statistics.getAverageResponseTime()/statistics.getTotalNumberOfResultsForTest());
-			statistics.setAverageResponseTimeMen(statistics.getAverageResponseTimeMen()/statistics.getNumberOfMen());
-			statistics.setAverageResponseTimeWomen(statistics.getAverageResponseTimeWomen()/statistics.getNumberOfWomen());
-			
-			statistics.setAverageResponseTimeMen_30(statistics.getAverageResponseTimeMen_30()/statistics.getNumberOfMen_30());
-			statistics.setAverageResponseTimeMen31_50(statistics.getAverageResponseTimeMen31_50()/statistics.getNumberOfMen31_50());
-			statistics.setAverageResponseTimeMen51_(statistics.getAverageResponseTimeMen51_()/statistics.getNumberOfMen51_());
-			statistics.setAverageResponseTimeWomen_30(statistics.getAverageResponseTimeWomen_30()/statistics.getNumberOfWomen_30());
-			statistics.setAverageResponseTimeWomen31_50(statistics.getAverageResponseTimeWomen31_50()/statistics.getNumberOfWomen31_50());
-			statistics.setAverageResponseTimeWomen51_(statistics.getAverageResponseTimeWomen51_()/statistics.getNumberOfWomen51_());
 		}
+		statistics.setAverageResponseTime(statistics.getAverageResponseTime()/statistics.getTotalNumberOfResultsForTest());
+		statistics.setAverageResponseTimeMen(statistics.getAverageResponseTimeMen()/statistics.getNumberOfMen());
+		statistics.setAverageResponseTimeWomen(statistics.getAverageResponseTimeWomen()/statistics.getNumberOfWomen());
+		
+		statistics.setAverageResponseTimeMen_30(statistics.getAverageResponseTimeMen_30()/statistics.getNumberOfMen_30());
+		statistics.setAverageResponseTimeMen31_50(statistics.getAverageResponseTimeMen31_50()/statistics.getNumberOfMen31_50());
+		statistics.setAverageResponseTimeMen51_(statistics.getAverageResponseTimeMen51_()/statistics.getNumberOfMen51_());
+		statistics.setAverageResponseTimeWomen_30(statistics.getAverageResponseTimeWomen_30()/statistics.getNumberOfWomen_30());
+		statistics.setAverageResponseTimeWomen31_50(statistics.getAverageResponseTimeWomen31_50()/statistics.getNumberOfWomen31_50());
+		statistics.setAverageResponseTimeWomen51_(statistics.getAverageResponseTimeWomen51_()/statistics.getNumberOfWomen51_());
+
 		return statistics;
 	}
-	
-	
-}
+}	
+
+

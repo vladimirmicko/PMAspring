@@ -410,7 +410,7 @@ public class Statistics implements Serializable {
 	public double getPercentMenPositive(){
 		double percentMenPositive=0;
 		if (numberOfMen>0){
-			percentMenPositive=numberOfMenPositive/numberOfMen;
+			percentMenPositive=1.0*numberOfMenPositive/numberOfMen;
 		}
 		else{
 			percentMenPositive=0;
@@ -422,7 +422,7 @@ public class Statistics implements Serializable {
 	public double getPercentMenNegative(){
 		double percentMenNegative=0;
 		if (numberOfMen>0){
-			percentMenNegative=numberOfMenNegative/numberOfMen;
+			percentMenNegative=1.0*numberOfMenNegative/numberOfMen;
 		}
 		else{
 			percentMenNegative=0;
@@ -433,7 +433,7 @@ public class Statistics implements Serializable {
 	public double getPercentWomenPositive(){
 		double percentWomenPositive=0;
 		if (numberOfWomen>0){
-			percentWomenPositive=numberOfWomenPositive/numberOfWomen;
+			percentWomenPositive=1.0*numberOfWomenPositive/numberOfWomen;
 		}
 		else{
 			percentWomenPositive=0;
@@ -445,7 +445,7 @@ public class Statistics implements Serializable {
 	public double getPercentWomenNegative(){
 		double percentWomenNegative=0;
 		if (numberOfWomen>0){
-			percentWomenNegative=numberOfWomenNegative/numberOfWomen;
+			percentWomenNegative=1.0*numberOfWomenNegative/numberOfWomen;
 		}
 		else{
 			percentWomenNegative=0;

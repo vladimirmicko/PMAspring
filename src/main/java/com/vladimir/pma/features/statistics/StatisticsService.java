@@ -37,68 +37,68 @@ public class StatisticsService {
 		Test test = testDao.findById(testId);
 		List<Result> resultList = resultDao.getAllResultsForTest(test);
 		Statistics statistics = new Statistics();
-		statistics.setTotalNumberOfResultsForTest(resultList.size());
-		statistics.setTestId(testId);
+		statistics.set_01__totalNumberOfResultsForTest(resultList.size());
+		statistics.set$testId(testId);
 		
 		for(Result result : resultList){
 			if (result!=null && result.getEvaluation()!=null && result.getUserAccount()!=null && result.getUserAccount().getSex()!=null){
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("M")){
-					statistics.setNumberOfMenPositive(statistics.getNumberOfMenPositive()+1);
+					statistics.set_12__numberOfMenPositive(statistics.get_12__numberOfMenPositive()+1);
 				}
 				
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("M")){
-					statistics.setNumberOfMenNegative(statistics.getNumberOfMenNegative()+1);
+					statistics.set_13__numberOfMenNegative(statistics.get_13__numberOfMenNegative()+1);
 				}
 	
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("M") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
-					statistics.setNumberOfMenPositive_30(statistics.getNumberOfMenPositive_30()+1);
+					statistics.set_12__numberOfMenPositive(statistics.get_12__numberOfMenPositive()+1);
 				}
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("M") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
-					statistics.setNumberOfMenNegative_30(statistics.getNumberOfMenNegative_30()+1);
+					statistics.set_18__numberOfMenNegative12_30(statistics.get_18__numberOfMenNegative12_30()+1);
 				}
 				
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("M") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())>=31 && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<51){
-					statistics.setNumberOfMenPositive31_50(statistics.getNumberOfMenPositive31_50()+1);
+					statistics.set_19__numberOfMenPositive31_50(statistics.get_19__numberOfMenPositive31_50()+1);
 				}
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("M") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())>=31 && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<51){
-					statistics.setNumberOfMenNegative31_50(statistics.getNumberOfMenNegative31_50()+1);
+					statistics.set_20__numberOfMenNegative31_50(statistics.get_20__numberOfMenNegative31_50()+1);
 				}
 				
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("M") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())>50){
-					statistics.setNumberOfMenNegative51_(statistics.getNumberOfMenNegative51_()+1);
+					statistics.set_22__numberOfMenNegative51_75(statistics.get_22__numberOfMenNegative51_75()+1);
 				}
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("M") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())>50){
-					statistics.setNumberOfMenNegative51_(statistics.getNumberOfMenNegative51_()+1);
+					statistics.set_22__numberOfMenNegative51_75(statistics.get_22__numberOfMenNegative51_75()+1);
 				}
 	
 				
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("F")){
-					statistics.setNumberOfWomenPositive(statistics.getNumberOfWomenPositive()+1);
+					statistics.set_14__numberOfWomenPositive(statistics.get_14__numberOfWomenPositive()+1);
 				}
 				
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("F")){
-					statistics.setNumberOfWomenNegative(statistics.getNumberOfWomenNegative()+1);
+					statistics.set_15__numberOfWomenNegative(statistics.get_15__numberOfWomenNegative()+1);
 				}
 	
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("F") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
-					statistics.setNumberOfWomenPositive_30(statistics.getNumberOfWomenPositive_30()+1);
+					statistics.set_17__numberOfMenPositive12_30(statistics.get_17__numberOfMenPositive12_30()+1);
 				}
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("F") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
-					statistics.setNumberOfWomenNegative_30(statistics.getNumberOfWomenNegative_30()+1);
+					statistics.set_27__numberOfWomenNegative12_30(statistics.get_27__numberOfWomenNegative12_30()+1);
 				}
 				
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("F") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())>=31 && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<51){
-					statistics.setNumberOfWomenPositive31_50(statistics.getNumberOfWomenPositive31_50()+1);
+					statistics.set_28__numberOfWomenPositive31_50(statistics.get_28__numberOfWomenPositive31_50()+1);
 				}
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("F") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())>=31 && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<51){
-					statistics.setNumberOfWomenNegative31_50(statistics.getNumberOfWomenNegative31_50()+1);
+					statistics.set_29__numberOfWomenNegative31_50(statistics.get_29__numberOfWomenNegative31_50()+1);
 				}
 				
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("F") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())>50){
-					statistics.setNumberOfWomenPositive51_(statistics.getNumberOfWomenPositive51_()+1);
+					statistics.set_30__numberOfWomenPositive51_75(statistics.get_30__numberOfWomenPositive51_75()+1);
 				}
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("F") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())>50){
-					statistics.setNumberOfWomenNegative51_(statistics.getNumberOfWomenNegative51_()+1);
+					statistics.set_31__numberOfWomenNegative51_75(statistics.get_31__numberOfWomenNegative51_75()+1);
 				}
 	
 				
@@ -108,53 +108,53 @@ public class StatisticsService {
 				}
 				averageAnswerTime=averageAnswerTime/result.getAnswerList().size();
 				
-				statistics.setAverageResponseTime(statistics.getAverageResponseTime()+averageAnswerTime);
+				statistics.set_35__averageResponseTime(statistics.get_35__averageResponseTime()+averageAnswerTime);
 				if (result.getUserAccount().getSex().equals("M")){
-					statistics.setNumberOfMen(statistics.getNumberOfMen()+1);
-					statistics.setAverageResponseTimeMen(statistics.getAverageResponseTimeMen()+averageAnswerTime);
+					statistics.set_03__numberOfMen(statistics.get_03__numberOfMen()+1);
+					statistics.set_36__averageResponseTimeMen(statistics.get_36__averageResponseTimeMen()+averageAnswerTime);
 					
 					if(Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
-						statistics.setNumberOfMen_30(statistics.getNumberOfMen_30()+1);
-					    statistics.setAverageResponseTimeMen_30(statistics.getAverageResponseTimeMen_30()+averageAnswerTime);
+						statistics.set_05__numberOfMen12_30(statistics.get_05__numberOfMen12_30()+1);
+					    statistics.set_39__averageResponseTimeMen12_30(statistics.get_39__averageResponseTimeMen12_30()+averageAnswerTime);
 					}
 					else if(Utility.getAgeInYears(result.getUserAccount().getBirthdate())>=31 && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<51){
-						statistics.setNumberOfMen31_50(statistics.getNumberOfMen31_50()+1);
-						statistics.setAverageResponseTimeMen31_50(statistics.getAverageResponseTimeMen31_50()+averageAnswerTime);
+						statistics.set_06__numberOfMen31_50(statistics.get_06__numberOfMen31_50()+1);
+						statistics.set_40__averageResponseTimeMen31_50(statistics.get_40__averageResponseTimeMen31_50()+averageAnswerTime);
 					}
 					else {
-						statistics.setNumberOfMen51_(statistics.getNumberOfMen51_()+1);
-						statistics.setAverageResponseTimeMen51_(statistics.getAverageResponseTimeMen51_()+averageAnswerTime);
+						statistics.set_07__numberOfMen51_75(statistics.get_07__numberOfMen51_75()+1);
+						statistics.set_41__averageResponseTimeMen51_75(statistics.get_41__averageResponseTimeMen51_75()+averageAnswerTime);
 					}
 				}
 				else{
-					statistics.setNumberOfWomen(statistics.getNumberOfWomen()+1);
-					statistics.setAverageResponseTimeWomen(statistics.getAverageResponseTimeWomen()+averageAnswerTime);
+					statistics.set_04__numberOfWomen(statistics.get_04__numberOfWomen()+1);
+					statistics.set_37__averageResponseTimeWomen(statistics.get_37__averageResponseTimeWomen()+averageAnswerTime);
 					
 					if(Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
-						statistics.setNumberOfWomen_30(statistics.getNumberOfWomen_30()+1);
-					    statistics.setAverageResponseTimeWomen_30(statistics.getAverageResponseTimeWomen_30()+averageAnswerTime);
+						statistics.set_08__numberOfWomen12_30(statistics.get_08__numberOfWomen12_30()+1);
+					    statistics.set_42__averageResponseTimeWomen12_30(statistics.get_42__averageResponseTimeWomen12_30()+averageAnswerTime);
 					}
 					else if(Utility.getAgeInYears(result.getUserAccount().getBirthdate())>=31 && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<51){
-						statistics.setNumberOfWomen31_50(statistics.getNumberOfWomen31_50()+1);
-						statistics.setAverageResponseTimeWomen31_50(statistics.getAverageResponseTimeWomen31_50()+averageAnswerTime);
+						statistics.set_09__numberOfWomen31_50(statistics.get_09__numberOfWomen31_50()+1);
+						statistics.set_43__averageResponseTimeWomen31_50(statistics.get_43__averageResponseTimeWomen31_50()+averageAnswerTime);
 					}
 					else {
-						statistics.setNumberOfWomen51_(statistics.getNumberOfWomen51_()+1);
-						statistics.setAverageResponseTimeWomen51_(statistics.getAverageResponseTimeWomen51_()+averageAnswerTime);
+						statistics.set_10__numberOfWomen51_75(statistics.get_10__numberOfWomen51_75()+1);
+						statistics.set_44__averageResponseTimeWomen51_75(statistics.get_44__averageResponseTimeWomen51_75()+averageAnswerTime);
 					}
 				}
 			}
 		}
-		statistics.setAverageResponseTime(statistics.getAverageResponseTime()/statistics.getTotalNumberOfResultsForTest());
-		statistics.setAverageResponseTimeMen(statistics.getAverageResponseTimeMen()/statistics.getNumberOfMen());
-		statistics.setAverageResponseTimeWomen(statistics.getAverageResponseTimeWomen()/statistics.getNumberOfWomen());
+		statistics.set_35__averageResponseTime(statistics.get_35__averageResponseTime()/statistics.get_01__totalNumberOfResultsForTest());
+		statistics.set_36__averageResponseTimeMen(statistics.get_36__averageResponseTimeMen()/statistics.get_03__numberOfMen());
+		statistics.set_37__averageResponseTimeWomen(statistics.get_37__averageResponseTimeWomen()/statistics.get_04__numberOfWomen());
 		
-		statistics.setAverageResponseTimeMen_30(statistics.getAverageResponseTimeMen_30()/statistics.getNumberOfMen_30());
-		statistics.setAverageResponseTimeMen31_50(statistics.getAverageResponseTimeMen31_50()/statistics.getNumberOfMen31_50());
-		statistics.setAverageResponseTimeMen51_(statistics.getAverageResponseTimeMen51_()/statistics.getNumberOfMen51_());
-		statistics.setAverageResponseTimeWomen_30(statistics.getAverageResponseTimeWomen_30()/statistics.getNumberOfWomen_30());
-		statistics.setAverageResponseTimeWomen31_50(statistics.getAverageResponseTimeWomen31_50()/statistics.getNumberOfWomen31_50());
-		statistics.setAverageResponseTimeWomen51_(statistics.getAverageResponseTimeWomen51_()/statistics.getNumberOfWomen51_());
+		statistics.set_39__averageResponseTimeMen12_30(statistics.get_39__averageResponseTimeMen12_30()/statistics.get_05__numberOfMen12_30());
+		statistics.set_40__averageResponseTimeMen31_50(statistics.get_40__averageResponseTimeMen31_50()/statistics.get_06__numberOfMen31_50());
+		statistics.set_41__averageResponseTimeMen51_75(statistics.get_41__averageResponseTimeMen51_75()/statistics.get_07__numberOfMen51_75());
+		statistics.set_42__averageResponseTimeWomen12_30(statistics.get_42__averageResponseTimeWomen12_30()/statistics.get_08__numberOfWomen12_30());
+		statistics.set_43__averageResponseTimeWomen31_50(statistics.get_43__averageResponseTimeWomen31_50()/statistics.get_09__numberOfWomen31_50());
+		statistics.set_44__averageResponseTimeWomen51_75(statistics.get_44__averageResponseTimeWomen51_75()/statistics.get_10__numberOfWomen51_75());
 
 		return statistics;
 	}

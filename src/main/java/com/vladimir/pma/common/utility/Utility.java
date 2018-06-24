@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -60,5 +62,21 @@ public class Utility {
 		oos.close();
 		return Base64.getEncoder().encodeToString(baos.toByteArray());
 	}
+	
+	
+    public static double round(Double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        double result;
+
+        if(!value.isNaN() && !value.isInfinite()){
+            BigDecimal bd = new BigDecimal(value);
+            bd = bd.setScale(places, RoundingMode.HALF_UP);
+            result = bd.doubleValue();
+        }
+        else{
+            result=0;
+        }
+        return result;
+    }
 
 }

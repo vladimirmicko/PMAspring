@@ -51,7 +51,7 @@ public class StatisticsService {
 				}
 	
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("M") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
-					statistics.set_12__numberOfMenPositive(statistics.get_12__numberOfMenPositive()+1);
+					statistics.set_17__numberOfMenPositive12_30(statistics.get_17__numberOfMenPositive12_30()+1);
 				}
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("M") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
 					statistics.set_18__numberOfMenNegative12_30(statistics.get_18__numberOfMenNegative12_30()+1);
@@ -65,7 +65,7 @@ public class StatisticsService {
 				}
 				
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("M") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())>50){
-					statistics.set_22__numberOfMenNegative51_75(statistics.get_22__numberOfMenNegative51_75()+1);
+					statistics.set_21__numberOfMenPositive51_75(statistics.get_21__numberOfMenPositive51_75()+1);
 				}
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("M") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())>50){
 					statistics.set_22__numberOfMenNegative51_75(statistics.get_22__numberOfMenNegative51_75()+1);
@@ -81,7 +81,7 @@ public class StatisticsService {
 				}
 	
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("F") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
-					statistics.set_17__numberOfMenPositive12_30(statistics.get_17__numberOfMenPositive12_30()+1);
+					statistics.set_26_numberOfWomenPositive12_30(statistics.get_26_numberOfWomenPositive12_30()+1);
 				}
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("F") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
 					statistics.set_27__numberOfWomenNegative12_30(statistics.get_27__numberOfWomenNegative12_30()+1);

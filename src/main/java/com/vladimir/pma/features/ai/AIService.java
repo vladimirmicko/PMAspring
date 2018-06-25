@@ -147,6 +147,12 @@ public class AIService {
 	}
 	
 	
+	public MultilayerPerceptron createMLP(Instances trainingSet) {
+		MultilayerPerceptron mlp = (MultilayerPerceptron)createClassifier(MultilayerPerceptron.class, trainingSet);
+		return mlp;
+	}
+	
+	
     public void saveModelToFile(Classifier model, String modelpath) {
 
         try {

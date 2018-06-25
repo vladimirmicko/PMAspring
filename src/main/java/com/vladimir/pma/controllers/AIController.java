@@ -67,7 +67,7 @@ public class AIController {
 		log.info("createClassifierForTest(): /rest/ai/toggleSupervised/{testId}");
 		Instances trainingSet = aiService.getTrainingDataset(testId);
 		Instances testingSet  = aiService.getTestingDataset(testId);
-		Classifier classifier = aiService.createClassifier(MultilayerPerceptron.class, trainingSet);
+		MultilayerPerceptron  classifier = aiService.createMLP(trainingSet);
 		
 		Classifier classifierFromString=null;
 		String stringClassifier=null;

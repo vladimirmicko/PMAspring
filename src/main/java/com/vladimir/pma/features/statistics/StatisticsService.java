@@ -81,7 +81,7 @@ public class StatisticsService {
 				}
 	
 				if (result.getEvaluation()==1 && result.getUserAccount().getSex().equals("F") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
-					statistics.set_26_numberOfWomenPositive12_30(statistics.get_26_numberOfWomenPositive12_30()+1);
+					statistics.set_26__numberOfWomenPositive12_30(statistics.get_26__numberOfWomenPositive12_30()+1);
 				}
 				if (result.getEvaluation()==0 && result.getUserAccount().getSex().equals("F") && Utility.getAgeInYears(result.getUserAccount().getBirthdate())<31){
 					statistics.set_27__numberOfWomenNegative12_30(statistics.get_27__numberOfWomenNegative12_30()+1);

@@ -1,6 +1,7 @@
 package com.vladimir.pma.controllers;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import com.vladimir.pma.data.dao.TestDao;
 import com.vladimir.pma.data.dto.Statistics;
 import com.vladimir.pma.data.entity.Answer;
 import com.vladimir.pma.data.entity.Result;
+import com.vladimir.pma.data.entity.Slide;
 import com.vladimir.pma.data.entity.Test;
 import com.vladimir.pma.data.entity.UserAccount;
 import com.vladimir.pma.features.ai.AIService;
@@ -161,8 +163,10 @@ public class ResultController {
 		List<Result> resultList = resultDao.findAll();
 		List<Test> testList = testDao.findAll();
 		for(Result result : resultList){
-			for(Answer answer : result.getAnswerList()){
-				answer.setSlideName(answer.getResult().getTest().getSlideList().get(answer.getAnswerNumber()-1).getSlideName());
+            for(Answer answer : result.getAnswerList()){
+            	List<Slide> slideList = answer.getResult().getTest().getSlideList();
+            	slideList.sort(Comparator.comparing(Slide::getId));
+				answer.setSlideName(slideList.get(answer.getAnswerNumber()-1).getSlideName());
 			}
 		}
 		return new ResponseEntity<List<Result>>(resultList, HttpStatus.OK);

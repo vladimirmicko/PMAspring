@@ -103,7 +103,9 @@ var TestAdminComponent = (function () {
     TestAdminComponent.prototype.getTests = function () {
         var _this = this;
         this.testService.getTests()
-            .subscribe(function (tests) { return _this.tests = tests; }, function (error) {
+            .subscribe(function (tests) {
+            _this.tests = tests;
+        }, function (error) {
             _this.errorMessage = error;
             _this.router.navigateByUrl('login/');
         });

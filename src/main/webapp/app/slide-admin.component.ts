@@ -129,7 +129,18 @@ public addEditSlide(slide: Slide, isValid: boolean, modal: ModalDirective) {
   public getTest(id: number) {
     this.testService.getTest(id)
       .subscribe(
-      test => {this.test = test; this.slides = test.slideList},
+      test => { this.test = test; 
+                this.slides = test.slideList;
+                this.slides.sort( function(slide1, slide2) {
+                  if ( slide1.id < slide2.id ){
+                    return -1;
+                  }else if( slide1.id > slide2.id ){
+                      return 1;
+                  }else{
+                    return 0;	
+                  }
+              });
+              },
       error => {
         this.errorMessage = <any>error
         this.router.navigateByUrl('login/');

@@ -105,7 +105,21 @@ var SlideAdminComponent = (function () {
     SlideAdminComponent.prototype.getTest = function (id) {
         var _this = this;
         this.testService.getTest(id)
-            .subscribe(function (test) { _this.test = test; _this.slides = test.slideList; }, function (error) {
+            .subscribe(function (test) {
+            _this.test = test;
+            _this.slides = test.slideList;
+            _this.slides.sort(function (slide1, slide2) {
+                if (slide1.id < slide2.id) {
+                    return -1;
+                }
+                else if (slide1.id > slide2.id) {
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            });
+        }, function (error) {
             _this.errorMessage = error;
             _this.router.navigateByUrl('login/');
         });

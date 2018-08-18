@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vladimir.pma.data.dao.ResultDao;
 import com.vladimir.pma.data.dao.StatisticsDao;
@@ -85,6 +86,7 @@ public class AIService {
 		return null;
 	}
 
+	@Transactional
 	public Instances getTestingDataset(int testId) {
 		Test test = testDao.findById(testId);
 		List<Result> resultList = resultDao.getAllResultsForTest(test);
@@ -112,7 +114,7 @@ public class AIService {
 
 			Instance instance=null;
 			for (Result result : resultList) {
-				if (result.getEvaluation() != null) {
+				if (result.getSupervisedValue() == null) {
 					instance = new DenseInstance(fvAnswers.size());
 					int index = 0;
 					for (Answer answer : result.getAnswerList()) {
@@ -121,8 +123,13 @@ public class AIService {
 					}
 					int evaluation = result.getEvaluation();
 					instance.setValue(index, evaluation);
+					result.setEvaluation(evaluation);
 					dataSet.add(instance);
 				}
+				else{
+					result.setEvaluation(result.getSupervisedValue() ? 1:0);
+				}
+				//resultDao.merge(result);
 			}
 			return dataSet;
 		}

@@ -34,7 +34,7 @@
 					<button class="btn btn-danger delete-button" (click)="deleteTestModal(object, deleteModal)">
 						<span class="glyphicon glyphicon-trash"></span>
                     </button>
-                    <button class="btn btn-success delete-button" (click)="trainClassifier(object)">
+                    <button class="btn btn-success delete-button" (click)="trainClassifier(object, classifierModal)">
 						<span class="glyphicon glyphicon-fire"></span>
 					</button>
 			</template>
@@ -143,14 +143,14 @@
         <div class="modal-dialog modal-md modal-dialog-center">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" aria-label="Close" (click)="deleteModal.hide()">
+                    <button type="button" class="close" aria-label="Close" (click)="classifierModal.hide()">
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</button>
                     <h4 class="modal-title">Classifier evaluation</h4>
                 </div>
                 <div class="modal-body">
                     <div>
-                         <textarea style="font-family:Courier New;" class="form-control" rows="8">{{classifier}}</textarea>
+                        <textarea style="font-family:Courier New;" class="form-control" rows="8">{{classifier}}</textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

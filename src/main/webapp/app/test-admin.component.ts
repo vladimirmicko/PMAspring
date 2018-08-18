@@ -70,14 +70,14 @@ export class TestAdminComponent implements OnInit {
     modal.show();
   }
 
-  public trainClassifier(test: Test): void {
+  public trainClassifier(test: Test, modal: ModalDirective): void {
     console.log(test.testName);
+    modal.show();
     this.test = test;
     this.subscriptions = this.testService.trainClassifier(test)
       .subscribe(
       (res: any) => {
         this.classifier = res.message;
-        this.classifierModal.show();
         // this.getTests();
       },
       (err: any) => {

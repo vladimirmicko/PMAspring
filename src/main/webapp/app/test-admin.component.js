@@ -56,14 +56,14 @@ var TestAdminComponent = (function () {
         this.test = test;
         modal.show();
     };
-    TestAdminComponent.prototype.trainClassifier = function (test) {
+    TestAdminComponent.prototype.trainClassifier = function (test, modal) {
         var _this = this;
         console.log(test.testName);
+        modal.show();
         this.test = test;
         this.subscriptions = this.testService.trainClassifier(test)
             .subscribe(function (res) {
             _this.classifier = res.message;
-            _this.classifierModal.show();
             // this.getTests();
         }, function (err) {
             _this.router.navigateByUrl('login/');

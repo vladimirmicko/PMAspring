@@ -23,7 +23,7 @@
         </p-column>
         <p-column field="Actions" [style]="{'width':'15%'}">
             <template let-object="rowData" pTemplate="body">
-					<button class="btn btn-warning edit-button" (click)="viewModal(object,viewAnswersModal)">
+					<button class="btn btn-success delete-button" (click)="viewModal(object,viewAnswersModal)">
 						<span class="glyphicon glyphicon-film"></span>
                     </button>
                     <button class="btn btn-danger delete-button" (click)="deleteResultModal(object, deleteModal)">

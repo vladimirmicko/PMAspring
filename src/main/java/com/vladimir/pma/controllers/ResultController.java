@@ -3,7 +3,9 @@ package com.vladimir.pma.controllers;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -63,6 +65,15 @@ public class ResultController {
 	@Autowired
 	private AIService aiService;
 
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, String>> deleteResult(@PathVariable(value = "id") int id) {
+		resultDao.deleteById(id);
+		Map<String, String> response = new HashMap<String, String>();
+		response.put("Status", "OK");
+		return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);
+	}
+	
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> saveResults(@PathVariable(value = "id") int id, @RequestBody Result result) {

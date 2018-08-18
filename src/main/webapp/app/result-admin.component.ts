@@ -39,7 +39,12 @@ export class ResultAdminComponent implements OnInit {
 
 
 
-  public deleteResult(result: Result) {
+  public deleteResultModal(result: Result, modal: ModalDirective): void {
+    this.result=result;
+    modal.show();
+  }
+
+  public deleteResult(result: Result, modal: ModalDirective) {
     console.log('Result deleted: ' + result.testName);
     this.subscriptions = this.resultService.deleteResult(result)
       .subscribe(
@@ -49,6 +54,7 @@ export class ResultAdminComponent implements OnInit {
       (err: any) => {
         this.router.navigateByUrl('login/');
       })
+      modal.hide();
   }
 
 

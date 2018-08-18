@@ -33,7 +33,7 @@ public class ResultDao extends BaseDao {
 	public void deleteById(Integer id) {
 		Result result = this.findById(id);
 		for(Answer answer : result.getAnswerList()){
-			answerDao.delete(answer.getId());
+			answerDao.delete(answer);
 		}
 		delete(result);
 	}

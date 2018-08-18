@@ -27,7 +27,11 @@ var ResultAdminComponent = (function () {
         var _this = this;
         this.resultService.toggleSupervised(result.id).subscribe(function (result) { return _this.result = result; }, function (error) { return _this.errorMessage = error; });
     };
-    ResultAdminComponent.prototype.deleteResult = function (result) {
+    ResultAdminComponent.prototype.deleteResultModal = function (result, modal) {
+        this.result = result;
+        modal.show();
+    };
+    ResultAdminComponent.prototype.deleteResult = function (result, modal) {
         var _this = this;
         console.log('Result deleted: ' + result.testName);
         this.subscriptions = this.resultService.deleteResult(result)
@@ -36,6 +40,7 @@ var ResultAdminComponent = (function () {
         }, function (err) {
             _this.router.navigateByUrl('login/');
         });
+        modal.hide();
     };
     ResultAdminComponent.prototype.viewModal = function (result, modal) {
         this.answers = result.answerList;

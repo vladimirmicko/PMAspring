@@ -18,6 +18,7 @@ export class TestAdminComponent implements OnInit {
   public editForm: FormGroup;
   public submitted: boolean;
   public events: any[] = [];
+  progress=0;
   tests: Test[] = [];
   classifier: string;
   errorMessage: string;
@@ -73,11 +74,13 @@ export class TestAdminComponent implements OnInit {
   public trainClassifier(test: Test, modal: ModalDirective): void {
     console.log(test.testName);
     modal.show();
+    this.progress=5;
     this.test = test;
     this.subscriptions = this.testService.trainClassifier(test)
       .subscribe(
       (res: any) => {
         this.classifier = res.message;
+        this.progress=100;
         // this.getTests();
       },
       (err: any) => {

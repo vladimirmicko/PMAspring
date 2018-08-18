@@ -18,6 +18,7 @@ var TestAdminComponent = (function () {
         this.testService = testService;
         this.router = router;
         this.events = [];
+        this.progress = 0;
         this.tests = [];
         this.test = new test_1.Test();
         this.classifier = "";
@@ -60,10 +61,12 @@ var TestAdminComponent = (function () {
         var _this = this;
         console.log(test.testName);
         modal.show();
+        this.progress = 5;
         this.test = test;
         this.subscriptions = this.testService.trainClassifier(test)
             .subscribe(function (res) {
             _this.classifier = res.message;
+            _this.progress = 100;
             // this.getTests();
         }, function (err) {
             _this.router.navigateByUrl('login/');

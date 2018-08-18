@@ -60,6 +60,18 @@ export class ResultAdminComponent implements OnInit {
 
   public viewModal(result: Result, modal: ModalDirective): void {
     this.answers=result.answerList;
+    this.answers.sort( function(answer1, answer2) {
+      if ( answer1.id < answer2.id ){
+        return -1;
+      }else if( answer1.id > answer2.id ){
+          return 1;
+      }else{
+        return 0;	
+      }
+  });
+
+
+
     modal.show();
   }
 

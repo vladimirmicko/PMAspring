@@ -25,16 +25,16 @@
 					</span>
 			</template>
             <template let-object="rowData" pTemplate="body">
-            		<button class="btn btn-primary edit-button" (click)="redirectToTest(object, editModal)">
+            		<button class="btn btn-primary edit-button btn-outline-secondary mr-2" data-toggle="tooltip" data-placement="top" title="Slides" (click)="redirectToTest(object, editModal)">
 						<span class="glyphicon glyphicon glyphicon-film"></span>
 					</button>
-					<button class="btn btn-warning edit-button" (click)="editTestModal(object, editModal)">
+					<button class="btn btn-warning edit-button btn-outline-secondary mr-2" data-toggle="tooltip" data-placement="top" title="Edit" (click)="editTestModal(object, editModal)">
 						<span class="glyphicon glyphicon-edit"></span>
 					</button>
-					<button class="btn btn-danger delete-button" (click)="deleteTestModal(object, deleteModal)">
+					<button class="btn btn-danger delete-button btn-outline-secondary mr-2" data-toggle="tooltip" data-placement="top" title="Delete" (click)="deleteTestModal(object, deleteModal)">
 						<span class="glyphicon glyphicon-trash"></span>
                     </button>
-                    <button class="btn btn-success delete-button" (click)="trainClassifier(object, classifierModal)">
+                    <button class="btn btn-success delete-button btn-outline-secondary mr-2" data-toggle="tooltip" data-placement="top" title="Train ANN" (click)="trainClassifier(object, classifierModal)">
 						<span class="glyphicon glyphicon-fire"></span>
 					</button>
 			</template>

@@ -1,6 +1,7 @@
 package com.vladimir.pma.controllers;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -102,6 +103,7 @@ public class ResultController {
 		UserAccount userAccount = SecurityUtils.getUserFromContext();
 		result.setUserAccount(userAccount);
 		Double prediction=null;
+		DecimalFormat df2 = new DecimalFormat("#.##");
 
 		if(test.getClassifier()!=null){
 			try {
@@ -138,14 +140,14 @@ public class ResultController {
 			if (Math.round(prediction) == 0){
 				response
 				.append("Evaluation: FALSE, p=")
-				.append(prediction)
+				.append(df2.format(prediction))
 				.append("\n\n")
 				.append(test.getResultNoDescription());
 			}
 			else{
 				response
 				.append("Evaluation: TRUE, p=")
-				.append(prediction)
+				.append(df2.format(prediction))
 				.append("\n\n")
 				.append(test.getResultYesDescription());
 			}

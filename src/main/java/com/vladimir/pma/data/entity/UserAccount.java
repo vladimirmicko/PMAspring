@@ -62,7 +62,16 @@ public class UserAccount implements UserDetails, Serializable {
 	
 	@Transient
 	private String sessionId;
+	
+	@Transient
+	private Long tsMobile;
 
+	@Transient
+	private Long tsServer;
+	
+	@Transient
+	private Long deltaT;
+	
 	public UserAccount() {
 	}
 
@@ -135,6 +144,39 @@ public class UserAccount implements UserDetails, Serializable {
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
 	}
+
+	
+	
+	
+	public Long getTsMobile() {
+		return tsMobile;
+	}
+
+
+	public void setTsMobile(Long tsMobile) {
+		this.tsMobile = tsMobile;
+	}
+
+
+	public Long getTsServer() {
+		return tsServer;
+	}
+
+
+	public void setTsServer(Long tsServer) {
+		this.tsServer = tsServer;
+	}
+
+
+	public Long getDeltaT() {
+		return deltaT;
+	}
+
+
+	public void setDeltaT(Long deltaT) {
+		this.deltaT = deltaT;
+	}
+
 
 	@JsonIgnore
 	@Override

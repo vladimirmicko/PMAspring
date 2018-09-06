@@ -49,15 +49,14 @@ public class SychronizationController {
 	private UserAccountDao userAccountDao;
 	
 
-	@RequestMapping(value = "/deltaT/{tsMobile}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Long> ping(@PathVariable(value = "tsMobile") int tsMobile, @RequestHeader HttpHeaders headers) {
+	@RequestMapping(value = "/serverTime", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Long> getServerTime() {
 		log.info("getTest(): /rest/time");
 		Long serverTime = System.nanoTime();
-		//UserAccount user = SecurityUtils.getUserFromContext();
 		return new ResponseEntity<Long>(serverTime, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/synchronize/{tsMobile}/{deltaT}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/synchronization/{tsMobile}/{deltaT}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Long> getTest(@PathVariable(value = "tsMobile") Long tsMobile, @PathVariable(value = "deltaT") Long deltaT, @RequestHeader HttpHeaders headers) {
 		log.info("getTest(): /rest/time/synchronize");
 		Long serverTime = System.nanoTime();
@@ -67,7 +66,8 @@ public class SychronizationController {
 		Long tsServer = System.nanoTime();
 		user.setTsServer(tsServer);
 		log.info("Time synchronization:");
-		log.info("Delta T: "+deltaT);
+		log.info("DeltaT: "+deltaT);
+		log.info("DeltaT/2: "+deltaT/2);
 		log.info("Mobile timestamp: "+tsMobile);
 		log.info("Server timestamp: "+tsServer);
 		return new ResponseEntity<Long>(serverTime, HttpStatus.OK);
